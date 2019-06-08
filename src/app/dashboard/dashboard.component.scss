@@ -1,0 +1,46 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.sidenav .mat-toolbar {
+  //background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+}
+
+.mat-toolbar-single-row {
+  padding: 26px;
+}
+
+.mat-nav-list {
+  @media(max-height: 359px) {
+    overflow-y: scroll;
+    height: 310px;
+  }
+  //width: 90% !important;
+}
+
+
+.dashboard-content {
+  @media (max-width: 767px) {
+    padding: 0px;
+  }
+}
+
+/deep/ .mat-toolbar-single-row {
+  z-index: 2 !important;
+}

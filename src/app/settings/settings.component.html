@@ -1,0 +1,126 @@
+<div class="settings p-2">
+  <div>
+    <h5 class="text-center">Options</h5>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 text-center mb-2">
+            <div class="text-center pl-2">
+              <p>Active</p>
+            </div>
+            <div>
+              <mat-slide-toggle (click)="changeActive()"></mat-slide-toggle>
+            </div>
+          </div>
+          <div class="col-md-6 search">
+            <div>
+              <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Search" [formControl]="searchField">
+                  <mat-icon matPrefix>search</mat-icon>
+                </mat-form-field>
+              </form>
+              <!--div class="searchIcon"><i class="material-icons">search</i></div>
+              <div class="searchInput"><input type="text" placeholder="Search"></div-->
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-12 settingsExtender">
+        <div class="col-md-12">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Category</p>
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                  Your active/deactive categories {{panelOpenState ? 'open' : 'closed'}}
+                </mat-panel-description> -->
+                <mat-panel-description>
+                  <p>Your active/deactive categories</p>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-md-3 p-2" *ngFor="let category of categories$">
+                  <!--div [ngClass]="{'activeCard': active, 'deactiveCard': !active}"-->
+                  <div>
+
+                  </div>
+                  <mat-card class="currencyCard" (click)="activeCategory(category.id)"  *ngIf="active">
+                    <h5 class="m-auto card">{{ category.name }}</h5>
+                  </mat-card>
+                  <mat-card class="currencyCard" (click)="deactiveCategory(category.id)" *ngIf="!active">
+                    <h5 class="m-auto card">{{ category.name }}</h5>
+                  </mat-card>
+                  <!--/div-->
+
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Sub categories</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <p>Your active/deactive subcategories</p>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-md-3 p-2" *ngFor="let sub_category of subCategories$">
+                  <!--div [ngClass]="{'activeCard': active, 'deactiveCard': !active}"-->
+                  <div>
+
+                  </div>
+                  <mat-card class="currencyCard" (click)="activeSubCategory(sub_category.id)" *ngIf="active">
+                    <h5 class="m-auto card">{{ sub_category.name }}</h5>
+                  </mat-card>
+                  <mat-card class="currencyCard" (click)="deactiveSubCategory(sub_category.id)" *ngIf="!active">
+                    <h5 class="m-auto card">{{ sub_category.name }}</h5>
+                  </mat-card>
+                  <!--/div-->
+
+                </div>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Currencies</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <p>Your active/deactive currencies (max. 10)</p>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-md-3 p-2" *ngFor="let currency of currencies$">
+                  <!--div [ngClass]="{'activeCard': active, 'deactiveCard': !active}"-->
+                  <div>
+
+                  </div>
+                  <mat-card class="currencyCard" (click)="activeCurrency(currency.id)" *ngIf="active">
+                    <h5 class="m-auto card">{{ currency.code }}</h5>
+                  </mat-card>
+                  <mat-card class="currencyCard" (click)="deactiveCurrency(currency.id)" *ngIf="!active">
+                    <h5 class="m-auto card">{{ currency.code }}</h5>
+                  </mat-card>
+                  <!--/div-->
+
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

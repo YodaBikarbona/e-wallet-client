@@ -1,0 +1,138 @@
+@mixin space ($attribute) {
+  @for $i from 1 to 6 {
+    &-#{$i} {
+      #{$attribute}: $i * 10px;
+    }
+  }
+}
+.m {
+  @include space(margin);
+}
+.mb {
+  @include space(margin-bottom)
+}
+.mt {
+  @include space(margin-top)
+}
+.mr {
+  @include space(margin-right)
+}
+.ml {
+  @include space(margin-left)
+}
+.p {
+  @include space(padding);
+}
+.pb {
+  @include space(padding-bottom)
+}
+.pt {
+  @include space(padding-top)
+}
+.pr {
+  @include space(padding-right)
+}
+.pl {
+  @include space(padding-left)
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// Button
+
+.btn-block {
+  width: 100%
+}
+
+// Text align
+
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+
+
+// Grid
+
+$break-points: (
+  xs: 0px,
+  sm: 360px,
+  md: 768px,
+  lg: 1000px
+);
+
+$colums: 12;
+
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin breakpoint($breakPoint) {
+  @media screen and (min-width: #{$breakPoint}) {
+    @content;
+  }
+}
+
+@mixin grid {
+  @each $key, $value in $break-points {
+    @include breakpoint($value) {
+      @for $i from 1 through $colums {
+        &-#{$key}-#{$i} {
+          flex: 0 0 100% / $colums * $i;
+        }
+      }
+    }
+  }
+}
+
+.col {
+  @include grid;
+}
+
+[class*='col-'] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+.button {
+  width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.error_message {
+  font-size: 12px;
+  color: darkred;
+}
+
+.shadow {
+  box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
+}
+
+.m-auto {
+  margin: auto;
+}
+
+/deep/ .mat-toolbar {
+  z-index: 2;
+}

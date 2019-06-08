@@ -1,0 +1,106 @@
+<div class="register p-3">
+  <form (submit)="registerSubmit(address, birthDate, city_id, confirmPassword, email, firstName, gender, lastName, password, country_id)">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h3 class="mb-3">Register</h3>
+      </div>
+      <div class="col-md-6 col-sm-12 p-1">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>First name</mat-label>
+            <input type="text" matInput required name="firstName" [(ngModel)]="firstName">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Last name</mat-label>
+            <input type="text" matInput required name="lastName" [(ngModel)]="lastName">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput required name="email" [(ngModel)]="email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="w-100">
+            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="birthDate" placeholder="Birth date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <!--mat-datepicker #picker></--mat-datepicker-->
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 p-1">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Country</mat-label>
+            <mat-select name="country_id" [(ngModel)]="country_id" (selectionChange)="onCountryChange($event)">
+              <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>City</mat-label>
+            <mat-select name="city_id" [(ngModel)]="city_id">
+              <mat-option *ngFor="let city of cities$" [value]="city.id" >
+                {{city.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput required name="address" [(ngModel)]="address">
+          </mat-form-field>
+        </div>
+        <div>
+          <!--div class="mb-2">
+            <label id="example-radio-group-label">Gender</label>
+          </div-->
+          <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="gender">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-radio-button value="male" class="mb-1">Male</mat-radio-button>
+              </div>
+              <div class="col-md-6">
+                <mat-radio-button value="female" class="mb-1">Female</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 p-1">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput required name="password" [(ngModel)]="password">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 p-1">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Confirm password</mat-label>
+            <input type="password" matInput required name="confirmPassword" [(ngModel)]="confirmPassword">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 p-1">
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2">
+            <div class="text-center">
+              <button type="submit" mat-raised-button color="primary" class="btn-block">Sign up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

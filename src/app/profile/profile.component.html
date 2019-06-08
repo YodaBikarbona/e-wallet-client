@@ -1,0 +1,168 @@
+<div class="profile p-2">
+  <div>
+    <div class="row">
+      <div class="col-md-2 col-sm-12">
+        <div class="imageWeapper">
+          <img class="profileAvatar"
+            src="{{url}}/dir/{{user.image.file_name}}"
+          />
+          <div class="imageHover">
+            <input type="file" hidden #imageInput (change)="image_selected($event)">
+            <button class="newBillButton" mat-button (click)="imageInput.click()">Change picture</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <div class="mb-1 mt-1">
+          <button class="newBillButton button" mat-button>Edit profile</button>
+        </div>
+        <div class="mb-1">
+          <button class="newBillButton button mb-1" mat-button>Change password</button>
+        </div>
+      </div>
+    </div>
+    <div class="breakSection"></div>
+    <div class="mt-1 information">
+      <mat-tab-group>
+        <mat-tab label="Personal">
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>First name:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.first_name }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Last name:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.last_name }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Gender:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.gender }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Birth date:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.birth_date }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Contact">
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Email:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Phone:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.phone }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Country:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.country.name }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>City:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.city.name }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-4 bold">
+              <p>Address:</p>
+            </div>
+            <div class="col-md-3 col-sm-8 text-center">
+              <p>{{ user.address }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Application">
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-6 bold">
+              <p>Categories:</p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+              <p>{{ user.categories }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-6 bold">
+              <p>Sub categories:</p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+              <p>{{ user.sub_categories }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-6 bold">
+              <p>Currencies:</p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+              <p>{{ user.currencies }}</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-md-3 col-sm-6 bold">
+              <p>Default currency:</p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+              <p>EUR</p>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
