@@ -32,15 +32,16 @@ export class MenuListItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navService.currentUrl.subscribe((url: string) => {
-      console.log(url)
-      if (this.item.route && url) {
+    //this.navService.currentUrl.subscribe((url: string) => {
+    //  console.log("Tu sam")
+    //  console.log(url)
+      /*if (this.item.route && url) {
         // console.log(`Checking '/${this.item.route}' against '${url}'`);
         this.expanded = url.indexOf(`/${this.item.route}`) === 0;
         this.ariaExpanded = this.expanded;
         // console.log(`${this.item.route} is expanded: ${this.expanded}`);
-      }
-    });
+      }*/
+    //});
   }
 
   onItemSelected(item: NavItem) {
@@ -57,7 +58,10 @@ export class MenuListItemComponent implements OnInit {
   onItemSelectedChildren(item: NavItem) {
     console.log(item)
     console.log(item.route)
-    this.router.navigate([item.route], {relativeTo: this.route});
+    this.router.navigate([item.route], {relativeTo: this.route}).then(r => {
+      console.log(r);
+    });
+    //this.router.navigate([item.route]);
     //this.navService.closeNav();
   }
 }

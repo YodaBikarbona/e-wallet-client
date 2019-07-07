@@ -5,7 +5,7 @@ import {
   ActiveOrDeactiveUserSettingsCurrencyRequest, ActiveOrDeactiveUserSettingsSubCategoryRequest,
   SettingsCategoriesGetRequest,
   SettingsCurrenciesGetRequest,
-  SettingsSubCategoriesGetRequest
+  SettingsSubCategoriesGetRequest, SubCategoriesByCategoryGetRequest
 } from '../model';
 import {API_URL} from '../app.constants';
 
@@ -39,5 +39,9 @@ export class SettingsService {
   ToogleActiveSubCategory(active: boolean, search: string, subCategoryId: number) {
     const request = new ActiveOrDeactiveUserSettingsSubCategoryRequest(active, search, subCategoryId);
     return this.http.post(`${API_URL}/user/save_sub_category`, request);
+  }
+  getSubCategoriesByCategories(category_id: number) {
+    const request = new SubCategoriesByCategoryGetRequest(category_id);
+    return this.http.post(`${API_URL}/user/category/sub_categories`, request);
   }
 }

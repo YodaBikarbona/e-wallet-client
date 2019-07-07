@@ -24,7 +24,14 @@ const routes: Routes = [
   path: "dashboard", component: DashboardComponent,
   children: [
     {path: "profile", component: ProfileComponent, resolve: {user: UserResolver}},
-    {path: "bills", component: BillsComponent},
+    {path: "bills", component: BillsComponent,
+      /*children: [
+        {path: "profits", component: BillsComponent},
+        {path: "costs", component: BillsComponent}
+        ]*/
+    },
+    //{path: "profits", component: BillsComponent},
+    //{path: "costs", component: BillsComponent},
     {path: "settings", component: SettingsComponent},
   ]
 },

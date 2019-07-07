@@ -134,6 +134,14 @@ export class SettingsSubCategoriesGetRequest {
   }
 }
 
+export class SubCategoriesByCategoryGetRequest {
+  category_id: number;
+
+  constructor(category_id: number) {
+    this.category_id = category_id;
+  }
+}
+
 export class ActiveOrDeactiveUserSettingsCurrencyRequest extends SettingsCurrenciesGetRequest {
   currencyId: number;
 

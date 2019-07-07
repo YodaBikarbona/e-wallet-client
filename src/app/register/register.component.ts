@@ -29,11 +29,11 @@ export class RegisterComponent implements OnInit {
   registerSubmit(address:string, birthDate: Date, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
     let finalBirthDate = '';
     if (birthDate) {
-      let birthDateFormat = birthDate.toLocaleDateString().replace("/","-");
+      /*let birthDateFormat = birthDate.toLocaleDateString().replace("/","-");
       birthDateFormat = birthDateFormat.replace("/","-");
       birthDateFormat = birthDateFormat.split('-');
       finalBirthDate = finalBirthDate + birthDateFormat[2] + '-' + birthDateFormat[1] + '-' + birthDateFormat[0];
-      console.log(finalBirthDate);
+      console.log(finalBirthDate);*/
     }
     if (password != confirmPassword) {
     }

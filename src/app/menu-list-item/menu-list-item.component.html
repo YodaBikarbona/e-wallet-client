@@ -14,4 +14,6 @@
 <div *ngIf="expanded" class="submenu">
   <app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1" (click)="onItemSelectedChildren(child)">
   </app-menu-list-item>
+  <!--app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1" (click)="onItemSelected(item)">
+  </app-menu-list-item-->
 </div>

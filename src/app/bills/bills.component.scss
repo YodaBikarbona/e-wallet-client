@@ -23,6 +23,15 @@ tr.mat-footer-row {
 
 .newBillButton {
   border: 1px solid black;
+  @media (max-width: 767px) {
+    width: 90%;
+  }
+}
+
+.backButton, .saveButton, .billPrice {
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 }
 
 [mat-row] {
@@ -47,6 +56,10 @@ tr.mat-footer-row {
 
 @media (max-width: 767px) {
 
+}
+
+.newBillTextarea {
+  min-height: 300px;
 }
 
 

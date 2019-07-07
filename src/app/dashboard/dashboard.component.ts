@@ -73,19 +73,19 @@ export class DashboardComponent implements OnInit{
     {
       displayName: 'Bills',
       iconName: 'list_alt',
-      route: "",
-      children: [
+      route: "bills",
+      /*children: [
         {
           displayName: 'Profits',
           iconName: 'attach_money',
-          route: 'bills',
+          route: 'profits',
         },
         {
           displayName: 'Costs',
           iconName: 'money_off',
-          route: 'bills',
+          route: 'costs',
         },
-      ]
+      ]*/
     },
     {
       displayName: 'Graph',
