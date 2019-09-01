@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   error_message = '';
   searchField = new FormControl('');
   subSubscription: Subscription;
+  panelOpenState: boolean;
   constructor(public settingsService: SettingsService, public router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {

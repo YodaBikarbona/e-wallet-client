@@ -16,11 +16,12 @@ export class BillsComponent implements OnInit {
   categories$: BillCategory[];
   subCategories$: BillSubCategory[];
   error_message = '';
-  costs$: Bill[];
+  bills$: Bill[];
   categoryId: number = null;
   subCategoryId: number = null;
   currencyId: number = null;
   newBillState: boolean = false;
+  buttonSwitchMessage = 'Switch to profits!'
   constructor(public billService: BillService, public settingsService: SettingsService, public router: Router) { }
 
   ngOnInit() {
@@ -41,7 +42,15 @@ export class BillsComponent implements OnInit {
 
   getCosts(categoryId: number, subCategoryId: number, currencyId: number) {
     this.billService.getCosts(categoryId, subCategoryId, currencyId).subscribe((data:any) => {
-      this.costs$ = data.costs;
+      this.bills$ = data.costs;
+      console.log(this.bills$);
+    }, (data:any) => this.error_message = data.error.message);
+  }
+
+  getProfits(categoryId: number, subCategoryId: number, currencyId: number) {
+    this.billService.getProfits(categoryId, subCategoryId, currencyId).subscribe((data:any) => {
+      this.bills$ = data.profits;
+      console.log(this.bills$);
     }, (data:any) => this.error_message = data.error.message);
   }
 
@@ -49,44 +58,65 @@ export class BillsComponent implements OnInit {
     this.getCosts(categoryId, subCategoryId, currencyId);
   }*/
 
-  onChange(id: number, type: string) {
-    console.log("Tu sam")
+  onChange(event, type: string) {
+    console.log("Tu sam");
+    console.log(event.value)
     if (type === 'categoryId') {
-      this.categoryId = id;
-      //if (id != null) {
-        this.settingsService.getSubCategoriesByCategories(id).subscribe((data: any) => {
+      this.categoryId = event.value;
+      if (event.value != null) {
+        this.settingsService.getSubCategoriesByCategories(event.value).subscribe((data: any) => {
           this.subCategories$ = data.sub_categories;
           console.log(data)
           this.error_message = '';
         }, (data: any) => this.error_message = data.error.message);
-      //}
-      //else {
-        //this.subCategories$ = [];
-      //}
+      }
+      else {
+        this.subCategories$ = [];
+      }
 
     }
     else if (type === 'subCategoryId') {
-      this.subCategoryId = id;
+      this.subCategoryId = event.value;
     }
     else {
-      this.currencyId = id;
+      this.currencyId = event.value;
     }
     this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
   }
 
-  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "image"];
+  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "image", "showDetails"];
 
    /** Gets the total cost of all transactions. */
   getTotalCost() {
-    return this.costs$.map(t => t.price).reduce((acc, value) => acc + value, 0);
+    return this.bills$.map(t => t.price).reduce((acc, value) => acc + value, 0);
   }
 
   newBill(state: boolean) {
     this.newBillState = state;
   }
 
-  newBillSubmit(category_id: number, sub_category_id: number, currency_id: number, title: string, comment: string, price: number) {
-    console.log(category_id, sub_category_id, currency_id, title, comment, price);
+  changeBills(categoryId: number, subCategoryId: number, currencyId: number) {
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.buttonSwitchMessage = 'Switch to profits!';
+      this.getCosts(categoryId, subCategoryId, currencyId);
+    }
+    else {
+      this.buttonSwitchMessage = 'Switch to costs!';
+      this.getProfits(categoryId, subCategoryId, currencyId);
+    }
+  }
+
+  newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
+    console.log(categoryId, subCategoryId, currencyId, title, comment, price);
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.billService.newProfits(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
+      }, (data:any) => this.error_message = data.error.message);
+    }
+    else {
+      this.billService.newCosts(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
+      }, (data:any) => this.error_message = data.error.message);
+    }
+    console.log(categoryId, subCategoryId, currencyId, title, comment, price);
   }
 
 }

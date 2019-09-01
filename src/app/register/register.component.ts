@@ -17,6 +17,8 @@ import DateTimeFormat = Intl.DateTimeFormat;
 })
 export class RegisterComponent implements OnInit {
 
+  regRequest: RegisterRequest = new RegisterRequest();
+
   countries$: Observable<Country[]>;
   cities$: Observable<City[]>;
   constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService) { }
@@ -26,20 +28,20 @@ export class RegisterComponent implements OnInit {
     console.log(this.countries$);
   }
 
-  registerSubmit(address:string, birthDate: Date, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
+  registerSubmit(regRequest: RegisterRequest) {
     let finalBirthDate = '';
-    if (birthDate) {
-      /*let birthDateFormat = birthDate.toLocaleDateString().replace("/","-");
+    if (regRequest.birthDate) {
+      /*let birthDateFormat = regRequest.birthDate.toLocaleDateString().replace("/","-");
       birthDateFormat = birthDateFormat.replace("/","-");
       birthDateFormat = birthDateFormat.split('-');
       finalBirthDate = finalBirthDate + birthDateFormat[2] + '-' + birthDateFormat[1] + '-' + birthDateFormat[0];
-      console.log(finalBirthDate);*/
+      console.log(finalBirthDate);
+      regRequest.birthDate = finalBirthDate;*/
     }
-    if (password != confirmPassword) {
+    if (regRequest.password != regRequest.confirmPassword) {
     }
     else {
-      this.registerService.register(address, finalBirthDate, city_id, confirmPassword, email, firstName,
-        gender, lastName, password, country_id).subscribe(console.log, console.log);
+      this.registerService.register(regRequest).subscribe(console.log, console.log);
     }
   }
 

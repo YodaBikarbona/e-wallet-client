@@ -62,4 +62,14 @@ tr.mat-footer-row {
   min-height: 300px;
 }
 
+/deep/ .mat-table, th.mat-header-cell.text-center {
+  text-align: center;
+}
 
+/deep/ .mat-table, th.mat-header-cell.firstTableRow {
+  text-align: left;
+}
+
+/deep/ .ng-container .text-center {
+  text-align: center;
+}

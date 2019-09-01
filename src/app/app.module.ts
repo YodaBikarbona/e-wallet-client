@@ -27,6 +27,10 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
 
 
 
@@ -99,6 +103,8 @@ import { SettingsComponent } from './settings/settings.component';
     MatSlideToggleModule,
     MatCardModule,
     MatSnackBarModule,
+    MatTooltipModule,
+    MatCheckboxModule,
     //VERSION,
   ],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],

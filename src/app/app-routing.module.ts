@@ -35,7 +35,7 @@ const routes: Routes = [
     {path: "settings", component: SettingsComponent},
   ]
 },
-{path: "**", redirectTo: "/dashboard", pathMatch: "full"}
+{path: "**", redirectTo: "/login", pathMatch: "full"}
 ];
 
 // path: "dashboard/:id", component: DashboardComponent, //children: {profile} za bindanje id-a u rutu

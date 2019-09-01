@@ -50,6 +50,9 @@ export class User extends AbstractEntity {
   role_id: number;
   country: Country;
   image: Image;
+  categories: number;
+  sub_categories: number;
+  currencies: number;
 }
 
 export class BillCategory extends AbstractEntity{
@@ -111,6 +114,24 @@ export class BillCostsGetRequest {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
+  }
+}
+
+export class NewBillRequest {
+  categoryId: number;
+  subCategoryId: number;
+  currencyId: number;
+  title: string;
+  comment: string;
+  price: string;
+
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
+    this.categoryId = categoryId;
+    this.subCategoryId = subCategoryId;
+    this.currencyId = currencyId;
+    this.title = title;
+    this.comment = comment;
+    this.price = price;
   }
 }
 
@@ -210,7 +231,7 @@ export class RegisterRequest {
   password:string;
   country_id:number;
 
-  constructor(address:string, birthDate:string, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
+  /*constructor(address:string, birthDate:string, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -221,5 +242,5 @@ export class RegisterRequest {
     this.password = password;
     this.confirmPassword = confirmPassword;
     this.email = email;
-  }
+  }*/
 }

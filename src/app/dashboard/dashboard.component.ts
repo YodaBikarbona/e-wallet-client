@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit() {
     const role = this.autenticationService.role;
-    if (role == 'admin') {
+    if (role === 'admin') {
       this.navItems.push(
         {
         displayName: 'Admin',
