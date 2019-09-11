@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent, DashboardGuard} from './dashboard/dashboard.component';
 import { BillsComponent } from './bills/bills.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserResolver } from './services/user.resolver';
@@ -21,7 +21,7 @@ const routes: Routes = [
   path: "restartPassword", component: RestartPasswordComponent
 },
 {
-  path: "dashboard", component: DashboardComponent,
+  path: "dashboard", component: DashboardComponent, canActivate: [DashboardGuard],
   children: [
     {path: "profile", component: ProfileComponent, resolve: {user: UserResolver}},
     {path: "bills", component: BillsComponent,

@@ -9,7 +9,7 @@
           <app-menu-list-item *ngFor="let item of navItems" [item]="item" [routerLink]="[item.route]"></app-menu-list-item>
         </mat-nav-list>
         <div class="text-center logout p-1">
-          <button type="submit" mat-raised-button color="primary" class="btn-block">Logout</button>
+          <button type="submit" mat-raised-button color="primary" class="btn-block" (click)="logout()">Logout</button>
         </div>
       </mat-sidenav>
       <!--app-top-nav fxHide.xs></app-top-nav-->

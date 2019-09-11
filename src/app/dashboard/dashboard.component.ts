@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, ViewEncapsulation, AfterViewInit, OnInit, OnDestroy, Injectable} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,20 +7,21 @@ import { MatSidenavModule } from '@angular/material';
 import { NavItem } from './nav-item';
 import { NavService } from './nav.service';
 import {AuthenticationService} from '../services/authentication.service';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router) {}
 
   ngOnInit() {
     const role = this.autenticationService.role;
@@ -60,6 +61,14 @@ export class DashboardComponent implements OnInit{
       }
       );
     }
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
   @ViewChild('appDrawer') appDrawer: ElementRef;
@@ -166,3 +175,21 @@ export class DashboardComponent implements OnInit{
     this.navService.appDrawer = this.appDrawer;
   }
 }*/
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DashboardGuard implements CanActivate {
+
+  constructor(private autenticationService: AuthenticationService, public router: Router) {}
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.autenticationService.getToken()) {
+        return true;
+    }
+    // navigate to login page
+    this.router.navigate(['login']);
+    // you can save redirect url so after authing we can move them back to the page they requested
+    return false;
+  }
+}
