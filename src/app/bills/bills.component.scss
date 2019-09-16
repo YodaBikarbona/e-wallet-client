@@ -73,3 +73,15 @@ tr.mat-footer-row {
 /deep/ .ng-container .text-center {
   text-align: center;
 }
+
+/deep/ .pdfReport {
+  &:hover {
+    background-color: #EC2929;
+  }
+}
+
+/deep/ .info {
+  &:hover {
+    background-color: white;
+  }
+}

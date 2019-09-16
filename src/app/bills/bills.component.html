@@ -7,13 +7,31 @@
       <h1 class="m-auto" *ngIf="buttonSwitchMessage === 'Switch to costs!'"><i class="material-icons">attach_money</i>Profits
       </h1>
     </div>
-    <div class="col-md-1 col-sm-6">
+    <div class="col-md-2 col-sm-6">
       <div class="m-auto">
         <button mat-button (click)="changeBills(categoryId, subCategoryId, currencyId)"
                 matTooltip="{{buttonSwitchMessage}}"><i class="material-icons">swap_vert</i></button>
+        <button class="info" mat-button matTooltip="This button will change type of bills,
+        you can see profits or costs using switching."><i class="material-icons">info</i></button>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+          <!--div class="m-auto text-center pdfReport">
+          <button mat-button (click)="changeBills(categoryId, subCategoryId, currencyId)"
+                  matTooltip="{{buttonSwitchMessage}}"><i class="material-icons">picture_as_pdf</i></button>
+          </div-->
+          <div class="m-auto">
+        <button class="pdfReport" mat-button (click)="printReport()"><i class="material-icons">picture_as_pdf</i></button>
+            <button class="info" mat-button matTooltip="This button will print bill report,
+            in user options you can set additional options as print both type, sort by date, sort by max price etc."><i class="material-icons">info</i></button>
+      </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div>
