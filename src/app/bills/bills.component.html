@@ -25,7 +25,7 @@
                   matTooltip="{{buttonSwitchMessage}}"><i class="material-icons">picture_as_pdf</i></button>
           </div-->
           <div class="m-auto">
-        <button class="pdfReport" mat-button (click)="printReport()"><i class="material-icons">picture_as_pdf</i></button>
+        <button class="pdfReport" mat-button (click)="printReport(categoryId, subCategoryId, currencyId)"><i class="material-icons">picture_as_pdf</i></button>
             <button class="info" mat-button matTooltip="This button will print bill report,
             in user options you can set additional options as print both type, sort by date, sort by max price etc."><i class="material-icons">info</i></button>
       </div>

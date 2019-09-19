@@ -106,8 +106,15 @@ export class BillsComponent implements OnInit {
     }
   }
 
-  printReport() {
-    this.billService.printBills();
+  printReport(categoryId: number, subCategoryId: number, currencyId: number) {
+    let billType = '';
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      billType = 'costs';
+    }
+    else {
+      billType = 'profits';
+    }
+    this.billService.printBills(categoryId, subCategoryId, currencyId, billType);
   }
 
   newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {

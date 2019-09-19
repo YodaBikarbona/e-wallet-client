@@ -135,6 +135,20 @@ export class NewBillRequest {
   }
 }
 
+export class reportPdfRequest {
+  categoryId: number;
+  subCategoryId: number;
+  currencyId: number;
+  billType: string;
+
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string) {
+    this.categoryId = categoryId;
+    this.subCategoryId = subCategoryId;
+    this.currencyId = currencyId;
+    this.billType = billType;
+  }
+}
+
 export class SettingsCategoriesGetRequest {
   active: boolean;
   search: string;
