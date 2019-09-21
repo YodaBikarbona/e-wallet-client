@@ -8,32 +8,61 @@
       </h1>
     </div>
     <div class="col-md-2 col-sm-6">
-      <div class="m-auto">
+      <div class="m-auto p-relative">
         <button mat-button (click)="changeBills(categoryId, subCategoryId, currencyId)"
                 matTooltip="{{buttonSwitchMessage}}"><i class="material-icons">swap_vert</i></button>
-        <button class="info" mat-button matTooltip="This button will change type of bills,
-        you can see profits or costs using switching."><i class="material-icons">info</i></button>
+        <div class="info p-absolute" mat-button matTooltip="This button will change type of bills,
+        you can see profits or costs using switching."><i class="material-icons">info</i></div>
+        <!--button class="info" mat-button matTooltip="This button will change type of bills,
+        you can see profits or costs using switching."><i class="material-icons">info</i></button-->
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="row">
+    <div class="col-md-6">
+      <!--div class="row">
         <div class="col-md-10">
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2"-->
+
+
           <!--div class="m-auto text-center pdfReport">
           <button mat-button (click)="changeBills(categoryId, subCategoryId, currencyId)"
                   matTooltip="{{buttonSwitchMessage}}"><i class="material-icons">picture_as_pdf</i></button>
           </div-->
-          <div class="m-auto">
-        <button class="pdfReport" mat-button (click)="printReport(categoryId, subCategoryId, currencyId)"><i class="material-icons">picture_as_pdf</i></button>
-            <button class="info" mat-button matTooltip="This button will print bill report,
-            in user options you can set additional options as print both type, sort by date, sort by max price etc."><i class="material-icons">info</i></button>
-      </div>
+
+
+          <!--div class="m-auto p-relative">
+            <button class="pdfReport" mat-button (click)="printReport(categoryId, subCategoryId, currencyId)"><i
+              class="material-icons">picture_as_pdf</i></button>
+            <div class="info p-absolute" mat-button matTooltip="This button will print bill report,
+            in user options you can set additional options as print both type, sort by date, sort by max price etc."><i
+              class="material-icons">info</i></div-->
+
+
+            <!--button class="info" mat-button matTooltip="This button will print bill report,
+            in user options you can set additional options as print both type, sort by date, sort by max price etc."><i class="material-icons">info</i></button-->
+
+
+          <!--/div>
         </div>
+      </div-->
+
+    </div>
+
+    <div class="col-md-2 col-sm-6">
+      <div class="m-auto p-relative">
+        <button class="pdfReport" mat-button (click)="printReport(categoryId, subCategoryId, currencyId)"><i
+              class="material-icons">picture_as_pdf</i></button>
+            <div class="info p-absolute" mat-button matTooltip="This button will print bill report,
+            in user options you can set additional options as print both type, sort by date, sort by max price etc."><i
+              class="material-icons">info</i></div>
+        <!--button class="info" mat-button matTooltip="This button will change type of bills,
+        you can see profits or costs using switching."><i class="material-icons">info</i></button-->
       </div>
 
     </div>
   </div>
+
+
   <div>
     <h3>Filter by</h3>
   </div>
@@ -125,7 +154,7 @@
 
           <!-- Show details table row button -->
           <ng-container matColumnDef="showDetails">
-            <th mat-header-cell *matHeaderCellDef class="text-center"> ... </th>
+            <th mat-header-cell *matHeaderCellDef class="text-center"> ...</th>
             <td mat-cell *matCellDef class="text-center">
               <button mat-button matTooltip="Show details"><i class="material-icons">open_in_new</i></button>
             </td>

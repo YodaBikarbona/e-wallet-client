@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { API_URL } from '../app.constants';
-import { User } from '../model';
+import {ChangePassword, User} from '../model';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 
@@ -16,5 +16,9 @@ export class UserService {
     return this.http.post(`${API_URL}/upload/user`, formData).pipe(map(
       (data: any) => data.image.file_name
     ));
+  }
+  changePassword(currentPassword: string, newPassword: string, confirmPassword: string) {
+    const request = new ChangePassword(currentPassword, newPassword, confirmPassword);
+    return this.http.post(`${API_URL}/user/change_password`, request);
   }
 }

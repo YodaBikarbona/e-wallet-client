@@ -233,6 +233,18 @@ export class SaveNewPasswordRequest extends  RestartPasswordRequest {
   }
 }
 
+export class ChangePassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+
+  constructor(currentPassword: string, newPassword: string, confirmPassword: string) {
+    this.currentPassword = currentPassword
+    this.newPassword = newPassword
+    this.confirmPassword = confirmPassword
+  }
+}
+
 export class RegisterRequest {
   address:string;
   birthDate:string;

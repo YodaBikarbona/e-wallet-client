@@ -29,6 +29,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -52,6 +53,7 @@ import { JWTHeaderInterceptor } from './services/authorization-header.intercepto
 import { RegisterComponent } from './register/register.component';
 import { RestartPasswordComponent } from './restart-password/restart-password.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DialogChangePasswordComponent} from './profile/change_password';
 
 
 
@@ -75,6 +77,7 @@ import { SettingsComponent } from './settings/settings.component';
     RegisterComponent,
     RestartPasswordComponent,
     SettingsComponent,
+    DialogChangePasswordComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -105,8 +108,10 @@ import { SettingsComponent } from './settings/settings.component';
     MatSnackBarModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatDialogModule,
     //VERSION,
   ],
+  entryComponents: [DialogChangePasswordComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
