@@ -54,6 +54,7 @@ import { RegisterComponent } from './register/register.component';
 import { RestartPasswordComponent } from './restart-password/restart-password.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DialogChangePasswordComponent} from './profile/change_password';
+import {DialogEditProfileComponent} from './profile/edit_profile';
 
 
 
@@ -78,6 +79,7 @@ import { DialogChangePasswordComponent} from './profile/change_password';
     RestartPasswordComponent,
     SettingsComponent,
     DialogChangePasswordComponent,
+    DialogEditProfileComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -111,7 +113,7 @@ import { DialogChangePasswordComponent} from './profile/change_password';
     MatDialogModule,
     //VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

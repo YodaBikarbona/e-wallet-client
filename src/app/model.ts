@@ -53,6 +53,8 @@ export class User extends AbstractEntity {
   categories: number;
   sub_categories: number;
   currencies: number;
+  city_id: number;
+  country_id: number;
 }
 
 export class BillCategory extends AbstractEntity{

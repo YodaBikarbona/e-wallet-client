@@ -23,7 +23,7 @@ const routes: Routes = [
 {
   path: "dashboard", component: DashboardComponent, canActivate: [DashboardGuard],
   children: [
-    {path: "profile", component: ProfileComponent, resolve: {user: UserResolver}},
+    {path: "profile", component: ProfileComponent, resolve: {user: UserResolver, countries: CountryResolver}},
     {path: "bills", component: BillsComponent,
       /*children: [
         {path: "profits", component: BillsComponent},

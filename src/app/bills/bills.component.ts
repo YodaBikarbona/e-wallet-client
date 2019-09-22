@@ -109,11 +109,12 @@ export class BillsComponent implements OnInit {
   printReport(categoryId: number, subCategoryId: number, currencyId: number) {
     let billType = '';
     if (this.buttonSwitchMessage === 'Switch to costs!') {
-      billType = 'costs';
-    }
-    else {
       billType = 'profits';
     }
+    else {
+      billType = 'costs';
+    }
+    console.log(billType)
     this.billService.printBills(categoryId, subCategoryId, currencyId, billType);
   }
 
