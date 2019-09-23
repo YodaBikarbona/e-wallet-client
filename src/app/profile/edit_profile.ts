@@ -8,9 +8,7 @@ import {Observable} from 'rxjs';
 import {City} from '../model';
 
 export interface DialogData {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
+  edited: boolean;
 }
 
 @Component({
@@ -21,6 +19,7 @@ export class DialogEditProfileComponent {
 
   error_message = '';
   cities$: Observable<City[]>;
+  edited: boolean;
 
   constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router) {
     console.log(data)
@@ -30,15 +29,19 @@ export class DialogEditProfileComponent {
     this.dialogRef.close();
   }
 
-  changePassword(data: any) {
-    this.userService.changePassword(data.currentPassword, data.newPassword, data.confirmPassword).subscribe((data: any) => {
+  editProfile(userData: any) {
+    this.userService.editProfile(userData).subscribe((data: any) => {
       this.dialogRef.close();
       setTimeout(() => {
-      localStorage.clear();
-      this.router.navigate(['login']);
+      //localStorage.clear();
+      //this.router.navigate(['login']);
+      this.edited = true;
     }, 2000);
       },
-      (data: any) => this.error_message = data.error.message);
+      (data: any) => {
+        this.error_message = data.error.message;
+        this.edited = false;
+      });
   }
 
   onCountryChange(event) {

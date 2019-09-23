@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   confirmPassword = '';
   countries$: Observable<Country[]>;
   cities$: Observable<City[]>;
+  edited = false;
 
   constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver) {
   }
@@ -72,13 +73,20 @@ export class ProfileComponent implements OnInit {
         country_id: this.user.country_id,
         city_id: this.user.city_id,
         email: this.user.email,
-        phone: this.user.phone
+        phone: this.user.phone,
+        edited: this.edited,
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.newPassword = result;
+      console.log(result)
+      this.edited = result;
+      this.router.data.pipe(map((data: any) => {
+        this.user = data.user.user;
+        console.log(data.user.user)}), tap(console.log));
+
+
     });
   }
 

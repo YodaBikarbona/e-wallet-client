@@ -57,6 +57,6 @@
     <button mat-button class="w-90" (click)="onNoClick()">No Thanks</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button mat-button class="w-90">Save</button>
+    <button mat-button class="w-90" [mat-dialog-close]="edited" (click)="editProfile(data)">Save</button>
   </div>
 </div>

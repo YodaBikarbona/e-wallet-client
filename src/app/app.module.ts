@@ -55,6 +55,8 @@ import { RestartPasswordComponent } from './restart-password/restart-password.co
 import { SettingsComponent } from './settings/settings.component';
 import { DialogChangePasswordComponent} from './profile/change_password';
 import {DialogEditProfileComponent} from './profile/edit_profile';
+import {ChartsModule} from 'ng2-charts';
+import { GraphComponent } from './graph/graph.component';
 
 
 
@@ -80,6 +82,7 @@ import {DialogEditProfileComponent} from './profile/edit_profile';
     SettingsComponent,
     DialogChangePasswordComponent,
     DialogEditProfileComponent,
+    GraphComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -111,6 +114,7 @@ import {DialogEditProfileComponent} from './profile/edit_profile';
     MatTooltipModule,
     MatCheckboxModule,
     MatDialogModule,
+    //ChartsModule,
     //VERSION,
   ],
   entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent],

@@ -241,9 +241,33 @@ export class ChangePassword {
   confirmPassword: string;
 
   constructor(currentPassword: string, newPassword: string, confirmPassword: string) {
-    this.currentPassword = currentPassword
-    this.newPassword = newPassword
-    this.confirmPassword = confirmPassword
+    this.currentPassword = currentPassword;
+    this.newPassword = newPassword;
+    this.confirmPassword = confirmPassword;
+  }
+}
+
+export class EditProfile {
+  firstName: string;
+  lastName: string;
+  birthDate: Date;
+  country_id: number;
+  city_id: number;
+  address: string;
+  email: string;
+  phone: string;
+  gender: string;
+
+  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthDate = birthDate;
+    this.country_id = country_id;
+    this.city_id = city_id;
+    this.address = address;
+    this.email = email;
+    this.phone = phone;
+    this.gender = gender;
   }
 }
 
