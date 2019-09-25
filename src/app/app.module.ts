@@ -64,9 +64,20 @@ import { GraphComponent } from './graph/graph.component';
 //import { SidenavAutosizeExample } from './dashboard/dashboard.component';
 
 
+// Graphs import packages
 
+import { FusionChartsModule } from 'angular-fusioncharts';
+import * as FusionCharts from 'fusioncharts';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 
-
+FusionChartsModule.fcRoot(
+  FusionCharts,
+  Charts,
+  FusionTheme,
+  TimeSeries,
+)
 
 
 @NgModule({
@@ -114,6 +125,7 @@ import { GraphComponent } from './graph/graph.component';
     MatTooltipModule,
     MatCheckboxModule,
     MatDialogModule,
+    FusionChartsModule,
     //ChartsModule,
     //VERSION,
   ],
