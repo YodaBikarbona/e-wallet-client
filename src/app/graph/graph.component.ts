@@ -90,8 +90,8 @@ export class GraphComponent implements OnInit {
       series: 'Type',
       yAxis: [
         {
-          plot: 'Sales Value',
-          title: 'Sale Value',
+          plot: 'Bills price',
+          title: 'Bills price',
           /*format: {
             prefix: '$'
           }*/
@@ -184,7 +184,7 @@ export class GraphComponent implements OnInit {
     "type": "string"
   },
   {
-    "name": "Sales Value",
+    "name": "Bills price",
     "type": "number"
   }
 ]
