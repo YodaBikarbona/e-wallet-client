@@ -84,19 +84,23 @@ export class GraphComponent implements OnInit {
       caption: {
         text: 'Bills Analysis'
       },
-      /*subcaption: {
-        text: 'Grocery'
-      },*/
+      subcaption: {
+        text: 'Profit & Cost'
+      },
+      series: 'Type',
       yAxis: [
         {
-          plot: {
-            value: 'Adds bill prices',
-            type: 'line'
-          },
+          plot: 'Sales Value',
+          title: 'Sale Value',
           /*format: {
-            prefix: '€'
-          },*/
-          title: 'Bills values'
+            prefix: '$'
+          }*/
+          referenceLine: [
+            {
+              label: 'Cost monthly limit',
+              value: '3800'
+            }
+          ]
         }
       ]
     };
@@ -107,89 +111,66 @@ export class GraphComponent implements OnInit {
   // parameters, one is data another is schema.
   fetchData() {
 
-    const data = [[
+    const data = [
+      [
     "01-Feb-11",
+    "Profit",
     8866
   ],
   [
+    "01-Feb-11",
+    "Cost",
+    984
+  ],
+  [
     "02-Feb-11",
+    "Profit",
     2174
   ],
   [
+    "02-Feb-11",
+    "Cost",
+    1109
+  ],
+  [
     "03-Feb-11",
+    "Profit",
     2084
   ],
   [
+    "03-Feb-11",
+    "Cost",
+    6526
+  ],
+  [
     "04-Feb-11",
+    "Profit",
     1503
   ],
   [
+    "04-Feb-11",
+    "Cost",
+    1007
+  ],
+  [
     "05-Feb-11",
+    "Profit",
     4928
   ],
   [
+    "05-Feb-11",
+    "Cost",
+    4112
+  ],
+  [
     "06-Feb-11",
-    0
+    "Profit",
+    4667
   ],
   [
-    "07-Feb-11",
-    1064
-  ],
-  [
-    "08-Feb-11",
-    851
-  ],
-  [
-    "09-Feb-11",
-    7326
-  ],
-  [
-    "10-Feb-11",
-    8399
-  ],
-  [
-    "11-Feb-11",
-    4084
-  ],
-  [
-    "12-Feb-11",
-    4012
-  ],
-  [
-    "13-Feb-11",
-    1673
-  ],
-  [
-    "14-Feb-11",
-    6018
-  ],
-  [
-    "15-Feb-11",
-    9011
-  ],
-  [
-    "16-Feb-11",
-    5817
-  ],
-  [
-    "17-Feb-11",
-    5813
-  ],
-  [
-    "18-Feb-11",
-    566
-  ],
-  [
-    "19-Feb-11",
-    9065
-  ],
-  [
-    "20-Feb-11",
-    6734
-  ],
-  [
-    "21-Feb-11",
-    6937
+    "06-Feb-11",
+    "Cost",
+    7206
   ],
   ]
     const schema = [
@@ -199,7 +180,11 @@ export class GraphComponent implements OnInit {
     "format": "%d-%b-%y"
   },
   {
-    "name": "Bills values",
+    "name": "Type",
+    "type": "string"
+  },
+  {
+    "name": "Sales Value",
     "type": "number"
   }
 ]
