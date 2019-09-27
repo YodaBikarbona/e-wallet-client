@@ -51,6 +51,17 @@
       </div>
     </div>
   </mat-radio-group>
+  <mat-form-field class="w-100">
+    <mat-label>Default currency</mat-label>
+    <mat-select name="currency_id" [(ngModel)]="data.currency_id">
+      <mat-option value="null">
+        <p>None</p>
+      </mat-option>
+      <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
+        {{currency.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-50 m-auto text-center">

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { API_URL } from '../app.constants';
-import {City, Country, User} from '../model';
+import {City, Country, Currency, User} from '../model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { map, tap } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import {DialogChangePasswordComponent} from './change_password';
 import {DialogEditProfileComponent} from './edit_profile';
 import {Observable} from 'rxjs';
 import {CityResolver} from '../services/country.service';
+import {SettingsService} from '../services/settings.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,8 +26,10 @@ export class ProfileComponent implements OnInit {
   countries$: Observable<Country[]>;
   cities$: Observable<City[]>;
   edited = false;
+  currencies$: Currency[];
+  error_message = '';
 
-  constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver) {
+  constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver, public settingsService: SettingsService) {
   }
 
   ngOnInit() {
@@ -34,6 +37,9 @@ export class ProfileComponent implements OnInit {
     this.countries$ = this.router.data.pipe(map(data => data.countries));
 
     this.cities$ = this.onCountryChange(event = null, this.user.country_id);
+    this.settingsService.getCurrencies(true, '').subscribe((data:any) => {
+      this.currencies$ = data.currencies;
+    }, (data:any) => this.error_message = data.error.message);
 
   }
 
@@ -74,6 +80,8 @@ export class ProfileComponent implements OnInit {
         city_id: this.user.city_id,
         email: this.user.email,
         phone: this.user.phone,
+        currencies$: this.currencies$,
+        currency_id: this.user.currency_id,
         edited: this.edited,
       }
     });

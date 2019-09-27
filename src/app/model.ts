@@ -55,6 +55,7 @@ export class User extends AbstractEntity {
   currencies: number;
   city_id: number;
   country_id: number;
+  currency_id: number;
 }
 
 export class BillCategory extends AbstractEntity{
@@ -257,8 +258,9 @@ export class EditProfile {
   email: string;
   phone: string;
   gender: string;
+  currency_id: string;
 
-  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string) {
+  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string, currency_id: string) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -268,6 +270,7 @@ export class EditProfile {
     this.email = email;
     this.phone = phone;
     this.gender = gender;
+    this.currency_id = currency_id;
   }
 }
 

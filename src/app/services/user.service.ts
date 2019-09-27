@@ -22,7 +22,7 @@ export class UserService {
     return this.http.post(`${API_URL}/user/change_password`, request);
   }
   editProfile(user: any) {
-    const request = new EditProfile(user.firstName, user.lastName, user.birthDate, user.country_id, user.city_id, user.address, user.email, user.phone, user.gender);
+    const request = new EditProfile(user.firstName, user.lastName, user.birthDate, user.country_id, user.city_id, user.address, user.email, user.phone, user.gender, user.currency_id);
     return this.http.put(`${API_URL}/user/edit`, request);
   }
 }
