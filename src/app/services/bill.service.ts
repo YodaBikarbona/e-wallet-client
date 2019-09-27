@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BillCostsGetRequest, NewBillRequest, reportPdfRequest, SettingsCurrenciesGetRequest} from '../model';
+import {BillCostsGetRequest, graphRequest, NewBillRequest, reportPdfRequest, SettingsCurrenciesGetRequest} from '../model';
 import {API_URL} from '../app.constants';
 import { saveAs } from 'file-saver';
 
@@ -37,5 +37,10 @@ export class BillService {
         // show your error message here
       }
     );
+  }
+
+  getGraph(costs: boolean, profits: boolean, currency_id: number) {
+    const request = new graphRequest(costs, profits, currency_id);
+    return this.http.post(`${API_URL}/bills/graph`, request)
   }
 }

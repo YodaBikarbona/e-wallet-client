@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import {BillService} from '../services/bill.service';
+import {Bill} from '../model';
 
 @Component({
   selector: 'app-graph',
@@ -73,7 +75,10 @@ export class GraphComponent implements OnInit {
   type: string;
   width: string;
   height: string;
-  constructor() {
+  error_message = '';
+  bills: [];
+  constructor(public billService: BillService) {
+
     this.type = 'timeseries';
     this.width = '100%';
     this.height = '400';
@@ -104,75 +109,13 @@ export class GraphComponent implements OnInit {
         }
       ]
     };
-    this.fetchData();
+    //this.fetchData();
   }
 
   // In this method we will create our DataStore and using that we will create a custom DataTable which takes two
   // parameters, one is data another is schema.
   fetchData() {
-
-    const data = [
-      [
-    "01-Feb-11",
-    "Profit",
-    8866
-  ],
-  [
-    "01-Feb-11",
-    "Cost",
-    984
-  ],
-  [
-    "02-Feb-11",
-    "Profit",
-    2174
-  ],
-  [
-    "02-Feb-11",
-    "Cost",
-    1109
-  ],
-  [
-    "03-Feb-11",
-    "Profit",
-    2084
-  ],
-  [
-    "03-Feb-11",
-    "Cost",
-    6526
-  ],
-  [
-    "04-Feb-11",
-    "Profit",
-    1503
-  ],
-  [
-    "04-Feb-11",
-    "Cost",
-    1007
-  ],
-  [
-    "05-Feb-11",
-    "Profit",
-    4928
-  ],
-  [
-    "05-Feb-11",
-    "Cost",
-    4112
-  ],
-  [
-    "06-Feb-11",
-    "Profit",
-    4667
-  ],
-  [
-    "06-Feb-11",
-    "Cost",
-    7206
-  ],
-  ]
+    const data = this.bills;
     const schema = [
   {
     "name": "Time",
@@ -194,7 +137,14 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.billService.getGraph(true, true, 3).subscribe((data: any) => {
+      this.bills = data.bills;
+      this.fetchData();
+      },
+      (data: any) => {
+        this.error_message = data.error.message;
+      });
+    //this.fetchData(this.bills);
   }
 
 }

@@ -152,6 +152,18 @@ export class reportPdfRequest {
   }
 }
 
+export class graphRequest {
+  costs: boolean;
+  profits: boolean;
+  currency_id: number;
+
+  constructor(costs: boolean, profits: boolean, currency_id: number) {
+    this.costs = costs;
+    this.profits = profits;
+    this.currency_id = currency_id;
+  }
+}
+
 export class SettingsCategoriesGetRequest {
   active: boolean;
   search: string;
