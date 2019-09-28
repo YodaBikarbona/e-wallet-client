@@ -2,10 +2,27 @@
   <canvas id="canvas" width="500px" height="200px">{{ chart }}</canvas>
 </div-->
 
-<fusioncharts
+<div class="mobileGraph">
+  <fusioncharts
   [type]="type"
   [width]="width"
   [height]="height"
   [dataSource]="dataSource"
->
-</fusioncharts>
+  >
+  </fusioncharts>
+  <div class="row pr-3 pl-3">
+    <div class="col-md-3 col-sm-12">
+      <p>Min cost: {{bills.min_cost}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <p>Max cost: {{bills.max_cost}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <p>Min profit: {{bills.min_profit}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <p>Max profit: {{bills.max_profit}}</p>
+    </div>
+  </div>
+</div>
+

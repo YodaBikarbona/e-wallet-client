@@ -1,0 +1,38 @@
+@media (max-width: 767px) {
+  .mobileGraph {
+    zoom: 200%;
+    overflow-x: scroll;
+    fusioncharts {
+      //width: 1000px;
+      //overflow-x: scroll;
+      /deep/ svg {
+        width: 500px !important;
+        height: 400px !important;
+      }
+      /deep/ .fusioncharts-container {
+        width: 500px !important;
+        height: 400px !important;
+        &.fc-cal-month {
+          width: auto;
+          height: auto;
+        }
+        &.fc-crs-widget {
+          width: 370px;
+          height: 230px;
+        }
+      }
+      /deep/ .fc-cal-month {
+          width: auto;
+          height: auto;
+      }
+      /deep/ .fc-crs-widget {
+          width: 370px;
+          height: 230px;
+      }
+      rect {
+        width: 1000px;
+        overflow-x: scroll;
+      }
+    }
+  }
+}

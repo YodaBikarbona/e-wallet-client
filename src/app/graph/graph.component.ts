@@ -79,6 +79,76 @@ export class GraphComponent implements OnInit {
   bills: [];
   constructor(public billService: BillService) {
 
+    /*this.type = 'timeseries';
+    this.width = '100%';
+    this.height = '400';
+    // This is the dataSource of the chart
+    this.dataSource = {
+      // Initially data is set as null
+      data: null,
+      caption: {
+        text: 'Bills Analysis'
+      },
+      subcaption: {
+        text: 'Profit & Cost'
+      },
+      series: 'Type',
+      yAxis: [
+        {
+          plot: 'Bills price',
+          title: 'Bills price',
+          format: {
+            prefix: '$'
+          }
+          referenceLine: [
+            {
+              label: 'Cost monthly limit',
+              value: '3800'
+            }
+          ]
+        }
+      ]
+    };*/
+    //this.fetchData();
+  }
+
+  // In this method we will create our DataStore and using that we will create a custom DataTable which takes two
+  // parameters, one is data another is schema.
+  fetchData() {
+    const data = this.bills.bills;
+    const schema = [
+  {
+    "name": "Time",
+    "type": "date",
+    "format": "%d-%b-%y"
+  },
+  {
+    "name": "Type",
+    "type": "string"
+  },
+  {
+    "name": "Bills price",
+    "type": "number"
+  }
+]
+    const fusionDataStore = new FusionCharts.DataStore();
+    const fusionTable = fusionDataStore.createDataTable(data, schema);
+    this.dataSource.data = fusionTable;
+  }
+
+  ngOnInit() {
+    this.billService.getGraph(true, true, 3).subscribe((data: any) => {
+      this.bills = data;
+      console.log(this.bills)
+      this.graph();
+      },
+      (data: any) => {
+        this.error_message = data.error.message;
+      });
+    //this.fetchData(this.bills);
+  }
+
+  graph() {
     this.type = 'timeseries';
     this.width = '100%';
     this.height = '400';
@@ -109,42 +179,7 @@ export class GraphComponent implements OnInit {
         }
       ]
     };
-    //this.fetchData();
-  }
-
-  // In this method we will create our DataStore and using that we will create a custom DataTable which takes two
-  // parameters, one is data another is schema.
-  fetchData() {
-    const data = this.bills;
-    const schema = [
-  {
-    "name": "Time",
-    "type": "date",
-    "format": "%d-%b-%y"
-  },
-  {
-    "name": "Type",
-    "type": "string"
-  },
-  {
-    "name": "Bills price",
-    "type": "number"
-  }
-]
-    const fusionDataStore = new FusionCharts.DataStore();
-    const fusionTable = fusionDataStore.createDataTable(data, schema);
-    this.dataSource.data = fusionTable;
-  }
-
-  ngOnInit() {
-    this.billService.getGraph(true, true, 3).subscribe((data: any) => {
-      this.bills = data.bills;
-      this.fetchData();
-      },
-      (data: any) => {
-        this.error_message = data.error.message;
-      });
-    //this.fetchData(this.bills);
+    this.fetchData();
   }
 
 }
