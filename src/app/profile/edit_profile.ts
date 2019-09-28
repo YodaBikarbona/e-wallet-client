@@ -2,7 +2,7 @@ import {Component, Inject, NgModule} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {CityResolver} from '../services/country.service';
 import {Observable} from 'rxjs';
 import {City} from '../model';
@@ -14,6 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-profile',
   templateUrl: 'edit_profile.html',
+  styleUrls: ['./edit_profile.scss']
 })
 export class DialogEditProfileComponent {
 
@@ -31,6 +32,7 @@ export class DialogEditProfileComponent {
 
   editProfile(userData: any) {
     this.userService.editProfile(userData).subscribe((data: any) => {
+      userData.edited = true;
       this.dialogRef.close();
       setTimeout(() => {
       //localStorage.clear();
@@ -44,9 +46,27 @@ export class DialogEditProfileComponent {
       });
   }
 
-  onCountryChange(event) {
+  onCountryChange(event, userData: any) {
+    console.log(event, userData)
     let _countryId = '';
-    _countryId = event.value;
-    this.data.cities$ = this.cityService.resolve(_countryId).pipe(map(data => data.cities));
+    if (event != null) {
+      _countryId = event.value;
+    } else {
+      _countryId = userData.country_id;
+    }
+    console.log("tu sam")
+    console.log(this.data)
+    userData.cities$ = this.cityService.resolve(_countryId).pipe(tap(console.log), map(data => data.cities));
+  }
+
+  onCountryChange2(event, countryId?) {
+    console.log(event.value)
+    let _countryId = '';
+    if (event != null) {
+      _countryId = event.value;
+    } else {
+      _countryId = countryId;
+    }
+    return this.cityService.resolve(_countryId).pipe(map(data => data));
   }
 }

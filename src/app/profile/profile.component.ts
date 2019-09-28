@@ -3,7 +3,7 @@ import { API_URL } from '../app.constants';
 import {City, Country, Currency, User} from '../model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { map, tap } from 'rxjs/operators';
+import {flatMap, map, tap} from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogChangePasswordComponent} from './change_password';
@@ -86,15 +86,13 @@ export class ProfileComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(
+      flatMap(result => this.userService.find_by_id()),
+      map(((data: any) => data.user)))
+      .subscribe(result => {
+        console.log("result", result)
+        this.user = result;
       console.log('The dialog was closed');
-      console.log(result)
-      this.edited = result;
-      this.router.data.pipe(map((data: any) => {
-        this.user = data.user.user;
-        console.log(data.user.user)}), tap(console.log));
-
-
     });
   }
 

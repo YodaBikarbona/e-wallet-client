@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import {BillService} from '../services/bill.service';
-import {Bill} from '../model';
+import {Bill, graphResponse} from '../model';
+import * as FusionCharts from 'fusioncharts';
 
 @Component({
   selector: 'app-graph',
@@ -76,7 +77,7 @@ export class GraphComponent implements OnInit {
   width: string;
   height: string;
   error_message = '';
-  bills: [];
+  bills: graphResponse;
   constructor(public billService: BillService) {
 
     /*this.type = 'timeseries';
@@ -115,7 +116,11 @@ export class GraphComponent implements OnInit {
   // In this method we will create our DataStore and using that we will create a custom DataTable which takes two
   // parameters, one is data another is schema.
   fetchData() {
-    const data = this.bills.bills;
+    console.log(this.bills)
+    let data = []
+    if (this.bills.bills) {
+      data = this.bills.bills;
+    }
     const schema = [
   {
     "name": "Time",
@@ -131,13 +136,17 @@ export class GraphComponent implements OnInit {
     "type": "number"
   }
 ]
-    const fusionDataStore = new FusionCharts.DataStore();
-    const fusionTable = fusionDataStore.createDataTable(data, schema);
-    this.dataSource.data = fusionTable;
+    if (data != undefined) {
+      const fusionDataStore = new FusionCharts.DataStore();
+      const fusionTable = fusionDataStore.createDataTable(data, schema);
+      this.dataSource.data = fusionTable;
+    }
+
   }
 
   ngOnInit() {
-    this.billService.getGraph(true, true, 3).subscribe((data: any) => {
+    this.billService.getGraph(true, true, 3).subscribe((data: graphResponse) => {
+      console.log(data)
       this.bills = data;
       console.log(this.bills)
       this.graph();
@@ -155,7 +164,7 @@ export class GraphComponent implements OnInit {
     // This is the dataSource of the chart
     this.dataSource = {
       // Initially data is set as null
-      data: null,
+      data: [],
       caption: {
         text: 'Bills Analysis'
       },

@@ -164,6 +164,22 @@ export class graphRequest {
   }
 }
 
+export class graphResponse {
+  bills: any[];
+  min_cost: number;
+  max_cost: number;
+  min_profit: number;
+  max_profit: number;
+
+  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number) {
+    this.bills = bills;
+    this.min_cost = min_cost;
+    this.max_cost = max_cost;
+    this.min_profit = min_profit;
+    this.max_profit = max_profit;
+  }
+}
+
 export class SettingsCategoriesGetRequest {
   active: boolean;
   search: string;
