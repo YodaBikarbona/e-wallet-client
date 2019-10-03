@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserResolver } from './services/user.resolver';
 import { RegisterComponent } from './register/register.component';
 import {RestartPasswordComponent} from './restart-password/restart-password.component';
-import {CountryResolver} from './services/country.service';
+import {CityResolver, CountryResolver} from './services/country.service';
 import {SettingsComponent} from './settings/settings.component';
 import {GraphComponent} from './graph/graph.component';
 

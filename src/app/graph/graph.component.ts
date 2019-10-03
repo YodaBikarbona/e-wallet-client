@@ -78,6 +78,7 @@ export class GraphComponent implements OnInit {
   height: string;
   error_message = '';
   bills: graphResponse;
+  //monthly_limit = 0;
   constructor(public billService: BillService) {
 
     /*this.type = 'timeseries';
@@ -149,6 +150,7 @@ export class GraphComponent implements OnInit {
       console.log(data)
       this.bills = data;
       console.log(this.bills)
+      //this.monthly_limit = this.bills.monthly_limit
       this.graph();
       },
       (data: any) => {
@@ -182,7 +184,7 @@ export class GraphComponent implements OnInit {
           referenceLine: [
             {
               label: 'Cost monthly limit',
-              value: '3800'
+              value: this.bills.monthly_limit
             }
           ]
         }

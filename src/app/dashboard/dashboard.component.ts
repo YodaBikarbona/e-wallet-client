@@ -8,6 +8,7 @@ import { NavItem } from './nav-item';
 import { NavService } from './nav.service';
 import {AuthenticationService} from '../services/authentication.service';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,9 +22,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router) {}
+  news = [];
+  error_message = '';
+
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router, public userService: UserService) {}
 
   ngOnInit() {
+
+    this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
+        this.error_message = data.error.message;
+      });
     const role = this.autenticationService.role;
     if (role === 'admin') {
       this.navItems.push(

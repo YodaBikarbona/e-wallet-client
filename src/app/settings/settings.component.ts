@@ -22,12 +22,14 @@ export class SettingsComponent implements OnInit, OnDestroy {
   searchField = new FormControl('');
   subSubscription: Subscription;
   panelOpenState: boolean;
+  activeCurrencies$: Currency[];
   constructor(public settingsService: SettingsService, public router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(this.active, searchValues);
     let categories = (searchValues: string) => this.settingsService.getCategories(this.active, searchValues);
     let subCategories = (searchValues: string) => this.settingsService.getSubCategories(this.active, searchValues);
+    let activeCurrencies = (searchValues: string) => this.settingsService.getActiveCurrenciesLimit(true, searchValues);
     currencies('').subscribe((data:any) => {
       this.currencies$ = data.currencies;
     }, (data:any) => this.error_message = data.error.message);
@@ -36,6 +38,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
     subCategories('').subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
+    }, (data:any) => this.error_message = data.error.message);
+    activeCurrencies('').subscribe((data:any) => {
+      this.activeCurrencies$ = data.currencies;
     }, (data:any) => this.error_message = data.error.message);
     let settings = (searchValues: string) => zip(currencies(searchValues), categories(searchValues), subCategories(searchValues));
 
@@ -131,6 +136,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.settingsService.ToogleActiveSubCategory(false, this.searchField.value, subCategoryId).subscribe((data:any) => {
       this.settingsService.getSubCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
+      this.error_message = '';
+      }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => this.error_message = data.error.message);
+  }
+
+  changeMonthlyLimit(currency_id: number, monthly_cost_limit: number) {
+    console.log(currency_id, monthly_cost_limit);
+    this.settingsService.editActiveCurrenciesLimit(currency_id, monthly_cost_limit).subscribe((data:any) => {
+      this.settingsService.getActiveCurrenciesLimit(this.active, this.searchField.value).subscribe((data:any) => {
+      this.activeCurrencies$ = data.currencies;
       this.error_message = '';
       }, (data:any) => this.error_message = data.error.message);
     }, (data:any) => this.error_message = data.error.message);

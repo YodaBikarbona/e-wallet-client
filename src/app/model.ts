@@ -170,13 +170,15 @@ export class graphResponse {
   max_cost: number;
   min_profit: number;
   max_profit: number;
+  monthly_limit: number;
 
-  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number) {
+  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number, monthly_limit: number) {
     this.bills = bills;
     this.min_cost = min_cost;
     this.max_cost = max_cost;
     this.min_profit = min_profit;
     this.max_profit = max_profit;
+    this.monthly_limit = monthly_limit;
   }
 }
 
@@ -232,6 +234,16 @@ export class ActiveOrDeactiveUserSettingsSubCategoryRequest extends SettingsSubC
   constructor(active: boolean, search: string, subCategoryId: number) {
     super(active, search);
     this.subCategoryId = subCategoryId;
+  }
+}
+
+export class EditCurrencyMonthlyLimitRequest {
+  currency_id: number;
+  monthly_cost_limit: number
+
+  constructor(currency_id: number, monthly_cost_limit: number) {
+    this.currency_id = currency_id;
+    this.monthly_cost_limit = monthly_cost_limit;
   }
 }
 

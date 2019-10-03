@@ -13,22 +13,22 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field class="w-100">
+  <!--mat-form-field class="w-100">
     <mat-label>Country</mat-label>
     <mat-select name="country_id" [(ngModel)]="data.country_id" (selectionChange)="onCountryChange($event, data)">
       <mat-option *ngFor="let country of data.countries$ | async" [value]="country.id">
         {{country.name}}
       </mat-option>
     </mat-select>
-  </mat-form-field>
-  <mat-form-field class="w-100">
+  </mat-form-field-->
+  <!--mat-form-field class="w-100">
     <mat-label>City</mat-label>
     <mat-select name="city_id" [(ngModel)]="data.city_id">
       <mat-option *ngFor="let city of data.cities$ | async" [value]="city.id" >
         {{city.name}}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field-->
   <mat-form-field class="w-100">
     <mat-label>Address</mat-label>
     <input type="text" matInput required name="address" [(ngModel)]="data.address">

@@ -59,7 +59,6 @@
                     <h5 class="m-auto card">{{ category.name }}</h5>
                   </mat-card>
                   <!--/div-->
-
                 </div>
               </div>
 
@@ -113,6 +112,43 @@
                   <mat-card class="currencyCard" (click)="deactiveCurrency(currency.id)" *ngIf="!active">
                     <h5 class="m-auto card">{{ currency.code }}</h5>
                   </mat-card>
+                  <!--/div-->
+
+                </div>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Active currencies monthly limit</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <p>Your active currencies and their monthly limit</p>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col-md-3 p-2" *ngFor="let currency of activeCurrencies$">
+                  <mat-form-field class="w-50">
+                    <mat-label>{{ currency.currency.code }}</mat-label>
+                    <input type="text" matInput name="monthly_cost_limit" [(ngModel)]="currency.monthly_cost_limit">
+                  </mat-form-field>
+                  <button mat-button class="w-50" (click)="changeMonthlyLimit(currency.id, currency.monthly_cost_limit)">Save</button>
+                  <!--div class="w-50 m-auto text-center">
+                    <button mat-button class="w-90" (click)="changeMonthlyLimit(currency.id, monthly_limit)">Save</button>
+                  </div-->
+
+
+                  <!--div [ngClass]="{'activeCard': active, 'deactiveCard': !active}"-->
+                  <div>
+
+                  </div>
+                  <!--mat-card class="currencyCard" (click)="activeCurrency(currency.id)" *ngIf="active">
+                    <h5 class="m-auto card">{{ currency.code }}</h5>
+                  </mat-card>
+                  <mat-card class="currencyCard" (click)="deactiveCurrency(currency.id)" *ngIf="!active">
+                    <h5 class="m-auto card">{{ currency.code }}</h5>
+                  </mat-card-->
                   <!--/div-->
 
                 </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
   ActiveOrDeactiveUserSettingsCategoryRequest,
-  ActiveOrDeactiveUserSettingsCurrencyRequest, ActiveOrDeactiveUserSettingsSubCategoryRequest,
+  ActiveOrDeactiveUserSettingsCurrencyRequest, ActiveOrDeactiveUserSettingsSubCategoryRequest, EditCurrencyMonthlyLimitRequest,
   SettingsCategoriesGetRequest,
   SettingsCurrenciesGetRequest,
   SettingsSubCategoriesGetRequest, SubCategoriesByCategoryGetRequest
@@ -19,6 +19,14 @@ export class SettingsService {
   getCurrencies(active: boolean, search: string) {
     const request = new SettingsCurrenciesGetRequest(active, search);
     return this.http.post(`${API_URL}/user/currencies`, request);
+  }
+  getActiveCurrenciesLimit(active = true, search: string) {
+    const request = new SettingsCurrenciesGetRequest(active, search);
+    return this.http.post(`${API_URL}/active/currencies/limit`, request);
+  }
+  editActiveCurrenciesLimit(currency_id: number, monthly_cost_limit: number) {
+    const request = new EditCurrencyMonthlyLimitRequest(currency_id, monthly_cost_limit);
+    return this.http.put(`${API_URL}/currency/limit/edit`, request);
   }
   ToogleActiveCurrency(active: boolean, search: string, currencyId: number) {
     const request = new ActiveOrDeactiveUserSettingsCurrencyRequest(active, search, currencyId);

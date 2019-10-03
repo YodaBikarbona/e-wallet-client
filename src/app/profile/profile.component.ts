@@ -103,7 +103,10 @@ export class ProfileComponent implements OnInit {
     } else {
       _countryId = countryId;
     }
-    return this.cityService.resolve(_countryId).pipe(map(data => data.cities));
+    /*console.log(this.cityService.resolve(_countryId).subscribe(data => {
+      console.log(data.cities)
+    }))*/
+    return this.cityService.resolve(_countryId).pipe(map(data => data));
   }
 
 }

@@ -28,6 +28,26 @@
           <div class="p-5 dashboard-content">
             <router-outlet></router-outlet>
           </div>
+          <div class="pl-2 pr-2">
+            <h3 class="w-100 text-center">News and information</h3>
+            <div *ngFor="let n of news">
+              <div class="p-1 mb-1" style="border: 1px solid black">
+                <h5>{{ n.title }}</h5>
+                <p>{{ n.created }}</p>
+                <p>{{ n.content }}</p>
+                <div class="text-right w-100">
+                  <button mat-button class="w-10">Clear</button>
+                </div>
+              </div>
+
+
+            </div>
+            <!--div class="p-1" style="border: 1px solid black">
+              <h5>New categories</h5>
+              <p>Date: 10.08.2018</p>
+              <p>Added new categories food, drinks, auto</p>
+            </div-->
+          </div>
 
           <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
