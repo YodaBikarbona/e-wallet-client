@@ -32,11 +32,24 @@
             <h3 class="w-100 text-center">News and information</h3>
             <div *ngFor="let n of news">
               <div class="p-1 mb-1" style="border: 1px solid black">
-                <h5>{{ n.title }}</h5>
-                <p>{{ n.created }}</p>
-                <p>{{ n.content }}</p>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <h5>Title: {{ n.title }}</h5>
+                  </div>
+                  <div class="col-md-6 col-sm-6 text-right">
+                    <p>Created by: {{ n.user.role.role_name }}</p>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <p>Date: {{ n.created }}</p>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <p>{{ n.content }}</p>
+                  </div>
+                </div>
+                <!--p>Date: {{ n.created }}</p>
+                <p>{{ n.content }}</p-->
                 <div class="text-right w-100">
-                  <button mat-button class="w-10">Clear</button>
+                  <button mat-button class="w-10" (click)="clear(n.id)">Clear</button>
                 </div>
               </div>
 

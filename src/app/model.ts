@@ -314,6 +314,14 @@ export class EditProfile {
   }
 }
 
+export class ClearNewsRequest {
+  newsId: number;
+
+  constructor(newsId: number) {
+    this.newsId = newsId;
+  }
+}
+
 export class RegisterRequest {
   address:string;
   birthDate:string;
