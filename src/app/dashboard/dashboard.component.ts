@@ -22,16 +22,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       map(result => result.matches)
     );
 
-  news = [];
+  // news = [];
   error_message = '';
 
   constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router, public userService: UserService) {}
 
   ngOnInit() {
 
-    this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
-        this.error_message = data.error.message;
-      });
+    // this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
+    //     this.error_message = data.error.message;
+    //   });
     const role = this.autenticationService.role;
     if (role === 'admin') {
       this.navItems.push(
@@ -79,15 +79,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.router.navigate(['login']);
   }
 
-  clear(newsId: number) {
-    console.log(newsId)
-    this.userService.clearNews(newsId).subscribe((data: any) => {
-      this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
-        this.error_message = data.error.message;
-      })}, (data: any) => {
-        this.error_message = data.error.message;
-    });
-  }
+  // clear(newsId: number) {
+  //   console.log(newsId)
+  //   this.userService.clearNews(newsId).subscribe((data: any) => {
+  //     this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
+  //       this.error_message = data.error.message;
+  //     })}, (data: any) => {
+  //       this.error_message = data.error.message;
+  //   });
+  // }
 
   @ViewChild('appDrawer') appDrawer: ElementRef;
   //version = VERSION;

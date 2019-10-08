@@ -71,6 +71,7 @@ import * as FusionCharts from 'fusioncharts';
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
+import { NewsComponent } from './news/news.component';
 
 FusionChartsModule.fcRoot(
   FusionCharts,
@@ -94,6 +95,7 @@ FusionChartsModule.fcRoot(
     DialogChangePasswordComponent,
     DialogEditProfileComponent,
     GraphComponent,
+    NewsComponent,
     //SidenavAutosizeExample,
   ],
   imports: [

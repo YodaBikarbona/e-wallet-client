@@ -299,8 +299,9 @@ export class EditProfile {
   phone: string;
   gender: string;
   currency_id: string;
+  edited: boolean;
 
-  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string, currency_id: string) {
+  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string, currency_id: string, edited: boolean) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -311,6 +312,7 @@ export class EditProfile {
     this.phone = phone;
     this.gender = gender;
     this.currency_id = currency_id;
+    this.edited = edited;
   }
 }
 

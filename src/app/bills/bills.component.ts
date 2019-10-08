@@ -81,10 +81,15 @@ export class BillsComponent implements OnInit {
     else {
       this.currencyId = event.value;
     }
-    this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+    }
+    else {
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+    }
   }
 
-  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "image", "showDetails"];
+  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "bill_price", "bill_currency", "image", "showDetails"];
 
    /** Gets the total cost of all transactions. */
   getTotalCost() {
@@ -131,4 +136,7 @@ export class BillsComponent implements OnInit {
     console.log(categoryId, subCategoryId, currencyId, title, comment, price);
   }
 
+  testFun(event) {
+    console.log(event);
+  }
 }

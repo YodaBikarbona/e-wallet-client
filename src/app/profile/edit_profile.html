@@ -2,14 +2,14 @@
   <p>Edit your personal information</p>
   <mat-form-field class="w-100">
     <mat-label>First name</mat-label>
-    <input type="text" matInput required name="firstName" [(ngModel)]="data.firstName">
+    <input type="text" matInput required [(ngModel)]="dataEdit.firstName">
   </mat-form-field>
   <mat-form-field class="w-100">
     <mat-label>Last name</mat-label>
-    <input type="text" matInput required name="lastName" [(ngModel)]="data.lastName">
+    <input type="text" matInput required [(ngModel)]="dataEdit.lastName">
   </mat-form-field>
   <mat-form-field class="w-100">
-    <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="data.birthDate" placeholder="Birth date" required>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="dataEdit.birthDate" placeholder="Birth date" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker></mat-datepicker>
   </mat-form-field>
@@ -31,17 +31,17 @@
   </mat-form-field-->
   <mat-form-field class="w-100">
     <mat-label>Address</mat-label>
-    <input type="text" matInput required name="address" [(ngModel)]="data.address">
+    <input type="text" matInput required [(ngModel)]="dataEdit.address">
   </mat-form-field>
   <mat-form-field class="w-100">
     <mat-label>Email</mat-label>
-    <input type="email" matInput required name="email" [(ngModel)]="data.email">
+    <input type="email" matInput required [(ngModel)]="dataEdit.email">
   </mat-form-field>
   <mat-form-field class="w-100">
     <mat-label>Phone</mat-label>
-    <input type="text" matInput name="phone" [(ngModel)]="data.phone">
+    <input type="text" matInput [(ngModel)]="dataEdit.phone">
   </mat-form-field>
-  <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="data.gender" class="w-100">
+  <mat-radio-group aria-label="Select an option" required [(ngModel)]="dataEdit.gender" class="w-100">
     <div class="row">
       <div class="col-md-6">
         <mat-radio-button value="male" class="mb-1">Male</mat-radio-button>
@@ -53,11 +53,11 @@
   </mat-radio-group>
   <mat-form-field class="w-100">
     <mat-label>Default currency</mat-label>
-    <mat-select name="currency_id" [(ngModel)]="data.currency_id">
+    <mat-select name="currency_id" [(ngModel)]="dataEdit.currency_id">
       <mat-option value="null">
         <p>None</p>
       </mat-option>
-      <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
+      <mat-option *ngFor="let currency of dataEdit.currencies$" [value]="currency.id">
         {{currency.code}}
       </mat-option>
     </mat-select>
@@ -68,6 +68,6 @@
     <button mat-button class="w-90" (click)="onNoClick()">No Thanks</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button mat-button class="w-90" [mat-dialog-close]="data" (click)="editProfile(data)">Save</button>
+    <button mat-button class="w-90" [mat-dialog-close]="data" (click)="editProfile(dataEdit)">Save</button>
   </div>
 </div>

@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {CityResolver} from '../services/country.service';
 import {Observable} from 'rxjs';
-import {City} from '../model';
+import {City, EditProfile, User} from '../model';
 
 export interface DialogData {
   edited: boolean;
@@ -21,9 +21,14 @@ export class DialogEditProfileComponent {
   error_message = '';
   cities$: Observable<City[]>;
   edited: boolean;
+  dataEdit: EditProfile;
 
-  constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router) {
+  constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: EditProfile, public router: Router) {
     console.log(data)
+    this.dataEdit = data;
+    //this.data = this.dataEdit;
+    //data = this.dataEdit;
+    //console.log(data)
   }
 
   onNoClick(): void {
@@ -32,7 +37,7 @@ export class DialogEditProfileComponent {
 
   editProfile(userData: any) {
     this.userService.editProfile(userData).subscribe((data: any) => {
-      userData.edited = true;
+      //userData.edited = true;
       this.dialogRef.close();
       setTimeout(() => {
       //localStorage.clear();

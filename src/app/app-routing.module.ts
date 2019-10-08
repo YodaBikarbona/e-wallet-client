@@ -10,6 +10,7 @@ import {RestartPasswordComponent} from './restart-password/restart-password.comp
 import {CityResolver, CountryResolver} from './services/country.service';
 import {SettingsComponent} from './settings/settings.component';
 import {GraphComponent} from './graph/graph.component';
+import {NewsComponent} from './news/news.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
 {
   path: "dashboard", component: DashboardComponent, canActivate: [DashboardGuard],
   children: [
+    {path: "", component: NewsComponent},
     {path: "profile", component: ProfileComponent, resolve: {user: UserResolver, countries: CountryResolver}},
     {path: "bills", component: BillsComponent,
       /*children: [

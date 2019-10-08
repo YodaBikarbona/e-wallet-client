@@ -6,6 +6,9 @@
 
   @media (max-width: 767px) {
     padding: 0;
+    border: none;
+    border-radius: unset;
+    box-shadow: none;
   }
 }
 
@@ -19,12 +22,15 @@ tr.mat-footer-row {
 
 .newBill {
   bottom: 10px;
+  @media (max-width:767px) {
+    padding: 5px;
+  }
 }
 
 .newBillButton {
   border: 1px solid black;
   @media (max-width: 767px) {
-    width: 90%;
+    width: 100%;
   }
 }
 
@@ -87,4 +93,58 @@ tr.mat-footer-row {
   left: 20%;
   top: -10px;
   width: 30px;
+}
+
+/deep/ .filters mat-form-field {
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.filters {
+  @media (max-width: 767px) {
+    padding: 5px;
+  }
+}
+
+/deep/ .actionButton .mat-button{
+  @media (max-width: 767px) {
+    width: 100%;
+    border: 1px solid black;
+  }
+}
+
+/deep/ .actionButton {
+  @media (max-width: 767px) {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+}
+
+.info {
+  @media (max-width: 767px) {
+    right: 0px;
+    left: unset;
+    width: unset;
+  }
+}
+
+/deep/ .actionButton button {
+  &:hover {
+    @media (max-width: 767px) {
+      background-color: unset;
+    }
+  }
+}
+
+/deep/ .tableMobile {
+  @media(max-width: 767px) {
+    display: none;
+  }
+}
+
+/deep/ .mat-table {
+  @media (max-width: 767px) {
+    width: 110% !important;
+  }
 }

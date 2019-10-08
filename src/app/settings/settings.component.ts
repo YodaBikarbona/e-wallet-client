@@ -41,6 +41,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
     activeCurrencies('').subscribe((data:any) => {
       this.activeCurrencies$ = data.currencies;
+      console.log(this.activeCurrencies$);
     }, (data:any) => this.error_message = data.error.message);
     let settings = (searchValues: string) => zip(currencies(searchValues), categories(searchValues), subCategories(searchValues));
 
@@ -144,10 +145,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   changeMonthlyLimit(currency_id: number, monthly_cost_limit: number) {
     console.log(currency_id, monthly_cost_limit);
     this.settingsService.editActiveCurrenciesLimit(currency_id, monthly_cost_limit).subscribe((data:any) => {
-      this.settingsService.getActiveCurrenciesLimit(this.active, this.searchField.value).subscribe((data:any) => {
       this.activeCurrencies$ = data.currencies;
       this.error_message = '';
-      }, (data:any) => this.error_message = data.error.message);
+      // this.settingsService.getActiveCurrenciesLimit(this.active, this.searchField.value).subscribe((data:any) => {
+      // this.activeCurrencies$ = data.currencies;
+      // this.error_message = '';
+      // }, (data:any) => this.error_message = data.error.message);
     }, (data:any) => this.error_message = data.error.message);
   }
 }
