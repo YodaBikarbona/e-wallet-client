@@ -72,6 +72,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 import { NewsComponent } from './news/news.component';
+import { DialogNewBillComponent } from './bills/new-bill.component';
 
 FusionChartsModule.fcRoot(
   FusionCharts,
@@ -96,6 +97,7 @@ FusionChartsModule.fcRoot(
     DialogEditProfileComponent,
     GraphComponent,
     NewsComponent,
+    DialogNewBillComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -131,7 +133,7 @@ FusionChartsModule.fcRoot(
     //ChartsModule,
     //VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

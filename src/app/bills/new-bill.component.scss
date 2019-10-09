@@ -1,0 +1,20 @@
+/deep/ .newBillTextarea {
+  height: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  resize: none !important;
+  @media (max-width: 767px) {
+    height: 200px !important;
+    resize: none;
+  }
+}
+
+/deep/ .mat-dialog-container {
+  @media (min-width: 768px) {
+    width: 500px !important;
+  }
+}
+
+/deep/ textarea {
+  resize: none;
+}

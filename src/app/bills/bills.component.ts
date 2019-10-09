@@ -4,6 +4,10 @@ import {SettingsService} from '../services/settings.service';
 import {Router} from '@angular/router';
 import {BillService} from '../services/bill.service';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {DialogChangePasswordComponent} from '../profile/change_password';
+import {MatDialog} from '@angular/material';
+import {DialogNewBillComponent} from './new-bill.component';
+import {flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-bills',
@@ -22,7 +26,7 @@ export class BillsComponent implements OnInit {
   currencyId: number = null;
   newBillState: boolean = false;
   buttonSwitchMessage = 'Switch to profits!'
-  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router) { }
+  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
@@ -97,7 +101,53 @@ export class BillsComponent implements OnInit {
   }
 
   newBill(state: boolean) {
-    this.newBillState = state;
+    //this.newBillState = state;
+  }
+
+  openDialogNewBill(): void {
+    let billType = '';
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      billType = 'profits';
+    }
+    else {
+      billType = 'costs';
+    }
+    const dialogRef = this.dialog.open(DialogNewBillComponent, {
+      //width: '300px',
+      disableClose: true,
+      data: {
+        categories$: this.categories$,
+        subCategories$: this.subCategories$,
+        currencies$: this.currencies$,
+        newBillType: billType,
+        title: '',
+        comment: '',
+        price: null,
+        categoryId: null,
+        subCategoryId: null,
+        currencyId: null,
+      }
+    });
+
+    dialogRef.afterClosed().pipe(
+    //   flatMap((result: any) => {
+    //     if (this.buttonSwitchMessage === 'Switch to costs!') {
+    //       this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+    //     }
+    //     else {
+    //       this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+    // }
+    //   }),
+      map(((data: any) => data)))
+      .subscribe(result => {
+        console.log('The dialog was closed');
+        if (this.buttonSwitchMessage === 'Switch to costs!') {
+          this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+        }
+        else {
+          this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+        }
+    });
   }
 
   changeBills(categoryId: number, subCategoryId: number, currencyId: number) {

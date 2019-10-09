@@ -1,0 +1,68 @@
+<div mat-dialog-content class="text-center">
+  <div *ngIf="data.newBillType == 'costs'">
+    <p>Add new bill (Cost)</p>
+  </div>
+  <div *ngIf="data.newBillType == 'profits'">
+    <p>Add new bill (Profits)</p>
+  </div>
+  <mat-form-field class="w-100">
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId')">
+      <mat-option value="null">
+        <p>None</p>
+      </mat-option>
+      <mat-option *ngFor="let category of data.categories$" [value]="category.id"
+                  value="category.name">
+        {{category.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Sub category</mat-label>
+    <mat-select [(ngModel)]="data.subCategoryId">
+      <mat-option value="null">
+        <p>None</p>
+      </mat-option>
+      <mat-option *ngFor="let subCategory of data.subCategories$ | async" [value]="subCategory.id" >
+        {{subCategory.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Currency</mat-label>
+    <mat-select [(ngModel)]="data.currencyId">
+      <mat-option value="null">
+        <p>None</p>
+      </mat-option>
+      <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
+        {{currency.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Title</mat-label>
+    <input type="text" matInput required [(ngModel)]="data.title">
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Comment</mat-label>
+    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Price</mat-label>
+    <input type="text" matInput required [(ngModel)]="data.price">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions class="w-100">
+  <div class="w-50 m-auto text-center">
+    <button mat-button class="w-90" (click)="onNoClick()">No Thanks</button>
+  </div>
+  <div class="w-50 m-auto text-center">
+    <button mat-button class="w-90" [mat-dialog-close]="data" (click)="addNewBill(data)">Add</button>
+  </div>
+</div>

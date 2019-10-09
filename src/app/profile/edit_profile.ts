@@ -36,6 +36,7 @@ export class DialogEditProfileComponent {
   }
 
   editProfile(userData: any) {
+    console.log(userData)
     this.userService.editProfile(userData).subscribe((data: any) => {
       //userData.edited = true;
       this.dialogRef.close();
