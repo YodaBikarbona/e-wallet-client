@@ -56,10 +56,7 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelectedChildren(item: NavItem) {
-    console.log(item)
-    console.log(item.route)
     this.router.navigate([item.route], {relativeTo: this.route}).then(r => {
-      console.log(r);
     });
     //this.router.navigate([item.route]);
     //this.navService.closeNav();

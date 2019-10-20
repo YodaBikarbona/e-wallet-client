@@ -117,7 +117,6 @@ export class GraphComponent implements OnInit {
   // In this method we will create our DataStore and using that we will create a custom DataTable which takes two
   // parameters, one is data another is schema.
   fetchData() {
-    console.log(this.bills)
     let data = []
     if (this.bills.bills) {
       data = this.bills.bills;
@@ -146,10 +145,8 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.billService.getGraph(true, true, 3).subscribe((data: graphResponse) => {
-      console.log(data)
+    this.billService.getGraph(true, true, 13).subscribe((data: graphResponse) => {
       this.bills = data;
-      console.log(this.bills)
       //this.monthly_limit = this.bills.monthly_limit
       this.graph();
       },

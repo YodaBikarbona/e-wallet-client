@@ -41,7 +41,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
     activeCurrencies('').subscribe((data:any) => {
       this.activeCurrencies$ = data.currencies;
-      console.log(this.activeCurrencies$);
     }, (data:any) => this.error_message = data.error.message);
     let settings = (searchValues: string) => zip(currencies(searchValues), categories(searchValues), subCategories(searchValues));
 
@@ -69,12 +68,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   handleError(message: string) {
-    console.log(message)
     this.snackBar.open(message, null, {duration: 4000});
     this.error_message = message;
   }
   changeActive() {
-    console.log("Acccc");
     this.active = !this.active;
     this.settingsService.getCurrencies(this.active, this.searchField.value).subscribe((data:any) => {
       this.currencies$ = data.currencies;
@@ -87,7 +84,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
   }
   activeCurrency(currencyId: number) {
-    console.log(this.searchField.value);
     this.settingsService.ToogleActiveCurrency(true, this.searchField.value, currencyId).subscribe((data:any) => {
       this.settingsService.getCurrencies(this.active, this.searchField.value).subscribe((data:any) => {
       this.currencies$ = data.currencies;
@@ -104,7 +100,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.handleError(data.error.message));
   }
   activeCategory(categoryId: number) {
-    console.log(this.searchField.value);
     this.settingsService.ToogleActiveCategory(true, this.searchField.value, categoryId).subscribe((data:any) => {
       this.settingsService.getCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.categories$ = data.categories;
@@ -125,7 +120,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
   }
   activeSubCategory(subCategoryId: number) {
-    console.log(this.searchField.value);
     this.settingsService.ToogleActiveSubCategory(true, this.searchField.value, subCategoryId).subscribe((data:any) => {
       this.settingsService.getSubCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
@@ -143,7 +137,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   changeMonthlyLimit(currency_id: number, monthly_cost_limit: number) {
-    console.log(currency_id, monthly_cost_limit);
     this.settingsService.editActiveCurrenciesLimit(currency_id, monthly_cost_limit).subscribe((data:any) => {
       this.activeCurrencies$ = data.currencies;
       this.error_message = '';

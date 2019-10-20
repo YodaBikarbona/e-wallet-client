@@ -57,6 +57,8 @@ import { DialogChangePasswordComponent} from './profile/change_password';
 import {DialogEditProfileComponent} from './profile/edit_profile';
 import {ChartsModule} from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
+import { DialogNewBillComponent } from './bills/new-bill.component';
+import { DialogShowBillComponent } from './bills/show-bill.component';
 
 
 
@@ -72,7 +74,8 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 import { NewsComponent } from './news/news.component';
-import { DialogNewBillComponent } from './bills/new-bill.component';
+import { DialogRegisterConfirmationComponent } from './register/register-confirmation.component';
+
 
 FusionChartsModule.fcRoot(
   FusionCharts,
@@ -98,6 +101,8 @@ FusionChartsModule.fcRoot(
     GraphComponent,
     NewsComponent,
     DialogNewBillComponent,
+    DialogShowBillComponent,
+    DialogRegisterConfirmationComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -133,7 +138,7 @@ FusionChartsModule.fcRoot(
     //ChartsModule,
     //VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

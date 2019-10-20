@@ -112,11 +112,15 @@ export class BillCostsGetRequest {
   categoryId: number;
   subCategoryId: number;
   currencyId: number;
+  billsLimit: number;
+  billsOffset: number;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
+    this.billsLimit = billsLimit;
+    this.billsOffset = billsOffset;
   }
 }
 
@@ -291,7 +295,7 @@ export class ChangePassword {
 export class EditProfile {
   firstName: string;
   lastName: string;
-  birthDate: Date;
+  birthDate: string;
   country_id: number;
   city_id: number;
   address: string;
@@ -300,8 +304,9 @@ export class EditProfile {
   gender: string;
   currency_id: string;
   edited: boolean;
+  currencies$: Currency[];
 
-  constructor(firstName: string, lastName: string, birthDate: Date, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string, currency_id: string, edited: boolean) {
+  constructor(firstName: string, lastName: string, birthDate: string, country_id: number, city_id: number, address: string, email: string, phone: string, gender: string, currency_id: string, edited: boolean, currencies$: Currency[]) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -313,6 +318,7 @@ export class EditProfile {
     this.gender = gender;
     this.currency_id = currency_id;
     this.edited = edited;
+    this.currencies$ = currencies$
   }
 }
 
@@ -325,18 +331,18 @@ export class ClearNewsRequest {
 }
 
 export class RegisterRequest {
-  address:string;
-  birthDate:string;
-  city_id:number;
-  confirmPassword:string;
-  email:string;
-  firstName:string;
-  gender:string;
-  lastName:string;
-  password:string;
-  country_id:number;
+  address: string;
+  birthDate: string;
+  city_id: number;
+  confirmPassword: string;
+  email: string;
+  firstName: string;
+  gender: string;
+  lastName: string;
+  password: string;
+  country_id: number;
 
-  /*constructor(address:string, birthDate:string, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
+  constructor(address:string, birthDate: string, city_id:number, confirmPassword:string, email:string, firstName:string, gender:string, lastName:string, password:string, country_id:number) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthDate = birthDate;
@@ -347,5 +353,5 @@ export class RegisterRequest {
     this.password = password;
     this.confirmPassword = confirmPassword;
     this.email = email;
-  }*/
+  }
 }

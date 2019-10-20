@@ -80,7 +80,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   // clear(newsId: number) {
-  //   console.log(newsId)
   //   this.userService.clearNews(newsId).subscribe((data: any) => {
   //     this.userService.getNews().subscribe((data: any) => this.news = data.news, (data: any) => {
   //       this.error_message = data.error.message;

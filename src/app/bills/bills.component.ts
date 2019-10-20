@@ -8,6 +8,7 @@ import {DialogChangePasswordComponent} from '../profile/change_password';
 import {MatDialog} from '@angular/material';
 import {DialogNewBillComponent} from './new-bill.component';
 import {flatMap, map} from 'rxjs/operators';
+import {DialogShowBillComponent} from './show-bill.component';
 
 @Component({
   selector: 'app-bills',
@@ -20,12 +21,15 @@ export class BillsComponent implements OnInit {
   categories$: BillCategory[];
   subCategories$: BillSubCategory[];
   error_message = '';
-  bills$: Bill[];
+  bills$: Bill[] = [];
   categoryId: number = null;
   subCategoryId: number = null;
   currencyId: number = null;
   newBillState: boolean = false;
-  buttonSwitchMessage = 'Switch to profits!'
+  buttonSwitchMessage = 'Switch to profits!';
+  billsLengthList = 0;
+  billsLimit = 5;
+  billsOffset = 0;
   constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -41,20 +45,21 @@ export class BillsComponent implements OnInit {
     /*subCategories('').subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
     }, (data:any) => this.error_message = data.error.message);*/
-    this.getCosts(null, null, null);
+    this.getCosts(null, null, null, this.billsLimit, this.billsOffset);
+
   }
 
-  getCosts(categoryId: number, subCategoryId: number, currencyId: number) {
-    this.billService.getCosts(categoryId, subCategoryId, currencyId).subscribe((data:any) => {
+  getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
+    this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset).subscribe((data:any) => {
       this.bills$ = data.costs;
-      console.log(this.bills$);
+      this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
   }
 
-  getProfits(categoryId: number, subCategoryId: number, currencyId: number) {
-    this.billService.getProfits(categoryId, subCategoryId, currencyId).subscribe((data:any) => {
+  getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
+    this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset).subscribe((data:any) => {
       this.bills$ = data.profits;
-      console.log(this.bills$);
+      this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
   }
 
@@ -63,14 +68,11 @@ export class BillsComponent implements OnInit {
   }*/
 
   onChange(event, type: string) {
-    console.log("Tu sam");
-    console.log(event.value)
     if (type === 'categoryId') {
       this.categoryId = event.value;
       if (event.value != null) {
         this.settingsService.getSubCategoriesByCategories(event.value).subscribe((data: any) => {
           this.subCategories$ = data.sub_categories;
-          console.log(data)
           this.error_message = '';
         }, (data: any) => this.error_message = data.error.message);
       }
@@ -86,10 +88,10 @@ export class BillsComponent implements OnInit {
       this.currencyId = event.value;
     }
     if (this.buttonSwitchMessage === 'Switch to costs!') {
-      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
     }
     else {
-      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
     }
   }
 
@@ -123,9 +125,9 @@ export class BillsComponent implements OnInit {
         title: '',
         comment: '',
         price: null,
-        categoryId: null,
-        subCategoryId: null,
-        currencyId: null,
+        categoryId: 'null',
+        subCategoryId: 'null',
+        currencyId: 'null',
       }
     });
 
@@ -140,12 +142,50 @@ export class BillsComponent implements OnInit {
     //   }),
       map(((data: any) => data)))
       .subscribe(result => {
-        console.log('The dialog was closed');
         if (this.buttonSwitchMessage === 'Switch to costs!') {
-          this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+          this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
         }
         else {
-          this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+          this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+        }
+    });
+  }
+
+  openDialogShowBill(bill: any): void {
+    let billType = '';
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      billType = 'profits';
+    }
+    else {
+      billType = 'costs';
+    }
+    const dialogRef = this.dialog.open(DialogShowBillComponent, {
+      //width: '300px',
+      disableClose: true,
+      data: {
+        billDate: bill.created,
+        categoryId: bill.bill_category_id,
+        subCategoryId: bill.bill_sub_category_id,
+        currencyId: bill.currency_id,
+        billTitle: bill.title,
+        billComment: bill.comment,
+        billPrice: bill.price,
+        categories$: this.categories$,
+        subCategories$: this.subCategories$,
+        currencies$: this.currencies$,
+        BillType: billType,
+        billId: bill.id,
+      }
+    });
+
+    dialogRef.afterClosed().pipe(
+      map(((data: any) => data)))
+      .subscribe(result => {
+        if (this.buttonSwitchMessage === 'Switch to costs!') {
+          this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+        }
+        else {
+          this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
         }
     });
   }
@@ -153,11 +193,11 @@ export class BillsComponent implements OnInit {
   changeBills(categoryId: number, subCategoryId: number, currencyId: number) {
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.buttonSwitchMessage = 'Switch to profits!';
-      this.getCosts(categoryId, subCategoryId, currencyId);
+      this.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset);
     }
     else {
       this.buttonSwitchMessage = 'Switch to costs!';
-      this.getProfits(categoryId, subCategoryId, currencyId);
+      this.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset);
     }
   }
 
@@ -169,12 +209,10 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
-    console.log(billType)
     this.billService.printBills(categoryId, subCategoryId, currencyId, billType);
   }
 
   newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
-    console.log(categoryId, subCategoryId, currencyId, title, comment, price);
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.billService.newProfits(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
@@ -183,10 +221,16 @@ export class BillsComponent implements OnInit {
       this.billService.newCosts(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
-    console.log(categoryId, subCategoryId, currencyId, title, comment, price);
   }
 
-  testFun(event) {
-    console.log(event);
+  changeOffsetLimit(event) {
+    this.billsLimit = event.pageSize;
+    this.billsOffset = event.pageIndex;
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
+    else {
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
   }
 }

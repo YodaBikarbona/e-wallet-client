@@ -9,6 +9,13 @@ export interface DialogData {
   currencies$: Currency[];
   categories$: BillCategory[];
   subCategories$: any;
+  categoryId: number;
+  newBillType: string;
+  subCategoryId: any;
+  currencyId: number;
+  title: string;
+  comment: string;
+  price: number;
 }
 
 @Component({
@@ -23,16 +30,21 @@ export class DialogNewBillComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogNewBillComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public settingsService: SettingsService, public billService: BillService) { }
 
   ngOnInit() {
+    this.onChange(null, 'categoryId', this.data.categoryId);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onChange(event, type: string) {
-    console.log(event, type)
+  onChange(event, type: string, subCat: number) {
     if (type === 'categoryId') {
-      this.data.subCategories$ = this.getSubcategories(event.value);
+      if (!subCat) {
+        this.data.subCategories$ = this.getSubcategories(event.value);
+      }
+      else {
+        this.data.subCategories$ = this.getSubcategories(subCat);
+      }
     }
   }
 

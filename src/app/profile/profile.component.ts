@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.data.pipe(map(data => data.user.user), tap(console.log)).subscribe(user => this.user = user);
+    this.router.data.pipe(map(data => data.user.user)).subscribe(user => this.user = user);
     this.countries$ = this.router.data.pipe(map(data => data.countries));
 
     this.cities$ = this.onCountryChange(event = null, this.user.country_id);
@@ -58,7 +58,6 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.newPassword = result;
     });
   }
@@ -90,9 +89,7 @@ export class ProfileComponent implements OnInit {
       flatMap(result => this.userService.find_by_id()),
       map(((data: any) => data.user)))
       .subscribe(result => {
-        console.log("result", result)
         this.user = result;
-      console.log('The dialog was closed');
     });
   }
 
@@ -103,9 +100,6 @@ export class ProfileComponent implements OnInit {
     } else {
       _countryId = countryId;
     }
-    /*console.log(this.cityService.resolve(_countryId).subscribe(data => {
-      console.log(data.cities)
-    }))*/
     return this.cityService.resolve(_countryId).pipe(map(data => data));
   }
 

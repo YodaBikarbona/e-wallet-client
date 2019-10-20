@@ -14,7 +14,7 @@ export class AuthenticationService {
     }
 
     authenticate(request: AuthenticationRequest): Observable<boolean> {
-        return this.http.post(`${API_URL}/login`, request)
+        return this.http.post(`${API_URL}/v1/login`, request)
             .pipe(
                 map((res: AuthResponse) => res.token),
                 map(token => this.resloveAuthentication(token)),

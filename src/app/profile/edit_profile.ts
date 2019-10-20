@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {CityResolver} from '../services/country.service';
 import {Observable} from 'rxjs';
-import {City, EditProfile, User} from '../model';
+import {City, Currency, EditProfile, User} from '../model';
 
 export interface DialogData {
   edited: boolean;
@@ -24,11 +24,9 @@ export class DialogEditProfileComponent {
   dataEdit: EditProfile;
 
   constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: EditProfile, public router: Router) {
-    console.log(data)
     this.dataEdit = data;
     //this.data = this.dataEdit;
     //data = this.dataEdit;
-    //console.log(data)
   }
 
   onNoClick(): void {
@@ -36,7 +34,11 @@ export class DialogEditProfileComponent {
   }
 
   editProfile(userData: any) {
-    console.log(userData)
+    const bDate = new Date(userData.birthDate);
+    const orginDate = userData.birthDate;
+    // let dateStr = mydate.toString("MMMM yyyy");
+    const finalDate = bDate.toISOString();
+    userData.birthDate = finalDate;
     this.userService.editProfile(userData).subscribe((data: any) => {
       //userData.edited = true;
       this.dialogRef.close();
@@ -49,24 +51,21 @@ export class DialogEditProfileComponent {
       (data: any) => {
         this.error_message = data.error.message;
         this.edited = false;
+        userData.birthDate = orginDate;
       });
   }
 
   onCountryChange(event, userData: any) {
-    console.log(event, userData)
     let _countryId = '';
     if (event != null) {
       _countryId = event.value;
     } else {
       _countryId = userData.country_id;
     }
-    console.log("tu sam")
-    console.log(this.data)
     userData.cities$ = this.cityService.resolve(_countryId).pipe(tap(console.log), map(data => data.cities));
   }
 
   onCountryChange2(event, countryId?) {
-    console.log(event.value)
     let _countryId = '';
     if (event != null) {
       _countryId = event.value;

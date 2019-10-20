@@ -3,15 +3,27 @@
 <img width="200" height="100" class="billHeader"
             src="http://178.236.87.123:5000/dir/header_bill.png"/>
 <div mat-dialog-content class="text-center">
-  <div *ngIf="data.newBillType == 'costs'">
-    <p>Add new bill (Cost)</p>
+
+
+
+  <div *ngIf="data.BillType == 'costs'">
+    <p>Cost</p>
   </div>
-  <div *ngIf="data.newBillType == 'profits'">
-    <p>Add new bill (Profit)</p>
+  <div *ngIf="data.BillType == 'profits'">
+    <p>Profit</p>
   </div>
+
+  <mat-form-field class="w-100">
+    <mat-label>Created</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.billDate" placeholder="Created date" required disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <!--mat-datepicker #picker></--mat-datepicker-->
+      <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+
   <mat-form-field class="w-100">
     <mat-label>Category</mat-label>
-    <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId', null)">
+    <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId')" disabled>
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -24,7 +36,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Sub category</mat-label>
-    <mat-select [(ngModel)]="data.subCategoryId">
+    <mat-select [(ngModel)]="data.subCategoryId" disabled>
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -36,7 +48,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Currency</mat-label>
-    <mat-select [(ngModel)]="data.currencyId">
+    <mat-select [(ngModel)]="data.currencyId" disabled>
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -48,17 +60,17 @@
 
   <mat-form-field class="w-100">
     <mat-label>Title</mat-label>
-    <input type="text" matInput required [(ngModel)]="data.title">
+    <input type="text" matInput required [(ngModel)]="data.billTitle" disabled>
   </mat-form-field>
 
   <mat-form-field class="w-100">
     <mat-label>Comment</mat-label>
-    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
+    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.billComment" disabled></textarea>
   </mat-form-field>
 
   <mat-form-field class="w-100">
     <mat-label>Price</mat-label>
-    <input type="text" matInput required [(ngModel)]="data.price">
+    <input type="text" matInput required [(ngModel)]="data.billPrice" disabled>
   </mat-form-field>
 
 </div>
@@ -67,7 +79,10 @@
     <button mat-button class="w-90" (click)="onNoClick()">No Thanks</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button mat-button class="w-90" [mat-dialog-close]="data" (click)="addNewBill(data)">Add</button>
+    <button mat-button class="w-90" [mat-dialog-close]="data" disabled>Edit</button>
+  </div>
+  <div class="w-100 m-auto text-center">
+    <button mat-button class="deleteBill" [mat-dialog-close]="data" (click)="deleteBill(data.billId)">Delete</button>
   </div>
 </div>
 <div class="text-right">
@@ -76,5 +91,3 @@
   <img width="200" height="100" class="billFooter"
             src="http://178.236.87.123:5000/dir/footer_bill.png"/>
 </div>
-
-

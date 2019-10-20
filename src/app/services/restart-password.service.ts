@@ -12,17 +12,17 @@ export class RestartPasswordService {
 
   restartPassword(email: string) {
     const request = new RestartPasswordRequest(email);
-    return this.http.post(`${API_URL}/restartPassword`, request);
+    return this.http.post(`${API_URL}/v1/restartPassword`, request);
   }
 
   restartPasswordCode(code: string, email: string) {
     const request = new RestartPasswordCodeRequest(code, email);
-    return this.http.post(`${API_URL}/restartPasswordCode`, request);
+    return this.http.post(`${API_URL}/v1/restartPasswordCode`, request);
   }
 
   saveNewPassword(password: string, confirmPassword: string, email: string) {
     const request = new SaveNewPasswordRequest(password, confirmPassword, email);
-    return this.http.post(`${API_URL}/saveNewPassword`, request);
+    return this.http.post(`${API_URL}/v1/saveNewPassword`, request);
   }
 }
 

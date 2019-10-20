@@ -9,16 +9,6 @@
   }
 }
 
-/deep/ .mat-dialog-container {
-  @media (min-width: 768px) {
-    width: 500px !important;
-  }
-}
-
-/deep/ textarea {
-  resize: none;
-}
-
 .billHeader {
   top: 0;
   left: 0;
@@ -31,4 +21,17 @@
   margin-bottom: -28px;
   margin-right: -24px;
   margin-top: -100px;
+}
+
+.deleteBill {
+  width: 95%;
+
+  @media (min-width: 768px) {
+    width: 95%;
+  }
+
+  &:hover {
+    background-color: #EC2929;
+    color: white;
+  }
 }

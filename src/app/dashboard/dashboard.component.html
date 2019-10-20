@@ -3,7 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary" routerLink="/dashboard">E-Wallet v1.0</mat-toolbar>
+    <mat-toolbar color="primary" routerLink="/dashboard" class="app">E-Wallet</mat-toolbar>
       <!--mat-sidenav #appDrawer mode="over" opened="false"-->
         <mat-nav-list>
           <app-menu-list-item *ngFor="let item of navItems" [item]="item" [routerLink]="[item.route]"></app-menu-list-item>
