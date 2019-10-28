@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import {BillService} from '../services/bill.service';
-import {Bill, graphResponse} from '../model';
+import {Bill, Currency, graphResponse} from '../model';
 import * as FusionCharts from 'fusioncharts';
+import {SettingsService} from '../services/settings.service';
 
 @Component({
   selector: 'app-graph',
@@ -79,7 +80,9 @@ export class GraphComponent implements OnInit {
   error_message = '';
   bills: graphResponse;
   //monthly_limit = 0;
-  constructor(public billService: BillService) {
+  currencies$: Currency[];
+  currencyId = 0;
+  constructor(public billService: BillService, public settingsService: SettingsService) {
 
     /*this.type = 'timeseries';
     this.width = '100%';
@@ -145,15 +148,23 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.billService.getGraph(true, true, 13).subscribe((data: graphResponse) => {
+    let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
+    currencies('').subscribe((data:any) => {
+      this.currencies$ = data.currencies;
+    }, (data:any) => this.error_message = data.error.message);
+    //this.fetchData(this.bills);
+  }
+
+  getGraph(currencyId: number) {
+    this.billService.getGraph(true, true, currencyId).subscribe((data: graphResponse) => {
       this.bills = data;
+      console.log(this.bills)
       //this.monthly_limit = this.bills.monthly_limit
       this.graph();
       },
       (data: any) => {
         this.error_message = data.error.message;
       });
-    //this.fetchData(this.bills);
   }
 
   graph() {
@@ -178,16 +189,22 @@ export class GraphComponent implements OnInit {
           /*format: {
             prefix: '$'
           }*/
-          referenceLine: [
-            {
-              label: 'Cost monthly limit',
-              value: this.bills.monthly_limit
-            }
-          ]
+          // Not work good, invastigate why not
+          // referenceLine: [
+          //   {
+          //     label: 'Cost monthly limit',
+          //     value: this.bills.monthly_limit
+          //   }
+          // ]
         }
       ]
     };
     this.fetchData();
+  }
+
+  onChange(event) {
+    this.currencyId = event.value;
+    this.getGraph(this.currencyId);
   }
 
 }
