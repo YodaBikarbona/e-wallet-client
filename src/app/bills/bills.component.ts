@@ -7,8 +7,10 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {DialogChangePasswordComponent} from '../profile/change_password';
 import {MatDialog} from '@angular/material';
 import {DialogNewBillComponent} from './new-bill.component';
-import {flatMap, map} from 'rxjs/operators';
+import {debounceTime, flatMap, map} from 'rxjs/operators';
 import {DialogShowBillComponent} from './show-bill.component';
+import {FormControl} from '@angular/forms';
+import {Subscription, zip} from 'rxjs';
 
 @Component({
   selector: 'app-bills',
@@ -30,6 +32,8 @@ export class BillsComponent implements OnInit {
   billsLengthList = 0;
   billsLimit = 5;
   billsOffset = 0;
+  searchField = new FormControl('');
+  subSubscription: Subscription;
   constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -47,17 +51,54 @@ export class BillsComponent implements OnInit {
     }, (data:any) => this.error_message = data.error.message);*/
     this.getCosts(null, null, null, this.billsLimit, this.billsOffset);
 
+
+
+    // let _bills$ = (searchValues: string) => this.billService.getCosts(null, null, null, this.billsLimit, this.billsOffset);
+    // if (this.buttonSwitchMessage === 'Switch to costs!') {
+    //   _bills$ = (searchValues: string) => this.billService.getProfits(null, null, null, this.billsLimit, this.billsOffset);
+    // }
+    // _bills$('').subscribe((data:any) => {
+    //   if (this.buttonSwitchMessage === 'Switch to costs!') {
+    //     this.bills$ = data.profits;
+    //   }
+    //   else {
+    //     this.bills$ = data.costs;
+    //   }
+    // }, (data:any) => this.error_message = data.error.message);
+    // let settings = (searchValues: string) => zip(_bills$(searchValues));
+
+
+
+    this.subSubscription = this.searchField.valueChanges.pipe(debounceTime(500), flatMap(value => {
+      if (this.buttonSwitchMessage === 'Switch to costs!') {
+        return this.billService.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value)
+      }
+      else {
+        return this.billService.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value)
+      }
+    })).subscribe((data: any) => {
+      console.log(data)
+      if (this.buttonSwitchMessage === 'Switch to costs!') {
+        this.bills$ = data.profits;
+        this.billsLengthList = data.profits_length_list;
+      }
+      else {
+        this.bills$ = data.costs;
+        this.billsLengthList = data.costs_length_list;
+      }
+    });
+
   }
 
   getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
-    this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset).subscribe((data:any) => {
+    this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value).subscribe((data:any) => {
       this.bills$ = data.costs;
       this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
   }
 
   getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
-    this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset).subscribe((data:any) => {
+    this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value).subscribe((data:any) => {
       this.bills$ = data.profits;
       this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
@@ -211,7 +252,7 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
-    this.billService.printBills(categoryId, subCategoryId, currencyId, billType);
+    this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value);
   }
 
   newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {

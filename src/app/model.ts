@@ -116,13 +116,15 @@ export class BillCostsGetRequest {
   currencyId: number;
   billsLimit: number;
   billsOffset: number;
+  search: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
     this.billsLimit = billsLimit;
     this.billsOffset = billsOffset;
+    this.search = search;
   }
 }
 
@@ -153,12 +155,14 @@ export class reportPdfRequest {
   subCategoryId: number;
   currencyId: number;
   billType: string;
+  search: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
     this.billType = billType;
+    this.search = search;
   }
 }
 

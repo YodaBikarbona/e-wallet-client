@@ -148,3 +148,9 @@ tr.mat-footer-row {
     //width: 110% !important;
   }
 }
+
+.desktopVersion {
+  @media (min-width: 900px) {
+    width: 90%;
+  }
+}
