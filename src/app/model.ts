@@ -75,6 +75,8 @@ export class Bill extends AbstractEntity {
   bill_category: BillCategory;
   bill_sub_category: BillSubCategory;
   currency: string; Currency;
+  quantity: number;
+  not_my_city: boolean;
 }
 
 export interface Transaction {
@@ -131,14 +133,18 @@ export class NewBillRequest {
   title: string;
   comment: string;
   price: string;
+  quantity: number;
+  notMyCity: boolean;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
     this.title = title;
     this.comment = comment;
     this.price = price;
+    this.quantity = quantity;
+    this.notMyCity = notMyCity;
   }
 }
 
@@ -270,12 +276,12 @@ export class RestartPasswordCodeRequest extends  RestartPasswordRequest {
 
 
 export class SaveNewPasswordRequest extends  RestartPasswordRequest {
-  password: string;
+  newPassword: string;
   confirmPassword: string;
 
-  constructor(password: string, confirmPassword: string, email: string) {
+  constructor(newPassword: string, confirmPassword: string, email: string) {
     super(email);
-    this.password = password;
+    this.newPassword = newPassword;
     this.confirmPassword = confirmPassword;
   }
 }

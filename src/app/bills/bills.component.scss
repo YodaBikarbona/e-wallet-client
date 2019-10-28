@@ -23,12 +23,12 @@ tr.mat-footer-row {
 .newBill {
   bottom: 10px;
   @media (max-width:767px) {
-    padding: 5px;
+    //padding: 5px;
   }
 }
 
 .newBillButton {
-  border: 1px solid black;
+  //border: 1px solid black;
   @media (max-width: 767px) {
     width: 100%;
   }
@@ -103,7 +103,7 @@ tr.mat-footer-row {
 
 .filters {
   @media (max-width: 767px) {
-    padding: 5px;
+    //padding: 5px;
   }
 }
 
@@ -116,8 +116,8 @@ tr.mat-footer-row {
 
 /deep/ .actionButton {
   @media (max-width: 767px) {
-    padding: 5px;
-    margin-bottom: 10px;
+    //padding: 5px;
+    //margin-bottom: 10px;
   }
 }
 
@@ -132,7 +132,7 @@ tr.mat-footer-row {
 /deep/ .actionButton button {
   &:hover {
     @media (max-width: 767px) {
-      background-color: unset;
+      //background-color: unset;
     }
   }
 }

@@ -31,7 +31,11 @@
   }
 
   &:hover {
-    background-color: #EC2929;
-    color: white;
+    //background-color: #EC2929;
+    //color: white;
   }
+}
+
+/deep/ .mat-dialog-content {
+  max-height: 55vh !important;
 }

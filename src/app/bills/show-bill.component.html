@@ -1,7 +1,10 @@
 <!--img width="200" height="100" class="billHeader"
             src="http://localhost:5000/dir/header_bill.png"/-->
+<!--<img width="200" height="100" class="billHeader"-->
+            <!--src="http://178.236.87.123:5000/dir/header_bill.png"/>-->
+
 <img width="200" height="100" class="billHeader"
-            src="http://178.236.87.123:5000/dir/header_bill.png"/>
+            src="https://i.ibb.co/fqdrtcs/header-bill.png"/>
 <div mat-dialog-content class="text-center">
 
 
@@ -73,21 +76,32 @@
     <input type="text" matInput required [(ngModel)]="data.billPrice" disabled>
   </mat-form-field>
 
+  <mat-form-field class="w-100">
+    <mat-label>Quantity</mat-label>
+    <input type="text" matInput required [(ngModel)]="data.billQuantity" disabled>
+  </mat-form-field>
+
+  <div class="w-100 text-left">
+    <mat-checkbox [(ngModel)]="data.billNotMyCity" disabled>Not my city</mat-checkbox>
+  </div>
+
 </div>
 <div mat-dialog-actions class="w-100">
-  <div class="w-50 m-auto text-center">
-    <button mat-button class="w-90" (click)="onNoClick()">No Thanks</button>
+  <div class="w-50 ml-auto mr-auto mb-auto mt-1 text-center">
+    <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">No Thanks</button>
   </div>
-  <div class="w-50 m-auto text-center">
-    <button mat-button class="w-90" [mat-dialog-close]="data" disabled>Edit</button>
+  <div class="w-50 ml-auto mr-auto mb-auto mt-1 text-center">
+    <button type="button" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data" disabled>Edit</button>
   </div>
-  <div class="w-100 m-auto text-center">
-    <button mat-button class="deleteBill" [mat-dialog-close]="data" (click)="deleteBill(data.billId)">Delete</button>
+  <div class="w-100 ml-auto mr-auto mb-auto mt-1 text-center">
+    <button type="button" mat-raised-button color="warn" class="btn-block deleteBill" [mat-dialog-close]="data" (click)="deleteBill(data.billId)" disabled>Delete</button>
   </div>
 </div>
 <div class="text-right">
   <!--img width="200" height="100" class="billFooter"
             src="http://localhost:5000/dir/footer_bill.png"/-->
+  <!--<img width="200" height="100" class="billFooter"-->
+            <!--src="http://178.236.87.123:5000/dir/footer_bill.png"/>-->
   <img width="200" height="100" class="billFooter"
-            src="http://178.236.87.123:5000/dir/footer_bill.png"/>
+            src="https://i.ibb.co/jhQf47t/footer-bill.png"/>
 </div>

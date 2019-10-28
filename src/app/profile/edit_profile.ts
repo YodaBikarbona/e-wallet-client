@@ -22,11 +22,13 @@ export class DialogEditProfileComponent {
   cities$: Observable<City[]>;
   edited: boolean;
   dataEdit: EditProfile;
+  oldBirthDate = '';
 
   constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: EditProfile, public router: Router) {
     this.dataEdit = data;
     //this.data = this.dataEdit;
     //data = this.dataEdit;
+    this.oldBirthDate = data.birthDate;
   }
 
   onNoClick(): void {
@@ -35,10 +37,16 @@ export class DialogEditProfileComponent {
 
   editProfile(userData: any) {
     const bDate = new Date(userData.birthDate);
+    //const bDate = new Date(userData.birthDate);
     const orginDate = userData.birthDate;
     // let dateStr = mydate.toString("MMMM yyyy");
     const finalDate = bDate.toISOString();
-    userData.birthDate = finalDate;
+    if (typeof userData.birthDate === 'string') {
+      userData.birthDate = 'null';
+    }
+    else {
+      userData.birthDate = finalDate;
+    }
     this.userService.editProfile(userData).subscribe((data: any) => {
       //userData.edited = true;
       this.dialogRef.close();

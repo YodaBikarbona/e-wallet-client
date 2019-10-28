@@ -25,10 +25,10 @@
         </div>
         <div>
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate" placeholder="Birth date" required>
+            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate" placeholder="Birth date" required disabled>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <!--mat-datepicker #picker></--mat-datepicker-->
-            <mat-datepicker touchUi #picker></mat-datepicker>
+            <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
           </mat-form-field>
         </div>
       </div>

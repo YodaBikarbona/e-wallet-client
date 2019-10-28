@@ -63,6 +63,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openDialogEditProfile(): void {
+    const editBirthDate = new Date(this.user.birth_date);
     const dialogRef = this.dialog.open(DialogEditProfileComponent, {
       width: '400px',
       height: '520px',

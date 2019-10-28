@@ -32,3 +32,7 @@
   margin-right: -24px;
   margin-top: -100px;
 }
+
+/deep/ .mat-dialog-content {
+  max-height: 55vh !important;
+}

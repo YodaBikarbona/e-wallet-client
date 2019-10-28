@@ -41,12 +41,12 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
     }, (data:any) => this.error_message = data.error.message);
   }
 
-  saveNewPassword(password: string, confirmPassword: string, email: string) {
-    if (password != confirmPassword) {
+  saveNewPassword(newPassword: string, confirmPassword: string, email: string) {
+    if (newPassword != confirmPassword) {
       this.error_message = 'Passwords are not same!';
     }
     else {
-      this.passwordService.saveNewPassword(password, confirmPassword, email).subscribe((data: any) => this.router.navigate(['login']), (data:any) => this.error_message = data.error.message);
+      this.passwordService.saveNewPassword(newPassword, confirmPassword, email).subscribe((data: any) => this.router.navigate(['login']), (data:any) => this.error_message = data.error.message);
     }
   }
 }

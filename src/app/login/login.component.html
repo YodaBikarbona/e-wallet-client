@@ -1,3 +1,62 @@
+<div class="row" xmlns="http://www.w3.org/1999/html">
+  <div class="col-md-1 col-sm-12">
+    <div class="text-center m-1">
+      <button mat-raised-button color="primary" class="btn-block" (click)="toogleShow()">How application works</button>
+    </div>
+  </div>
+  <div class="col-md-11 col-sm-0"></div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div *ngIf="howApplicationWorks">
+      <div class="m-1 p-1 border howApplicationWorks">
+        <h4 class="decorationText">Register</h4>
+        <p>
+          All fields on register form are required! Create your account using your information. Pick your country and your city (not possible to change), and set valid email (get your login code on mail)
+        </p>
+        <h4 class="decorationText">Login</h4>
+        <p>
+          Use your email and password to login, first login required login code (activation code) you received on email. User can resend code if not got on mail.
+        </p>
+        <h4 class="decorationText">Dashboard</h4>
+        <h5 class="decorationText">News</h5>
+        <p>
+          There will be all news (whats new added or changed on application)
+        </p>
+        <h5 class="decorationText">Profile</h5>
+        <p>
+          On tab profile user can see personal information, application information, change a password (after changing user account will be deactivated and will get login code again on email). Through Edit profile form user can change personal information, and set default currency (only from activated user currencies, it helps to add bills without picking currency on new bill form, if user doesn't have default currency then user needs pick currency on new bill form).
+        </p>
+        <h5 class="decorationText">Bills</h5>
+        <p>
+          On this tab user can see costs and profits. Through button switch user can switch type of bills. Report (PDF) button will make report and download on your device. Filters (category, subcategory, currency) help to get more precise results. On table user can change limit and offset of results (max 20 results on one page, pdf report will use all results that user got using filters). User can see bill details, clicking on button Show details. Through button New bill user can add new bill using category (required), subcategory, currency (required), title (this column is recommended and required for article name e.g. category "Food" subcategory "Meat" title "Chicken") comment (e.g. I brought a new smartphone in Mobile shop), price (required), quantity (required, cannot be less than 0), Not my City (all bills that not made in your city e.g. if user live in London and he brought new smartphone in Paris, it helps for new feature for users who want make some research to compare user city prices with some another city using specific category or subcategory e.g. if user wants to see how many people spend money for Fuel in London and Paris, where is bigger price for some category or subcategory and how much. In some period is "Fuel" get cheaper or more expensive)
+        </p>
+        <h5 class="decorationText">Graph</h5>
+        <p>
+          On this tab user can see graph of costs and profits (their own), also can see monthly limit, are costs are close to limit, see min and max cost and profit
+        </p>
+        <h5 class="decorationText">Options</h5>
+        <p>
+          User can set only categories, subcategories and currencies (max 10) they want to use. This is first step if user wants add new bills, filters will show only categories, subcategories and currencies that user pick (no need to see all categories and wasting time to find your category). User also can set their own limits for some currency (next feature will send warnings if user is to close to monthly limit)
+        </p>
+        <h5 class="decorationText">Suggestions</h5>
+        <p>
+          Not implemented yet! User can send message to moderators to add new category, subcategory, city (only moderator can change city) they want to use. If on register form user can't pick city that wants, pick any other and we will change currently city and country.
+        </p>
+        <h5 class="decorationText">Research and analyze</h5>
+        <p>
+          Not implemented yet! User can make they own research to compare prices and how users spend money for specific category or subcategory between two cities
+        </p>
+        <h5 class="decorationText">Report bug</h5>
+        <p>
+          Coming soon! Using this tab user can report application bugs
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="login p-3">
 
   <form *ngIf="!userActive" (submit)="activateUser(code)">
@@ -10,6 +69,9 @@
     </div>
     <div class="text-center">
       <button type="submit" mat-raised-button color="primary" class="btn-block">Activate</button>
+    </div>
+    <div class="text-center mt-1">
+      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">Resend code</button>
     </div>
   </form>
 

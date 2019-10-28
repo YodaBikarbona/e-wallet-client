@@ -16,6 +16,8 @@ export interface DialogData {
   title: string;
   comment: string;
   price: number;
+  quantity: number;
+  notMyCity: boolean;
 }
 
 @Component({
@@ -53,14 +55,22 @@ export class DialogNewBillComponent implements OnInit {
   }
 
   addNewBill(data: any) {
+    if (!data.notMyCity) {
+      data.notMyCity = false;
+    }
     if (data.newBillType === 'profits') {
-      this.billService.newProfits(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price).subscribe((data:any) => {
+      this.billService.newProfits(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
     else {
-      this.billService.newCosts(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price).subscribe((data:any) => {
+      this.billService.newCosts(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
+  }
+
+  toogle(event: any) {
+    console.log(event)
+    this.data.notMyCity = event.checked;
   }
 
 }

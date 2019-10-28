@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
     //   // regRequest.birthDate = finalBirthDate;
     // }
     if (reqData.password != reqData.confirmPassword) {
+      this.snackBar.open('Passwords need be same!', null, {duration: 4000, verticalPosition: 'top'});
     }
     else {
       this.registerService.register(reqData.address, finalDate, reqData.city_id, reqData.confirmPassword, reqData.email, reqData.firstName, reqData.gender, reqData.lastName, reqData.password, reqData.country_id).subscribe((data: any) => {
@@ -62,6 +63,9 @@ export class RegisterComponent implements OnInit {
           this.snackBar.open('Password should be atleast 8 characters long\n' +
             '            and should contain one number,one character and one special\n' +
             '            character', null, {duration: 4000, verticalPosition: 'top'});
+        }
+        else {
+          this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
         }
       }
       );

@@ -29,6 +29,8 @@ export interface DialogData2 {
   billPrice: number;
   billId: number;
   subCategoryId: any;
+  billQuantity: number;
+  billNotMyCity: boolean;
 }
 
 @Component({
@@ -42,6 +44,7 @@ export class DialogShowBillComponent implements OnInit {
 
   ngOnInit() {
     this.data.subCategories$ = this.settingsService.getSubCategoriesByCategories(this.data.categoryId).pipe(map(((data: any) => data.sub_categories)));
+    console.log(this.data);
   }
 
   onNoClick(): void {

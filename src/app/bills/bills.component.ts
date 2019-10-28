@@ -175,6 +175,8 @@ export class BillsComponent implements OnInit {
         currencies$: this.currencies$,
         BillType: billType,
         billId: bill.id,
+        billQuantity: bill.quantity,
+        billNotMyCity: bill.not_my_city
       }
     });
 
@@ -212,13 +214,13 @@ export class BillsComponent implements OnInit {
     this.billService.printBills(categoryId, subCategoryId, currencyId, billType);
   }
 
-  newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
+  newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
     if (this.buttonSwitchMessage === 'Switch to costs!') {
-      this.billService.newProfits(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
+      this.billService.newProfits(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
     else {
-      this.billService.newCosts(categoryId, subCategoryId, currencyId, title, comment, price).subscribe((data:any) => {
+      this.billService.newCosts(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
   }

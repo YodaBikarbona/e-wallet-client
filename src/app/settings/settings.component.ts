@@ -89,7 +89,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.currencies$ = data.currencies;
       this.error_message = '';
       }, (data:any) => this.error_message = data.error.message);
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;
+    });
   }
   deactiveCurrency(currencyId: number) {
     this.settingsService.ToogleActiveCurrency(false, this.searchField.value, currencyId).subscribe((data:any) => {
@@ -104,18 +107,25 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.settingsService.getCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.categories$ = data.categories;
       this.error_message = '';
-      }, (data:any) => this.error_message = data.error.message);
       this.settingsService.getSubCategories(this.active, this.searchField.value).subscribe((data:any) => {
-      this.subCategories$ = data.sub_categories;
-      this.error_message = '';
+        this.subCategories$ = data.sub_categories;
+        this.error_message = '';
+        }, (data:any) => this.error_message = data.error.message);
       }, (data:any) => this.error_message = data.error.message);
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;
+    });
   }
   deactiveCategory(categoryId: number) {
     this.settingsService.ToogleActiveCategory(false, this.searchField.value, categoryId).subscribe((data:any) => {
       this.settingsService.getCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.categories$ = data.categories;
       this.error_message = '';
+      this.settingsService.getSubCategories(this.active, this.searchField.value).subscribe((data:any) => {
+        this.subCategories$ = data.sub_categories;
+        this.error_message = '';
+        }, (data:any) => this.error_message = data.error.message);
       }, (data:any) => this.error_message = data.error.message);
     }, (data:any) => this.error_message = data.error.message);
   }
@@ -125,7 +135,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.subCategories$ = data.sub_categories;
       this.error_message = '';
       }, (data:any) => this.error_message = data.error.message);
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;
+    });
   }
   deactiveSubCategory(subCategoryId: number) {
     this.settingsService.ToogleActiveSubCategory(false, this.searchField.value, subCategoryId).subscribe((data:any) => {

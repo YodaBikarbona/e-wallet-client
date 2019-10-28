@@ -17,12 +17,12 @@ export class BillService {
     const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset);
     return this.http.post(`${API_URL}/v1/bills/profits`, request);
   }
-  newCosts(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
-    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price);
+  newCosts(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
+    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity);
     return this.http.post(`${API_URL}/v1/bills/costs/new`, request);
   }
-  newProfits(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string) {
-    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price);
+  newProfits(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
+    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity);
     return this.http.post(`${API_URL}/v1/bills/profits/new`, request);
   }
 
