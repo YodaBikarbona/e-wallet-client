@@ -77,7 +77,6 @@ export class BillsComponent implements OnInit {
         return this.billService.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value)
       }
     })).subscribe((data: any) => {
-      console.log(data)
       if (this.buttonSwitchMessage === 'Switch to costs!') {
         this.bills$ = data.profits;
         this.billsLengthList = data.profits_length_list;

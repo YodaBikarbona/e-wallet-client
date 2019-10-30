@@ -1,0 +1,11 @@
+<div mat-dialog-content class="text-center">
+  <h5>Are you sure that you want delete this bill?</h5>
+</div>
+<div mat-dialog-actions class="w-100">
+  <div class="w-50 m-auto text-center">
+    <button type="button" mat-raised-button class="btn-block w-90" [mat-dialog-close]="data" (click)="onNoClick()">No Thanks</button>
+  </div>
+  <div class="w-50 m-auto text-center">
+    <button type="button" mat-raised-button color="warn" class="btn-block w-90" [mat-dialog-close]="data" (click)="confirmDelete()">Delete</button>
+  </div>
+</div>

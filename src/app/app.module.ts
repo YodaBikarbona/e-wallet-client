@@ -60,6 +60,7 @@ import {ChartsModule} from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { DialogNewBillComponent } from './bills/new-bill.component';
 import { DialogShowBillComponent } from './bills/show-bill.component';
+import { DialogDeleteBillComponent } from './bills/delete-bill.component';
 
 
 
@@ -76,6 +77,7 @@ import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 import { NewsComponent } from './news/news.component';
 import { DialogRegisterConfirmationComponent } from './register/register-confirmation.component';
+
 
 
 FusionChartsModule.fcRoot(
@@ -104,6 +106,7 @@ FusionChartsModule.fcRoot(
     DialogNewBillComponent,
     DialogShowBillComponent,
     DialogRegisterConfirmationComponent,
+    DialogDeleteBillComponent,
     //SidenavAutosizeExample,
   ],
   imports: [
@@ -139,7 +142,7 @@ FusionChartsModule.fcRoot(
     //ChartsModule,
     //VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

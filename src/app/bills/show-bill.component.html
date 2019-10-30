@@ -94,7 +94,7 @@
     <button type="button" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data" disabled>Edit</button>
   </div>
   <div class="w-100 ml-auto mr-auto mb-auto mt-1 text-center">
-    <button type="button" mat-raised-button color="warn" class="btn-block deleteBill" [mat-dialog-close]="data" (click)="deleteBill(data.billId)" disabled>Delete</button>
+    <button type="button" mat-raised-button color="warn" class="btn-block deleteBill" (click)="openDialogDeleteBill(data.billId)">Delete</button>
   </div>
 </div>
 <div class="text-right">
