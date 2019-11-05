@@ -9,20 +9,20 @@ import { saveAs } from 'file-saver';
 })
 export class BillService {
   constructor(public http: HttpClient) { }
-  getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string) {
-    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search);
+  getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
+    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo);
     return this.http.post(`${API_URL}/v1/bills/costs`, request);
   }
-  getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string) {
-    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search);
+  getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
+    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo);
     return this.http.post(`${API_URL}/v1/bills/profits`, request);
   }
-  newCosts(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
-    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity);
+  newCosts(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
+    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity, created);
     return this.http.post(`${API_URL}/v1/bills/costs/new`, request);
   }
-  newProfits(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
-    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity);
+  newProfits(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
+    const request = new NewBillRequest(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity, created);
     return this.http.post(`${API_URL}/v1/bills/profits/new`, request);
   }
 

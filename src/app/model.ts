@@ -117,14 +117,18 @@ export class BillCostsGetRequest {
   billsLimit: number;
   billsOffset: number;
   search: string;
+  dateFrom: string;
+  dateTo: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
     this.billsLimit = billsLimit;
     this.billsOffset = billsOffset;
     this.search = search;
+    this.dateFrom = dateFrom;
+    this.dateTo = dateTo;
   }
 }
 
@@ -137,8 +141,9 @@ export class NewBillRequest {
   price: string;
   quantity: number;
   notMyCity: boolean;
+  created: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
@@ -147,6 +152,7 @@ export class NewBillRequest {
     this.price = price;
     this.quantity = quantity;
     this.notMyCity = notMyCity;
+    this.created = created;
   }
 }
 

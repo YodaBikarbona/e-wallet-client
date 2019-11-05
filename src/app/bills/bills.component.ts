@@ -34,6 +34,10 @@ export class BillsComponent implements OnInit {
   billsOffset = 0;
   searchField = new FormControl('');
   subSubscription: Subscription;
+  dateFrom = '';
+  dateTo = '';
+  dateFromRequest = '';
+  dateToRequest = '';
   constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -71,10 +75,10 @@ export class BillsComponent implements OnInit {
 
     this.subSubscription = this.searchField.valueChanges.pipe(debounceTime(500), flatMap(value => {
       if (this.buttonSwitchMessage === 'Switch to costs!') {
-        return this.billService.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value)
+        return this.billService.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest);
       }
       else {
-        return this.billService.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value)
+        return this.billService.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest);
       }
     })).subscribe((data: any) => {
       if (this.buttonSwitchMessage === 'Switch to costs!') {
@@ -90,14 +94,14 @@ export class BillsComponent implements OnInit {
   }
 
   getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
-    this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value).subscribe((data:any) => {
+    this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe((data:any) => {
       this.bills$ = data.costs;
       this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
   }
 
   getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
-    this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value).subscribe((data:any) => {
+    this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe((data:any) => {
       this.bills$ = data.profits;
       this.billsLengthList = data.costs_length_list;
     }, (data:any) => this.error_message = data.error.message);
@@ -124,8 +128,27 @@ export class BillsComponent implements OnInit {
     else if (type === 'subCategoryId') {
       this.subCategoryId = event.value;
     }
-    else {
+    else if (type === 'currencyId') {
       this.currencyId = event.value;
+    }
+    else if (type === 'dateFrom') {
+      console.log(event, type);
+      console.log(event.value);
+      const tempDateFrom = new Date(event.value);
+      const dateString = tempDateFrom.getFullYear() + '-' + (tempDateFrom.getMonth() + 1) + '-' + tempDateFrom.getDate() + 'T' + tempDateFrom.getHours() + ':' + tempDateFrom.getMinutes() + ':' + tempDateFrom.getSeconds() + '.' + tempDateFrom.getMilliseconds();
+      console.log(dateString);
+      this.dateFromRequest = dateString;
+    }
+    else if (type === 'dateTo') {
+      console.log(event, type);
+      console.log(event.value);
+      const tempDateTo = new Date(event.value);
+      const dateString = tempDateTo.getFullYear() + '-' + (tempDateTo.getMonth() + 1) + '-' + tempDateTo.getDate() + 'T' + tempDateTo.getHours() + ':' + tempDateTo.getMinutes() + ':' + tempDateTo.getSeconds() + '.' + tempDateTo.getMilliseconds();
+      console.log(dateString);
+      this.dateToRequest = dateString;
+    }
+    else {
+
     }
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
@@ -254,20 +277,34 @@ export class BillsComponent implements OnInit {
     this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value);
   }
 
-  newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
-    if (this.buttonSwitchMessage === 'Switch to costs!') {
-      this.billService.newProfits(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity).subscribe((data:any) => {
-      }, (data:any) => this.error_message = data.error.message);
-    }
-    else {
-      this.billService.newCosts(categoryId, subCategoryId, currencyId, title, comment, price, quantity, notMyCity).subscribe((data:any) => {
-      }, (data:any) => this.error_message = data.error.message);
-    }
+  newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
+
   }
 
   changeOffsetLimit(event) {
     this.billsLimit = event.pageSize;
     this.billsOffset = event.pageIndex;
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
+    else {
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
+  }
+
+  clearDateFrom() {
+    this.dateFrom = '';
+    this.dateFromRequest = '';
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
+    else {
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
+    }
+  }
+  clearDateTo() {
+    this.dateTo = '';
+    this.dateToRequest = '';
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
     }

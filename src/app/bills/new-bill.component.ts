@@ -58,12 +58,14 @@ export class DialogNewBillComponent implements OnInit {
     if (!data.notMyCity) {
       data.notMyCity = false;
     }
+    const created = new Date()
+    const createdString = created.getFullYear() + '-' + (created.getMonth() + 1) + '-' + created.getDate() + 'T' + created.getHours() + ':' + created.getMinutes() + ':' + created.getSeconds() + '.' + created.getMilliseconds();
     if (data.newBillType === 'profits') {
-      this.billService.newProfits(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity).subscribe((data:any) => {
+      this.billService.newProfits(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity, createdString).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
     else {
-      this.billService.newCosts(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity).subscribe((data:any) => {
+      this.billService.newCosts(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity, createdString).subscribe((data:any) => {
       }, (data:any) => this.error_message = data.error.message);
     }
   }

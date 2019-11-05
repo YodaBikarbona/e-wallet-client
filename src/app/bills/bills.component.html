@@ -109,6 +109,30 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div class="col-md-5 col-sm-9">
+        <mat-form-field class="w-100">
+          <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" placeholder="Date from" disabled (dateChange)="onChange($event, 'dateFrom')">
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #pickerFrom disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1 col-sm-3">
+        <div class="text-right p-1">
+          <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateFrom()">Clear</button>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-9">
+        <mat-form-field class="w-100">
+          <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" placeholder="Date to" disabled (dateChange)="onChange($event, 'dateTo')">
+          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #pickerTo disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1 col-sm-3">
+        <div class="text-right p-1">
+          <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateTo()">Clear</button>
+        </div>
+      </div>
       <div class="col-md-12 col-sm-12 search">
           <div>
             <form class="example-form">
