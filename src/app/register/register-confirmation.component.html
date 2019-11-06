@@ -1,12 +1,12 @@
 <div mat-dialog-content class="text-center">
   <div >
-    <h3>Congratulation</h3>
-    <p>You are successfully registered.</p>
-    <p>Please check your e-mail and use code to login!</p>
+    <h3>{{ _translation('Congratulation', langCode) }}</h3>
+    <p>{{ _translation('You are successfully registered.', langCode) }}</p>
+    <p>{{ _translation('Please check your e-mail and use code to login!', langCode) }}</p>
   </div>
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-100 m-auto text-center">
-    <button mat-button class="w-90" cdkFocusInitial [mat-dialog-close]="data" (click)="onNoClick(data)">Login</button>
+    <button mat-button class="w-90" cdkFocusInitial [mat-dialog-close]="data" (click)="onNoClick(data)">{{ _translation('Login', langCode) }}</button>
   </div>
 </div>

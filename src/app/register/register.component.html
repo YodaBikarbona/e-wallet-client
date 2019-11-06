@@ -1,31 +1,31 @@
 <div class="register p-3">
   <form (submit)="registerSubmit(regRequest)">
     <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <h3 class="mb-3">Register</h3>
+      <div class="col-md-12 col-sm-12 pl-1 pr-1">
+        <h3 class="mb-3">{{ _translation('Register', langCode) }}</h3>
       </div>
       <div class="col-md-6 col-sm-12 p-1">
         <div>
           <mat-form-field class="w-100">
-            <mat-label>First name</mat-label>
+            <mat-label>{{ _translation('First name', langCode) }}</mat-label>
             <input type="text" matInput required name="firstName" [(ngModel)]="regRequest.firstName">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Last name</mat-label>
+            <mat-label>{{ _translation('Last name', langCode) }}</mat-label>
             <input type="text" matInput required name="lastName" [(ngModel)]="regRequest.lastName">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Email</mat-label>
+            <mat-label>{{ _translation('Email', langCode) }}</mat-label>
             <input type="email" matInput required name="email" [(ngModel)]="regRequest.email">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate" placeholder="Birth date" required disabled>
+            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate" placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <!--mat-datepicker #picker></--mat-datepicker-->
             <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
@@ -35,7 +35,7 @@
       <div class="col-md-6 col-sm-12 p-1">
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Country</mat-label>
+            <mat-label>{{ _translation('Country', langCode) }}</mat-label>
             <mat-select name="country_id" [(ngModel)]="regRequest.country_id" (selectionChange)="onCountryChange($event)">
               <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
                 {{country.name}}
@@ -45,7 +45,7 @@
         </div>
         <div>
           <mat-form-field class="w-100">
-            <mat-label>City</mat-label>
+            <mat-label>{{ _translation('City', langCode) }}</mat-label>
             <mat-select name="city_id" [(ngModel)]="regRequest.city_id">
               <mat-option *ngFor="let city of cities$" [value]="city.id" >
                 {{city.name}}
@@ -55,7 +55,7 @@
         </div>
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Address</mat-label>
+            <mat-label>{{ _translation('Address', langCode) }}</mat-label>
             <input type="text" matInput required name="address" [(ngModel)]="regRequest.address">
           </mat-form-field>
         </div>
@@ -66,10 +66,10 @@
           <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="regRequest.gender">
             <div class="row">
               <div class="col-md-6">
-                <mat-radio-button value="male" class="mb-1">Male</mat-radio-button>
+                <mat-radio-button value="male" class="mb-1">{{ _translation('Male', langCode) }}</mat-radio-button>
               </div>
               <div class="col-md-6">
-                <mat-radio-button value="female" class="mb-1">Female</mat-radio-button>
+                <mat-radio-button value="female" class="mb-1">{{ _translation('Female', langCode) }}</mat-radio-button>
               </div>
             </div>
           </mat-radio-group>
@@ -78,7 +78,7 @@
       <div class="col-md-6 col-sm-12 p-1">
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Password</mat-label>
+            <mat-label>{{ _translation('Password', langCode) }}</mat-label>
             <input type="password" matInput required name="password" [(ngModel)]="regRequest.password">
           </mat-form-field>
         </div>
@@ -86,17 +86,17 @@
       <div class="col-md-6 col-sm-12 p-1">
         <div>
           <mat-form-field class="w-100">
-            <mat-label>Confirm password</mat-label>
+            <mat-label>{{ _translation('Confirm password', langCode) }}</mat-label>
             <input type="password" matInput required name="confirmPassword" [(ngModel)]="regRequest.confirmPassword">
           </mat-form-field>
         </div>
       </div>
       <div class="col-md-12 col-sm-12 p-1">
         <div class="row">
-          <div class="col-md-10"></div>
-          <div class="col-md-2">
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
             <div class="text-center">
-              <button type="submit" mat-raised-button color="primary" class="btn-block">Sign up</button>
+              <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign up', langCode) }}</button>
             </div>
           </div>
         </div>

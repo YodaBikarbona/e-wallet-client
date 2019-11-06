@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationRequest } from '../model';
 import {RestartPasswordService} from '../services/restart-password.service';
 import {MatSnackBar} from '@angular/material';
+import {not} from 'rxjs/internal-compatibility';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +18,25 @@ export class LoginComponent implements OnInit {
   authentcationRequest: AuthenticationRequest = null;
   userEmail = '';
   howApplicationWorks = false;
+  lang = '';
+  langCode = '';
+  languages = languages;
 
   constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar) { }
   //constructor() { }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
   }
 
   login(email: string, password: string) {
@@ -67,6 +83,37 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
+  }
 }
 
 

@@ -12,6 +12,7 @@ import DateTimeFormat = Intl.DateTimeFormat;
 import {DialogShowBillComponent} from '../bills/show-bill.component';
 import {DialogRegisterConfirmationComponent} from './register-confirmation.component';
 import {error} from '@angular/compiler/src/util';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-register',
@@ -27,11 +28,24 @@ export class RegisterComponent implements OnInit {
   passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   regRequest: RegisterRequest = new RegisterRequest(null, null, null, null, null, null, null, null, null, null);
-
+  lang = '';
+  langCode = '';
+  languages = languages;
   constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.countries$ = this.router.data.pipe(map(data => data.countries));
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
   }
 
   registerSubmit(reqData: any) {
@@ -91,6 +105,38 @@ export class RegisterComponent implements OnInit {
       .subscribe((result: any) => {
         this.loginRouter.navigate(['login']);
     });
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 
 }

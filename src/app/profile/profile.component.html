@@ -16,20 +16,20 @@
       </div>
       <div class="col-md-2 col-sm-12 actionButton">
         <div class="mb-1 mt-1">
-          <button type="button" mat-raised-button color="primary" class="btn-block newBillButton button" (click)="openDialogEditProfile()">Edit profile</button>
+          <button type="button" mat-raised-button color="primary" class="btn-block newBillButton button" (click)="openDialogEditProfile()">{{ _translation('Edit profile', langCode) }}</button>
         </div>
         <div class="mb-1">
-          <button type="button" mat-raised-button color="primary" class="btn-block newBillButton button mb-1" (click)="openDialogChangePassword()">Change password</button>
+          <button type="button" mat-raised-button color="primary" class="btn-block newBillButton button mb-1" (click)="openDialogChangePassword()">{{ _translation('Change password', langCode) }}</button>
         </div>
       </div>
     </div>
     <div class="breakSection"></div>
     <div class="mt-1 information">
       <mat-tab-group>
-        <mat-tab label="Personal">
+        <mat-tab label="{{ _translation('Personal', langCode) }}">
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>First name:</p>
+              <p>{{ _translation('First name', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.first_name }}</p>
@@ -39,7 +39,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Last name:</p>
+              <p>{{ _translation('Last name', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.last_name }}</p>
@@ -49,7 +49,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Gender:</p>
+              <p>{{ _translation('Gender', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.gender }}</p>
@@ -59,7 +59,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Birth date:</p>
+              <p>{{ _translation('Birth date', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.birth_date }}</p>
@@ -68,10 +68,10 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Contact">
+        <mat-tab label="{{ _translation('Contact', langCode) }}">
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Email:</p>
+              <p>{{ _translation('Email', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.email }}</p>
@@ -81,7 +81,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Phone:</p>
+              <p>{{ _translation('Phone', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.phone }}</p>
@@ -91,7 +91,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Country:</p>
+              <p>{{ _translation('Country', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.country.name }}</p>
@@ -101,7 +101,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>City:</p>
+              <p>{{ _translation('City', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.city.name }}</p>
@@ -111,7 +111,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-4 bold">
-              <p>Address:</p>
+              <p>{{ _translation('Address', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-8 text-center">
               <p>{{ user.address }}</p>
@@ -120,10 +120,10 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Application">
+        <mat-tab label="{{ _translation('Application', langCode) }}">
           <div class="row p-1">
             <div class="col-md-3 col-sm-6 bold">
-              <p>Categories:</p>
+              <p>{{ _translation('Categories', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-6 text-center">
               <p>{{ user.categories }}</p>
@@ -133,7 +133,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-6 bold">
-              <p>Sub categories:</p>
+              <p>{{ _translation('Sub categories', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-6 text-center">
               <p>{{ user.sub_categories }}</p>
@@ -143,7 +143,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-6 bold">
-              <p>Currencies:</p>
+              <p>{{ _translation('Currencies', langCode) }}:</p>
             </div>
             <div class="col-md-3 col-sm-6 text-center">
               <p>{{ user.currencies }}</p>
@@ -153,7 +153,7 @@
           </div>
           <div class="row p-1">
             <div class="col-md-3 col-sm-6 bold">
-              <p>Default currency:</p>
+              <p>{{ _translation('Default currency', langCode) }}:</p>
             </div>
             <div *ngIf="user.currency_id" class="col-md-3 col-sm-6 text-center">
               <p>{{ user.currency.code }}</p>

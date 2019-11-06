@@ -58,33 +58,32 @@
 
 
 <div class="login p-3">
-
   <form *ngIf="!userActive" (submit)="activateUser(code)">
     <div>
       <mat-form-field>
-        <mat-label>Activation code</mat-label>
+        <mat-label>{{ _translation('Activation code', langCode) }}</mat-label>
         <input type="text" matInput required name="code" [(ngModel)]="code">
         <mat-icon matSuffix>vpn_key</mat-icon>
       </mat-form-field>
     </div>
     <div class="text-center">
-      <button type="submit" mat-raised-button color="primary" class="btn-block">Activate</button>
+      <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Activate', langCode) }}</button>
     </div>
     <div class="text-center mt-1">
-      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">Resend code</button>
+      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">{{ _translation('Resend code', langCode) }}</button>
     </div>
   </form>
 
   <form (submit)="login(email, password)" *ngIf="userActive">
     <!--img src="https://image.freepik.com/vettori-gratuito/consulenza-finanziaria-orientamento-finanziario-consulente-aziendale-assistenza-agli-investimenti-disegno-di-linea-di-disegno-di-linea-di-disegno-di-linea-di-libro-disegno-per-la-grafica-mobile-e-web_1200-303.jpg" width="100%" height="400" alt="Italian Trulli"-->
-    <h3 class="mb-3">Login</h3>
+    <h3 class="mb-3">{{ _translation('Login', langCode) }}</h3>
     <mat-form-field>
-      <mat-label>Username</mat-label>
+      <mat-label>{{ _translation('Username', langCode) }}</mat-label>
       <input type="email" matInput required name="email" [(ngModel)]="email">
       <mat-icon matSuffix>account_circle</mat-icon>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Password</mat-label>
+        <mat-label>{{ _translation('Password', langCode) }}</mat-label>
       <input type="password" matInput required name="password" [(ngModel)]="password">
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
@@ -92,9 +91,26 @@
       <span class="error_message">{{message}}</span>
     </div>
     <div class="text-center">
-      <button type="submit" mat-raised-button color="primary" class="btn-block">Sign in</button>
-      <p class="m-2">Don't have an account? <a routerLink="/register">Sing up</a></p>
-      <p class="m-2"><a routerLink="/restartPassword"> Forgot your password</a></p>
+      <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign in', langCode) }}</button>
+      <p class="m-2">{{ _translation('Don\'t have an account?', langCode) }} <a routerLink="/register">{{ _translation('Sign up', langCode) }}</a></p>
+      <p class="m-2"><a routerLink="/restartPassword">{{ _translation('Forgot your password', langCode) }}</a></p>
     </div>
   </form>
+</div>
+
+<div class="row languageChoice" *ngIf="userActive">
+  <div class="col-md-5 col-sm-0">
+  </div>
+  <div class="col-md-2 col-sm-12">
+    <mat-form-field class="w-100">
+      <mat-label>{{ _translation('Language', langCode) }}</mat-label>
+      <mat-select (selectionChange)="changeLang($event)" [(ngModel)]="langCode">
+        <mat-option *ngFor="let language of languages" [value]="language.langCode">
+          <p>{{ language.language }}</p>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-5 col-sm-0">
+  </div>
 </div>

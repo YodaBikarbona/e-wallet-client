@@ -11,6 +11,7 @@ import {DialogEditProfileComponent} from './edit_profile';
 import {Observable} from 'rxjs';
 import {CityResolver} from '../services/country.service';
 import {SettingsService} from '../services/settings.service';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-profile',
@@ -28,11 +29,25 @@ export class ProfileComponent implements OnInit {
   edited = false;
   currencies$: Currency[];
   error_message = '';
+  lang = '';
+  langCode = '';
+  languages = languages;
 
   constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver, public settingsService: SettingsService) {
   }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
     this.router.data.pipe(map(data => data.user.user)).subscribe(user => this.user = user);
     this.countries$ = this.router.data.pipe(map(data => data.countries));
 
@@ -102,6 +117,38 @@ export class ProfileComponent implements OnInit {
       _countryId = countryId;
     }
     return this.cityService.resolve(_countryId).pipe(map(data => data));
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 
 }

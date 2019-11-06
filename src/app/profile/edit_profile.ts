@@ -6,6 +6,7 @@ import {map, tap} from 'rxjs/operators';
 import {CityResolver} from '../services/country.service';
 import {Observable} from 'rxjs';
 import {City, Currency, EditProfile, User} from '../model';
+import {languages, translateFunction} from '../translations/translations';
 
 export interface DialogData {
   edited: boolean;
@@ -23,8 +24,22 @@ export class DialogEditProfileComponent {
   edited: boolean;
   dataEdit: EditProfile;
   oldBirthDate = '';
+  lang = '';
+  langCode = '';
+  languages = languages
 
   constructor(public cityService: CityResolver, public userService: UserService, public dialogRef: MatDialogRef<DialogEditProfileComponent>, @Inject(MAT_DIALOG_DATA) public data: EditProfile, public router: Router) {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
     this.dataEdit = data;
     //this.data = this.dataEdit;
     //data = this.dataEdit;
@@ -81,5 +96,37 @@ export class DialogEditProfileComponent {
       _countryId = countryId;
     }
     return this.cityService.resolve(_countryId).pipe(map(data => data));
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

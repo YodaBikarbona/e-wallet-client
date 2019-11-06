@@ -2,6 +2,7 @@ import {Component, Inject, NgModule} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
+import {languages, translateFunction} from '../translations/translations';
 
 export interface DialogData {
   currentPassword: string;
@@ -16,8 +17,23 @@ export interface DialogData {
 export class DialogChangePasswordComponent {
 
   error_message = '';
+  lang = '';
+  langCode = '';
+  languages = languages;
 
-  constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router) {}
+  constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router) {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -32,5 +48,37 @@ export class DialogChangePasswordComponent {
     }, 2000);
       },
       (data: any) => this.error_message = data.error.message);
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

@@ -274,7 +274,7 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
-    this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value);
+    this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value, this.dateFromRequest, this.dateToRequest);
   }
 
   newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {

@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RestartPasswordRequest} from '../model';
 import {RestartPasswordService} from '../services/restart-password.service';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-restart-password',
@@ -15,12 +16,25 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
   email = '';
   error_message = '';
   restartRequest: RestartPasswordRequest = null;
+  lang = '';
+  langCode = '';
+  languages = languages;
 
   constructor(public passwordService: RestartPasswordService, public router: Router) {
   }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
 
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
   }
 
   ngOnDestroy(): void {
@@ -48,5 +62,37 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
     else {
       this.passwordService.saveNewPassword(newPassword, confirmPassword, email).subscribe((data: any) => this.router.navigate(['login']), (data:any) => this.error_message = data.error.message);
     }
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

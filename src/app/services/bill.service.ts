@@ -26,8 +26,8 @@ export class BillService {
     return this.http.post(`${API_URL}/v1/bills/profits/new`, request);
   }
 
-  printBills(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string) {
-    const request = new reportPdfRequest(categoryId, subCategoryId, currencyId, billType, search);
+  printBills(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string) {
+    const request = new reportPdfRequest(categoryId, subCategoryId, currencyId, billType, search, dateFrom, dateTo);
     return this.http.post(`${API_URL}/v1/report/print`, request, {responseType: 'blob'}).subscribe(
       (response) => {
         const blob = new Blob([response], {type: 'application/pdf'});

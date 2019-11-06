@@ -162,13 +162,17 @@ export class reportPdfRequest {
   currencyId: number;
   billType: string;
   search: string;
+  dateFrom: string;
+  dateTo: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
     this.billType = billType;
     this.search = search;
+    this.dateFrom = dateFrom;
+    this.dateTo = dateTo;
   }
 }
 
