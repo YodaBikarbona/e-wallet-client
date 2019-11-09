@@ -24,14 +24,14 @@ export const languages = [
     'language': 'English',
     'langCode': 'en'
   },
-  {
-    'language': 'German',
-    'langCode': 'de'
-  },
-  {
-    'language': 'Croatian',
-    'langCode': 'hr'
-  }
+  // {
+  //   'language': 'German',
+  //   'langCode': 'de'
+  // },
+  // {
+  //   'language': 'Croatian',
+  //   'langCode': 'hr'
+  // }
 ];
 // const translations = {
 //   'Language': {

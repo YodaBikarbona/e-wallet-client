@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BillCostsGetRequest, graphRequest, NewBillRequest, reportPdfRequest, SettingsCurrenciesGetRequest} from '../model';
+import {BillCostsGetRequest, EditBillRequest, graphRequest, NewBillRequest, reportPdfRequest, SettingsCurrenciesGetRequest} from '../model';
 import {API_URL} from '../app.constants';
 import { saveAs } from 'file-saver';
 
@@ -39,12 +39,17 @@ export class BillService {
     );
   }
 
-  getGraph(costs: boolean, profits: boolean, currency_id: number) {
-    const request = new graphRequest(costs, profits, currency_id);
+  getGraph(costs: boolean, profits: boolean, currency_id: number, dateFrom: string, dateTo: string) {
+    const request = new graphRequest(costs, profits, currency_id, dateFrom, dateTo);
     return this.http.post(`${API_URL}/v1/bills/graph`, request);
   }
 
   deleteBill(billId: number) {
     return this.http.delete(`${API_URL}/v1/bill/${billId}/delete`);
+  }
+
+  editBill(data: any) {
+    const request = new EditBillRequest(data.categoryId, data.subCategoryId, data.currencyId, data.billTitle, data.billComment, data.billPrice, data.billQuantity, data.billNotMyCity);
+    return this.http.post(`${API_URL}/v1/bill/${data.billId}/edit`, request);
   }
 }

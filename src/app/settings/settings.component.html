@@ -80,10 +80,10 @@
 
                   </div>
                   <mat-card class="currencyCard" (click)="activeSubCategory(sub_category.id)" *ngIf="active">
-                    <h5 class="m-auto card">{{ sub_category.name }}</h5>
+                    <h5 class="m-auto card">{{ sub_category.name }} <br> ({{ sub_category.bill_category.name }})</h5>
                   </mat-card>
                   <mat-card class="currencyCard" (click)="deactiveSubCategory(sub_category.id)" *ngIf="!active">
-                    <h5 class="m-auto card">{{ sub_category.name }}</h5>
+                    <h5 class="m-auto card">{{ sub_category.name }} <br> ({{ sub_category.bill_category.name }})</h5>
                   </mat-card>
                   <!--/div-->
 

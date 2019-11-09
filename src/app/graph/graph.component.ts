@@ -82,6 +82,65 @@ export class GraphComponent implements OnInit {
   //monthly_limit = 0;
   currencies$: Currency[];
   currencyId = 0;
+  pieFormat = 'json';
+  typePie = 'pie2d';
+  dateFrom = '';
+  dateTo = '';
+  dateFromRequest = '';
+  dateToRequest = '';
+  dataCostCategoryPie = [];
+  dataProfitCategoryPie = [];
+  dataCostSubCategoryPie = [];
+  dataProfitSubCategoryPie = [];
+  pieDataCategoryCost = {
+  chart: {
+    caption: "Categories (costs)",
+    plottooltext: "<b>$percentValue</b> of category $label",
+    showlegend: "1",
+    showpercentvalues: "1",
+    legendposition: "bottom",
+    usedataplotcolorforlabels: "1",
+    theme: "fusion"
+  },
+  data: []
+};
+  pieDataCategoryProfit = {
+  chart: {
+    caption: "Categories (profits)",
+    plottooltext: "<b>$percentValue</b> of category $label",
+    showlegend: "1",
+    showpercentvalues: "1",
+    legendposition: "bottom",
+    usedataplotcolorforlabels: "1",
+    theme: "fusion"
+  },
+  data: []
+};
+  pieDataSubCategoryCost = {
+  chart: {
+    caption: "Sub categories (costs)",
+    plottooltext: "<b>$percentValue</b> of subcategory $label",
+    showlegend: "1",
+    showpercentvalues: "1",
+    legendposition: "bottom",
+    usedataplotcolorforlabels: "1",
+    theme: "fusion"
+  },
+  data: []
+};
+  pieDataSubCategoryProfit = {
+  chart: {
+    caption: "Sub categories (profits)",
+    plottooltext: "<b>$percentValue</b> of subcategory $label",
+    showlegend: "1",
+    showpercentvalues: "1",
+    legendposition: "bottom",
+    usedataplotcolorforlabels: "1",
+    theme: "fusion"
+  },
+  data: []
+};
+
   constructor(public billService: BillService, public settingsService: SettingsService) {
 
     /*this.type = 'timeseries';
@@ -155,10 +214,17 @@ export class GraphComponent implements OnInit {
     //this.fetchData(this.bills);
   }
 
-  getGraph(currencyId: number) {
-    this.billService.getGraph(true, true, currencyId).subscribe((data: graphResponse) => {
+  getGraph(currencyId: number, dateFrom: string, dateTo: string) {
+    this.billService.getGraph(true, true, currencyId, dateFrom, dateTo).subscribe((data: graphResponse) => {
       this.bills = data;
-      console.log(this.bills)
+      this.pieDataCategoryCost.data = data.bill_categories_list_cost;
+      this.dataCostCategoryPie = data.bill_categories_list_cost;
+      this.pieDataCategoryProfit.data = data.bill_categories_list_profit;
+      this.dataProfitCategoryPie = data.bill_categories_list_profit;
+      this.pieDataSubCategoryCost.data = data.bill_sub_categories_list_cost;
+      this.dataCostSubCategoryPie = data.bill_sub_categories_list_cost;
+      this.pieDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
+      this.dataProfitSubCategoryPie = data.bill_sub_categories_list_profit;
       //this.monthly_limit = this.bills.monthly_limit
       this.graph();
       },
@@ -202,9 +268,30 @@ export class GraphComponent implements OnInit {
     this.fetchData();
   }
 
-  onChange(event) {
-    this.currencyId = event.value;
-    this.getGraph(this.currencyId);
+  onChange(event, type: string) {
+    if (type === 'currencyId') {
+      this.currencyId = event.value;
+    } else if (type === 'dateFrom') {
+      const tempDateFrom = new Date(event.value);
+      const dateString = tempDateFrom.getFullYear() + '-' + (tempDateFrom.getMonth() + 1) + '-' + tempDateFrom.getDate() + 'T' + tempDateFrom.getHours() + ':' + tempDateFrom.getMinutes() + ':' + tempDateFrom.getSeconds() + '.' + tempDateFrom.getMilliseconds();
+      this.dateFromRequest = dateString;
+    } else if (type === 'dateTo') {
+      const tempDateFrom = new Date(event.value);
+      const dateString = tempDateFrom.getFullYear() + '-' + (tempDateFrom.getMonth() + 1) + '-' + tempDateFrom.getDate() + 'T' + tempDateFrom.getHours() + ':' + tempDateFrom.getMinutes() + ':' + tempDateFrom.getSeconds() + '.' + tempDateFrom.getMilliseconds();
+      this.dateToRequest = dateString;
+    } else {}
+    this.getGraph(this.currencyId, this.dateFromRequest, this.dateToRequest);
   }
 
+  clearDateFrom() {
+    this.dateFrom = '';
+    this.dateFromRequest = '';
+    this.getGraph(this.currencyId, this.dateFromRequest, this.dateToRequest);
+  }
+
+  clearDateTo() {
+    this.dateTo = '';
+    this.dateToRequest = '';
+    this.getGraph(this.currencyId, this.dateFromRequest, this.dateToRequest);
+  }
 }

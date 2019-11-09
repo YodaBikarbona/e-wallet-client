@@ -156,6 +156,28 @@ export class NewBillRequest {
   }
 }
 
+export class EditBillRequest {
+  categoryId: number;
+  subCategoryId: number;
+  currencyId: number;
+  title: string;
+  comment: string;
+  price: string;
+  quantity: number;
+  notMyCity: boolean;
+
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean) {
+    this.categoryId = categoryId;
+    this.subCategoryId = subCategoryId;
+    this.currencyId = currencyId;
+    this.title = title;
+    this.comment = comment;
+    this.price = price;
+    this.quantity = quantity;
+    this.notMyCity = notMyCity;
+  }
+}
+
 export class reportPdfRequest {
   categoryId: number;
   subCategoryId: number;
@@ -180,11 +202,15 @@ export class graphRequest {
   costs: boolean;
   profits: boolean;
   currency_id: number;
+  dateFrom: string;
+  dateTo: string
 
-  constructor(costs: boolean, profits: boolean, currency_id: number) {
+  constructor(costs: boolean, profits: boolean, currency_id: number, dateFrom: string, dateTo: string) {
     this.costs = costs;
     this.profits = profits;
     this.currency_id = currency_id;
+    this.dateFrom = dateFrom;
+    this.dateTo = dateTo;
   }
 }
 
@@ -195,14 +221,22 @@ export class graphResponse {
   min_profit: number;
   max_profit: number;
   monthly_limit: number;
+  bill_categories_list_cost: any;
+  bill_categories_list_profit: any;
+  bill_sub_categories_list_cost: any;
+  bill_sub_categories_list_profit: any;
 
-  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number, monthly_limit: number) {
+  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number, monthly_limit: number, bill_categories_list_cost: any, bill_categories_list_profit: any, bill_sub_categories_list_cost: any, bill_sub_categories_list_profit: any) {
     this.bills = bills;
     this.min_cost = min_cost;
     this.max_cost = max_cost;
     this.min_profit = min_profit;
     this.max_profit = max_profit;
     this.monthly_limit = monthly_limit;
+    this.bill_categories_list_cost = bill_categories_list_cost;
+    this.bill_categories_list_profit = bill_categories_list_profit;
+    this.bill_sub_categories_list_cost = bill_sub_categories_list_cost;
+    this.bill_sub_categories_list_profit = bill_sub_categories_list_profit;
   }
 }
 

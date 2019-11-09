@@ -54,6 +54,7 @@ export class DialogShowBillComponent implements OnInit {
   onChange(event, type: string) {
     if (type === 'categoryId') {
       this.data.subCategories$ = this.getSubcategories(event.value);
+      this.data.subCategoryId = null;
     }
   }
 
@@ -92,6 +93,14 @@ export class DialogShowBillComponent implements OnInit {
         if (result) {
           this.deleteBill(billId);
         }
+    });
+  }
+
+  editBill(editData: any) {
+    this.billService.editBill(editData).subscribe((data: any) => {
+      this.onNoClick();
+    }, (data:any) => {
+
     });
   }
 }

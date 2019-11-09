@@ -92,8 +92,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('auth-token');
     this.router.navigate(['login']);
+  }
+
+  closeMenu(menuDisplayName: string, drawer) {
+    if (menuDisplayName !== 'Admin' && window.innerWidth < 768) {
+      drawer.close();
+      const element = document.getElementById("menuButton");
+      element.classList.remove("cdk-focused");
+      element.classList.remove("cdk-program-focused");
+    }
   }
 
   // clear(newsId: number) {

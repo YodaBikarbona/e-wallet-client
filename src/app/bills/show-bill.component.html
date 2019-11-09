@@ -26,7 +26,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Category</mat-label>
-    <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId')" disabled>
+    <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId')">
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -39,7 +39,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Sub category</mat-label>
-    <mat-select [(ngModel)]="data.subCategoryId" disabled>
+    <mat-select [(ngModel)]="data.subCategoryId">
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -51,7 +51,7 @@
 
   <mat-form-field class="w-100">
     <mat-label>Currency</mat-label>
-    <mat-select [(ngModel)]="data.currencyId" required disabled>
+    <mat-select [(ngModel)]="data.currencyId" required>
       <mat-option value="null">
         <p>None</p>
       </mat-option>
@@ -63,26 +63,26 @@
 
   <mat-form-field class="w-100">
     <mat-label>Title</mat-label>
-    <input type="text" matInput required [(ngModel)]="data.billTitle" disabled>
+    <input type="text" matInput required [(ngModel)]="data.billTitle">
   </mat-form-field>
 
   <mat-form-field class="w-100">
     <mat-label>Comment</mat-label>
-    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.billComment" disabled></textarea>
+    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.billComment"></textarea>
   </mat-form-field>
 
   <mat-form-field class="w-100">
     <mat-label>Price</mat-label>
-    <input type="text" matInput required [(ngModel)]="data.billPrice" disabled>
+    <input type="text" matInput required [(ngModel)]="data.billPrice">
   </mat-form-field>
 
   <mat-form-field class="w-100">
     <mat-label>Quantity</mat-label>
-    <input type="text" matInput required [(ngModel)]="data.billQuantity" disabled>
+    <input type="text" matInput required [(ngModel)]="data.billQuantity">
   </mat-form-field>
 
   <div class="w-100 text-left">
-    <mat-checkbox [(ngModel)]="data.billNotMyCity" disabled>Not my city</mat-checkbox>
+    <mat-checkbox [(ngModel)]="data.billNotMyCity">Not my city</mat-checkbox>
   </div>
 
 </div>
@@ -91,7 +91,7 @@
     <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">No Thanks</button>
   </div>
   <div class="w-50 ml-auto mr-auto mb-auto mt-1 text-center">
-    <button type="button" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data" disabled>Edit</button>
+    <button type="button" mat-raised-button color="primary" class="btn-block w-90" (click)="editBill(data)">Edit</button>
   </div>
   <div class="w-100 ml-auto mr-auto mb-auto mt-1 text-center">
     <button type="button" mat-raised-button color="warn" class="btn-block deleteBill" (click)="openDialogDeleteBill(data.billId)">Delete</button>
