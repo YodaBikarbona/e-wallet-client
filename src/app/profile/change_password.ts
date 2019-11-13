@@ -1,5 +1,5 @@
 import {Component, Inject, NgModule} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {languages, translateFunction} from '../translations/translations';
@@ -21,7 +21,7 @@ export class DialogChangePasswordComponent {
   langCode = '';
   languages = languages;
 
-  constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router) {
+  constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router, private snackBar: MatSnackBar) {
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -47,7 +47,9 @@ export class DialogChangePasswordComponent {
       this.router.navigate(['login']);
     }, 2000);
       },
-      (data: any) => this.error_message = data.error.message);
+      (data: any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;});
   }
 
   // Translations

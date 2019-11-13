@@ -28,10 +28,10 @@ export const languages = [
   //   'language': 'German',
   //   'langCode': 'de'
   // },
-  // {
-  //   'language': 'Croatian',
-  //   'langCode': 'hr'
-  // }
+  {
+    'language': 'Croatian',
+    'langCode': 'hr'
+  }
 ];
 // const translations = {
 //   'Language': {

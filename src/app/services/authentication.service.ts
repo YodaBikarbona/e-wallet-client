@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { API_URL } from '../app.constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationRequest } from '../model';
+import {headersToString} from 'selenium-webdriver/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -14,7 +15,7 @@ export class AuthenticationService {
     }
 
     authenticate(request: AuthenticationRequest): Observable<boolean> {
-        return this.http.post(`${API_URL}/v1/login`, request)
+        return this.http.post(`${API_URL}/v1/login`, request, {headers: {'Lang': localStorage.getItem('lang')}})
             .pipe(
                 map((res: AuthResponse) => res.token),
                 map(token => this.resloveAuthentication(token)),

@@ -225,8 +225,10 @@ export class graphResponse {
   bill_categories_list_profit: any;
   bill_sub_categories_list_cost: any;
   bill_sub_categories_list_profit: any;
+  costs: number;
+  profits: number;
 
-  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number, monthly_limit: number, bill_categories_list_cost: any, bill_categories_list_profit: any, bill_sub_categories_list_cost: any, bill_sub_categories_list_profit: any) {
+  constructor(bills: any, min_cost: number, max_cost: number, min_profit: number, max_profit: number, monthly_limit: number, bill_categories_list_cost: any, bill_categories_list_profit: any, bill_sub_categories_list_cost: any, bill_sub_categories_list_profit: any, costs: number, profits: number) {
     this.bills = bills;
     this.min_cost = min_cost;
     this.max_cost = max_cost;
@@ -237,6 +239,8 @@ export class graphResponse {
     this.bill_categories_list_profit = bill_categories_list_profit;
     this.bill_sub_categories_list_cost = bill_sub_categories_list_cost;
     this.bill_sub_categories_list_profit = bill_sub_categories_list_profit;
+    this.costs = costs;
+    this.profits = profits;
   }
 }
 

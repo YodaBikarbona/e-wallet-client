@@ -6,6 +6,7 @@ import {SettingsService} from '../services/settings.service';
 import {MatSnackBar} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {debounce, debounceTime, flatMap} from 'rxjs/operators';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-settings',
@@ -23,9 +24,23 @@ export class SettingsComponent implements OnInit, OnDestroy {
   subSubscription: Subscription;
   panelOpenState: boolean;
   activeCurrencies$: Currency[];
+  lang = '';
+  langCode = '';
+  languages = languages;
   constructor(public settingsService: SettingsService, public router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(this.active, searchValues);
     let categories = (searchValues: string) => this.settingsService.getCategories(this.active, searchValues);
     let subCategories = (searchValues: string) => this.settingsService.getSubCategories(this.active, searchValues);
@@ -158,5 +173,37 @@ export class SettingsComponent implements OnInit, OnDestroy {
       // this.error_message = '';
       // }, (data:any) => this.error_message = data.error.message);
     }, (data:any) => this.error_message = data.error.message);
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

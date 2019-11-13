@@ -6,16 +6,16 @@
             src="https://i.ibb.co/fqdrtcs/header-bill.png"/>
 <div mat-dialog-content class="text-center">
   <div *ngIf="data.newBillType == 'costs'">
-    <p>Add new bill (Cost)</p>
+    <p>{{ _translation('Add new bill (Cost)', langCode) }}</p>
   </div>
   <div *ngIf="data.newBillType == 'profits'">
-    <p>Add new bill (Profit)</p>
+    <p>{{ _translation('Add new bill (Profit)', langCode) }}</p>
   </div>
   <mat-form-field class="w-100">
-    <mat-label>Category</mat-label>
+    <mat-label>{{ _translation('Category', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId', null)">
       <mat-option value="null">
-        <p>None</p>
+        <p></p>
       </mat-option>
       <mat-option *ngFor="let category of data.categories$" [value]="category.id"
                   value="category.name">
@@ -25,10 +25,10 @@
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Sub category</mat-label>
+    <mat-label>{{ _translation('Sub category', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.subCategoryId">
       <mat-option value="null">
-        <p>None</p>
+        <p></p>
       </mat-option>
       <mat-option *ngFor="let subCategory of data.subCategories$ | async" [value]="subCategory.id" >
         {{subCategory.name}}
@@ -37,10 +37,10 @@
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Currency</mat-label>
+    <mat-label>{{ _translation('Currency', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.currencyId" required>
       <mat-option value="null">
-        <p>None</p>
+        <p></p>
       </mat-option>
       <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
         {{currency.code}}
@@ -49,36 +49,36 @@
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Title</mat-label>
+    <mat-label>{{ _translation('Title', langCode) }}</mat-label>
     <input type="text" matInput required [(ngModel)]="data.title">
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Comment</mat-label>
-    <textarea matInput placeholder="I bought a new car for 10000€..." class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
+    <mat-label>{{ _translation('Comment', langCode) }}</mat-label>
+    <textarea matInput placeholder="{{ _translation('I bought a new car for 10000€...', langCode) }}" class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Price</mat-label>
+    <mat-label>{{ _translation('Price', langCode) }}</mat-label>
     <input type="text" matInput required [(ngModel)]="data.price">
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>Quantity</mat-label>
+    <mat-label>{{ _translation('Quantity', langCode) }}</mat-label>
     <input type="text" matInput required [(ngModel)]="data.quantity">
   </mat-form-field>
 
   <div class="w-100 text-left">
-    <mat-checkbox [(ngModel)]="data.notMyCity" (change)="toogle($event)">Not my city</mat-checkbox>
+    <mat-checkbox [(ngModel)]="data.notMyCity" (change)="toogle($event)">{{ _translation('Not my city', langCode) }}</mat-checkbox>
   </div>
 
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">No Thanks</button>
+    <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data" (click)="addNewBill(data)">Add</button>
+    <button type="button" mat-raised-button color="primary" class="btn-block w-90" (click)="addNewBill(data)">{{ _translation('Add', langCode) }}</button>
   </div>
 </div>
 <div class="text-right">

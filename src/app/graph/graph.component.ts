@@ -4,6 +4,7 @@ import {BillService} from '../services/bill.service';
 import {Bill, Currency, graphResponse} from '../model';
 import * as FusionCharts from 'fusioncharts';
 import {SettingsService} from '../services/settings.service';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-graph',
@@ -82,6 +83,9 @@ export class GraphComponent implements OnInit {
   //monthly_limit = 0;
   currencies$: Currency[];
   currencyId = 0;
+  lang = '';
+  langCode = '';
+  languages = languages;
   pieFormat = 'json';
   typePie = 'pie2d';
   dateFrom = '';
@@ -94,49 +98,49 @@ export class GraphComponent implements OnInit {
   dataProfitSubCategoryPie = [];
   pieDataCategoryCost = {
   chart: {
-    caption: "Categories (costs)",
-    plottooltext: "<b>$percentValue</b> of category $label",
-    showlegend: "1",
-    showpercentvalues: "1",
-    legendposition: "bottom",
-    usedataplotcolorforlabels: "1",
-    theme: "fusion"
+    caption: this._translation('Categories (costs)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
   },
   data: []
 };
   pieDataCategoryProfit = {
   chart: {
-    caption: "Categories (profits)",
-    plottooltext: "<b>$percentValue</b> of category $label",
-    showlegend: "1",
-    showpercentvalues: "1",
-    legendposition: "bottom",
-    usedataplotcolorforlabels: "1",
-    theme: "fusion"
+    caption: this._translation('Categories (profits)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
   },
   data: []
 };
   pieDataSubCategoryCost = {
   chart: {
-    caption: "Sub categories (costs)",
-    plottooltext: "<b>$percentValue</b> of subcategory $label",
-    showlegend: "1",
-    showpercentvalues: "1",
-    legendposition: "bottom",
-    usedataplotcolorforlabels: "1",
-    theme: "fusion"
+    caption: this._translation('Sub categories (costs)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
   },
   data: []
 };
   pieDataSubCategoryProfit = {
   chart: {
-    caption: "Sub categories (profits)",
-    plottooltext: "<b>$percentValue</b> of subcategory $label",
-    showlegend: "1",
-    showpercentvalues: "1",
-    legendposition: "bottom",
-    usedataplotcolorforlabels: "1",
-    theme: "fusion"
+    caption: this._translation('Sub categories (profits)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    sshowlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
   },
   data: []
 };
@@ -185,17 +189,17 @@ export class GraphComponent implements OnInit {
     }
     const schema = [
   {
-    "name": "Time",
-    "type": "date",
-    "format": "%d-%b-%y"
+    'name': 'Time',
+    'type': 'date',
+    'format': '%d-%b-%y'
   },
   {
-    "name": "Type",
-    "type": "string"
+    "name": 'Type',
+    "type": 'string'
   },
   {
-    "name": "Bills price",
-    "type": "number"
+    "name": this._translation('Bills price', localStorage.getItem('lang')),
+    "type": 'number'
   }
 ]
     if (data != undefined) {
@@ -207,6 +211,17 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
     currencies('').subscribe((data:any) => {
       this.currencies$ = data.currencies;
@@ -242,16 +257,16 @@ export class GraphComponent implements OnInit {
       // Initially data is set as null
       data: [],
       caption: {
-        text: 'Bills Analysis'
+        text: this._translation('Bills Analysis', this.langCode)
       },
       subcaption: {
-        text: 'Profit & Cost'
+        text: this._translation('Profit & Cost', this.langCode)
       },
       series: 'Type',
       yAxis: [
         {
-          plot: 'Bills price',
-          title: 'Bills price',
+          plot: this._translation('Bills price', this.langCode),
+          title: this._translation('Bills price', this.langCode),
           /*format: {
             prefix: '$'
           }*/
@@ -293,5 +308,37 @@ export class GraphComponent implements OnInit {
     this.dateTo = '';
     this.dateToRequest = '';
     this.getGraph(this.currencyId, this.dateFromRequest, this.dateToRequest);
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

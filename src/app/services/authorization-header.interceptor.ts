@@ -10,8 +10,14 @@ export class JWTHeaderInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authenticationService.getToken()
     if (token) {
-      req = req.clone({headers: new HttpHeaders().set('Authorization', token)})
+      req = req.clone({headers : new HttpHeaders({
+      'Authorization': token,
+      'Lang': localStorage.getItem('lang')
+        })});
+      //req = req.clone({headers: new HttpHeaders().set('Authorization', token)});
     }
     return next.handle(req);
   }
 }
+
+

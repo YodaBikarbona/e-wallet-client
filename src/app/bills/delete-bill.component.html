@@ -1,11 +1,11 @@
 <div mat-dialog-content class="text-center">
-  <h5>Are you sure that you want delete this bill?</h5>
+  <h5>{{ _translation('Are you sure that you want delete this bill?', langCode) }}</h5>
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button class="btn-block w-90" [mat-dialog-close]="data" (click)="onNoClick()">No Thanks</button>
+    <button type="button" mat-raised-button class="btn-block w-90" [mat-dialog-close]="data" (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button color="warn" class="btn-block w-90" [mat-dialog-close]="data" (click)="confirmDelete()">Delete</button>
+    <button type="button" mat-raised-button color="warn" class="btn-block w-90" [mat-dialog-close]="data" (click)="confirmDelete()">{{ _translation('Delete', langCode) }}</button>
   </div>
 </div>

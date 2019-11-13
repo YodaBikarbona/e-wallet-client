@@ -5,12 +5,14 @@ import {Router} from '@angular/router';
 import {BillService} from '../services/bill.service';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {DialogChangePasswordComponent} from '../profile/change_password';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {DialogNewBillComponent} from './new-bill.component';
 import {debounceTime, flatMap, map} from 'rxjs/operators';
 import {DialogShowBillComponent} from './show-bill.component';
 import {FormControl} from '@angular/forms';
 import {Subscription, zip} from 'rxjs';
+import { saveAs } from 'file-saver';
+import {languages, translateFunction} from '../translations/translations';
 
 @Component({
   selector: 'app-bills',
@@ -38,9 +40,23 @@ export class BillsComponent implements OnInit {
   dateTo = '';
   dateFromRequest = '';
   dateToRequest = '';
-  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog) { }
+  lang = '';
+  langCode = '';
+  languages = languages;
+  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', 'en');
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+
+    }
+    else {
+      this.langCode = localStorage.getItem('lang');
+      this.changeLangByCode(this.langCode);
+    }
+    this.changeLang(undefined, this.langCode);
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
     let categories = (searchValues: string) => this.settingsService.getCategories(true, '');
     //let subCategories = (searchValues: string) => this.settingsService.getSubCategories(true, '');
@@ -158,7 +174,7 @@ export class BillsComponent implements OnInit {
     }
   }
 
-  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "bill_price", "bill_currency", "image", "showDetails"];
+  displayedColumns: string[] = ['title', 'comment', "bill_category", "bill_sub_category", "bill_price", "bill_currency", "showDetails"];
 
    /** Gets the total cost of all transactions. */
   getTotalCost() {
@@ -274,7 +290,16 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
-    this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value, this.dateFromRequest, this.dateToRequest);
+    this.billService.printBills(categoryId, subCategoryId, currencyId, billType, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe(
+      (response) => {
+        const blob = new Blob([response], {type: 'application/pdf'});
+        saveAs(blob, 'report.pdf');
+      },
+      (data: any) => {
+        this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+        // show your error message here
+      }
+    );
   }
 
   newBillSubmit(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
@@ -311,5 +336,37 @@ export class BillsComponent implements OnInit {
     else {
       this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset);
     }
+  }
+
+  // Translations
+  changeLangByCode(langCode: string) {
+    if (langCode === 'en') {
+      this.lang = 'English';
+    }
+    else if (langCode === 'de') {
+      this.lang = 'German';
+    }
+    else if (langCode === 'hr') {
+      this.lang = 'Croatian';
+    }
+    else {
+      this.langCode = 'en'
+      this.lang = 'English';
+    }
+  }
+
+  changeLang(event, lang: string) {
+    if (!lang) {
+      localStorage.setItem('lang', event.value);
+    }
+    else {
+      localStorage.setItem('lang', lang);
+    }
+    this.langCode = localStorage.getItem('lang');
+    this.changeLangByCode(this.langCode);
+  }
+
+  _translation(key: string, language: string) {
+    return translateFunction(key, language);
   }
 }

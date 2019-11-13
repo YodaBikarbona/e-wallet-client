@@ -1,13 +1,13 @@
 <div class="settings p-2">
   <div>
-    <h5 class="text-center">Options</h5>
+    <h5 class="text-center">{{ _translation('Options', langCode) }}</h5>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-6 text-center mb-2">
             <div class="text-center pl-2">
-              <p>Active</p>
+              <p>{{ _translation('Active', langCode) }}</p>
             </div>
             <div>
               <mat-slide-toggle (click)="changeActive()"></mat-slide-toggle>
@@ -17,7 +17,7 @@
             <div>
               <form class="example-form">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Search" [formControl]="searchField">
+                  <input matInput placeholder="{{ _translation('Search', langCode) }}" [formControl]="searchField">
                   <mat-icon matPrefix>search</mat-icon>
                 </mat-form-field>
               </form>
@@ -37,13 +37,13 @@
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <p>Category</p>
+                  <p>{{ _translation('Categories', langCode) }}</p>
                 </mat-panel-title>
                 <!-- <mat-panel-description>
                   Your active/deactive categories {{panelOpenState ? 'open' : 'closed'}}
                 </mat-panel-description> -->
                 <mat-panel-description>
-                  <p>Your active/deactive categories</p>
+                  <p>{{ _translation('Your active/deactive categories', langCode) }}</p>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="row">
@@ -67,10 +67,10 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <p>Sub categories</p>
+                  <p>{{ _translation('Sub categories', langCode) }}</p>
                 </mat-panel-title>
                 <mat-panel-description>
-                  <p>Your active/deactive subcategories</p>
+                  <p>{{ _translation('Your active/deactive subcategories', langCode) }}</p>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="row">
@@ -94,10 +94,10 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <p>Currencies</p>
+                  <p>{{ _translation('Currencies', langCode) }}</p>
                 </mat-panel-title>
                 <mat-panel-description>
-                  <p>Your active/deactive currencies (max. 10)</p>
+                  <p>{{ _translation('Your active/deactive currencies (max. 10)', langCode) }}</p>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="row">
@@ -121,10 +121,10 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <p>Active currencies monthly limit</p>
+                  <p>{{ _translation('Active currencies monthly limit', langCode) }}</p>
                 </mat-panel-title>
                 <mat-panel-description>
-                  <p>Your active currencies and their monthly limit</p>
+                  <p>{{ _translation('Your active currencies and their monthly limit', langCode) }}</p>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="row">
@@ -133,7 +133,7 @@
                     <mat-label>{{ currency.currency.code }}</mat-label>
                     <input type="text" matInput name="monthly_cost_limit" [(ngModel)]="currency.monthly_cost_limit">
                   </mat-form-field>
-                  <button mat-button class="w-50" (click)="changeMonthlyLimit(currency.id, currency.monthly_cost_limit)">Save</button>
+                  <button mat-raised-button color="primary" class="btn-block w-50" (click)="changeMonthlyLimit(currency.id, currency.monthly_cost_limit)">{{ _translation('Save', langCode) }}</button>
                   <!--div class="w-50 m-auto text-center">
                     <button mat-button class="w-90" (click)="changeMonthlyLimit(currency.id, monthly_limit)">Save</button>
                   </div-->

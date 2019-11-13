@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BillCostsGetRequest, EditBillRequest, graphRequest, NewBillRequest, reportPdfRequest, SettingsCurrenciesGetRequest} from '../model';
 import {API_URL} from '../app.constants';
-import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +27,7 @@ export class BillService {
 
   printBills(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string) {
     const request = new reportPdfRequest(categoryId, subCategoryId, currencyId, billType, search, dateFrom, dateTo);
-    return this.http.post(`${API_URL}/v1/report/print`, request, {responseType: 'blob'}).subscribe(
-      (response) => {
-        const blob = new Blob([response], {type: 'application/pdf'});
-        saveAs(blob, 'report.pdf');
-      },
-      error => {
-        // show your error message here
-      }
-    );
+    return this.http.post(`${API_URL}/v1/report/print`, request, {responseType: 'blob'});
   }
 
   getGraph(costs: boolean, profits: boolean, currency_id: number, dateFrom: string, dateTo: string) {

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {RestartPasswordRequest} from '../model';
 import {RestartPasswordService} from '../services/restart-password.service';
 import {languages, translateFunction} from '../translations/translations';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-restart-password',
@@ -20,7 +21,7 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
   langCode = '';
   languages = languages;
 
-  constructor(public passwordService: RestartPasswordService, public router: Router) {
+  constructor(public passwordService: RestartPasswordService, public router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -45,18 +46,25 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
       this.restart = true;
       this.email = email;
       this.error_message = '';
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;
+    });
   }
 
   restartPasswordCode(code: string, email: string) {
     this.passwordService.restartPasswordCode(code, email).subscribe((data:any) => {
       this.restart_code = true;
       this.error_message = '';
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+      this.error_message = data.error.message;
+    });
   }
 
   saveNewPassword(newPassword: string, confirmPassword: string, email: string) {
     if (newPassword != confirmPassword) {
+      this.snackBar.open(this._translation('Passwords are not same!', this.langCode), null, {duration: 4000, verticalPosition: 'top'});
       this.error_message = 'Passwords are not same!';
     }
     else {

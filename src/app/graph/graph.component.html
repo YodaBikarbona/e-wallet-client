@@ -6,7 +6,7 @@
   <div class="row pr-1 pl-1 mt-1">
     <div class="col-md-12 col-sm-12">
       <mat-form-field class="w-100">
-        <mat-label>Currency</mat-label>
+        <mat-label>{{ _translation('Currency', langCode) }}</mat-label>
         <mat-select (selectionChange)="onChange($event, 'currencyId')">
           <mat-option *ngFor="let currency of currencies$" [value]="currency.id">
             <p>{{ currency.code }}</p>
@@ -16,7 +16,7 @@
     </div>
     <div class="col-md-5 col-sm-9">
       <mat-form-field class="w-100">
-        <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" placeholder="Date from" disabled
+        <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" placeholder="{{ _translation('Date from', langCode) }}" disabled
                (dateChange)="onChange($event, 'dateFrom')">
         <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
         <mat-datepicker touchUi #pickerFrom disabled="false"></mat-datepicker>
@@ -24,13 +24,12 @@
     </div>
     <div class="col-md-1 col-sm-3">
       <div class="text-right p-1">
-        <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateFrom()">Clear
-        </button>
+        <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateFrom()">{{ _translation('Clear', langCode) }}</button>
       </div>
     </div>
     <div class="col-md-5 col-sm-9">
       <mat-form-field class="w-100">
-        <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" placeholder="Date to" disabled
+        <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" placeholder="{{ _translation('Date to', langCode) }}" disabled
                (dateChange)="onChange($event, 'dateTo')">
         <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
         <mat-datepicker touchUi #pickerTo disabled="false"></mat-datepicker>
@@ -38,22 +37,28 @@
     </div>
     <div class="col-md-1 col-sm-3">
       <div class="text-right p-1">
-        <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateTo()">Clear</button>
+        <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateTo()">{{ _translation('Clear', langCode) }}</button>
       </div>
     </div>
   </div>
   <div class="row pr-1 pl-1" *ngIf="bills">
     <div class="col-md-3 col-sm-12">
-      <p>Min cost: {{bills?.min_cost}}</p>
+      <p>{{ _translation('Min cost', langCode) }}: {{bills?.min_cost}}</p>
     </div>
     <div class="col-md-3 col-sm-12">
-      <p>Max cost: {{bills?.max_cost}}</p>
+      <p>{{ _translation('Max cost', langCode) }}: {{bills?.max_cost}}</p>
     </div>
     <div class="col-md-3 col-sm-12">
-      <p>Min profit: {{bills?.min_profit}}</p>
+      <p>{{ _translation('Min profit', langCode) }}: {{bills?.min_profit}}</p>
     </div>
     <div class="col-md-3 col-sm-12">
-      <p>Max profit: {{bills?.max_profit}}</p>
+      <p>{{ _translation('Max profit', langCode) }}: {{bills?.max_profit}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <p>{{ _translation('Costs', langCode) }}: {{bills?.costs}}</p>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <p>{{ _translation('Profits', langCode) }}: {{bills?.profits}}</p>
     </div>
   </div>
 </div>
