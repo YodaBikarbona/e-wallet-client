@@ -274,10 +274,15 @@ export class BillsComponent implements OnInit {
   changeBills(categoryId: number, subCategoryId: number, currencyId: number) {
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.buttonSwitchMessage = 'Switch to profits!';
+      this.billsLimit = 5;
+      this.billsOffset = 0;
       this.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset);
+
     }
     else {
       this.buttonSwitchMessage = 'Switch to costs!';
+      this.billsLimit = 5;
+      this.billsOffset = 0;
       this.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset);
     }
   }

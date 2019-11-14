@@ -227,7 +227,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data"></tr>
           <tr mat-footer-row *matFooterRowDef="displayedColumns" class="tableFooter"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="changeOffsetLimit($event)" length="{{billsLengthList}}" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" pageSize="{{ billsLimit }}" (page)="changeOffsetLimit($event)" length="{{billsLengthList}}" showFirstLastButtons></mat-paginator>
       </div>
     </div>
   </div>
