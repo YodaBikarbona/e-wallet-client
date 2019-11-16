@@ -94,8 +94,9 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>{{ _translation('Password', langCode) }}</mat-label>
-      <input type="password" matInput required name="password" [(ngModel)]="password">
-      <mat-icon matSuffix>lock</mat-icon>
+      <input [type]="showPassword == true ? 'text': 'password'" matInput required name="password" [(ngModel)]="password">
+      <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
+      <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
     </mat-form-field>
     <div *ngIf="message" class="mb-1">
       <span class="error_message">{{message}}</span>

@@ -79,7 +79,9 @@
         <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Password', langCode) }}</mat-label>
-            <input type="password" matInput required name="password" [(ngModel)]="regRequest.password">
+            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="password" [(ngModel)]="regRequest.password">
+            <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
+            <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
         </div>
       </div>
@@ -87,7 +89,9 @@
         <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Confirm password', langCode) }}</mat-label>
-            <input type="password" matInput required name="confirmPassword" [(ngModel)]="regRequest.confirmPassword">
+            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="confirmPassword" [(ngModel)]="regRequest.confirmPassword">
+            <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
+            <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
         </div>
       </div>

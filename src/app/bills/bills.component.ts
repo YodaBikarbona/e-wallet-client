@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Transaction, Bill, Currency, BillCategory, BillSubCategory} from '../model';
+import {Transaction, Bill, Currency, BillCategory, BillSubCategory, User} from '../model';
 import {SettingsService} from '../services/settings.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BillService} from '../services/bill.service';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {DialogChangePasswordComponent} from '../profile/change_password';
@@ -13,6 +13,8 @@ import {FormControl} from '@angular/forms';
 import {Subscription, zip} from 'rxjs';
 import { saveAs } from 'file-saver';
 import {languages, translateFunction} from '../translations/translations';
+import {UserResolver} from '../services/user.resolver';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-bills',
@@ -43,7 +45,8 @@ export class BillsComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
-  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+  user: User;
+  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog, private snackBar: MatSnackBar, private userService: UserService) { }
 
   ngOnInit() {
     if (!localStorage.getItem('lang')) {
@@ -57,6 +60,9 @@ export class BillsComponent implements OnInit {
       this.changeLangByCode(this.langCode);
     }
     this.changeLang(undefined, this.langCode);
+    this.userService.find_by_id().subscribe((data: any) => {
+      this.user = data.user;
+    })
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
     let categories = (searchValues: string) => this.settingsService.getCategories(true, '');
     //let subCategories = (searchValues: string) => this.settingsService.getSubCategories(true, '');
@@ -119,7 +125,7 @@ export class BillsComponent implements OnInit {
   getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
     this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe((data:any) => {
       this.bills$ = data.profits;
-      this.billsLengthList = data.costs_length_list;
+      this.billsLengthList = data.profits_length_list;
     }, (data:any) => this.error_message = data.error.message);
   }
 
@@ -193,6 +199,7 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
+    console.log(this.user)
     const dialogRef = this.dialog.open(DialogNewBillComponent, {
       //width: '300px',
       disableClose: true,
@@ -206,7 +213,7 @@ export class BillsComponent implements OnInit {
         price: null,
         categoryId: 'null',
         subCategoryId: 'null',
-        currencyId: 'null',
+        currencyId: this.user.currency_id ? this.user.currency_id : 'null',
       }
     });
 

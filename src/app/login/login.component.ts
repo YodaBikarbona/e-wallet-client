@@ -21,11 +21,15 @@ export class LoginComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
+  showPassword = false;
 
   constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar) { }
   //constructor() { }
 
   ngOnInit() {
+    if (localStorage.getItem('auth-token')) {
+      this.router.navigate(['dashboard']);
+    }
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -80,6 +84,15 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.howApplicationWorks = false;
+    }
+  }
+
+  toogleShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    }
+    else {
+      this.showPassword = false;
     }
   }
 

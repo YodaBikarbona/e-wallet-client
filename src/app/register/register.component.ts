@@ -31,9 +31,13 @@ export class RegisterComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
-  constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar) { }
+  showPassword = false;
+  constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar, public routerRedirect: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('auth-token')) {
+      this.routerRedirect.navigate(['dashboard']);
+    }
     this.countries$ = this.router.data.pipe(map(data => data.countries));
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
@@ -105,6 +109,15 @@ export class RegisterComponent implements OnInit {
       .subscribe((result: any) => {
         this.loginRouter.navigate(['login']);
     });
+  }
+
+  toogleShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    }
+    else {
+      this.showPassword = false;
+    }
   }
 
   // Translations

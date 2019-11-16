@@ -20,6 +20,7 @@ export class DialogChangePasswordComponent {
   lang = '';
   langCode = '';
   languages = languages;
+  showPassword = false;
 
   constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router, private snackBar: MatSnackBar) {
     if (!localStorage.getItem('lang')) {
@@ -50,6 +51,15 @@ export class DialogChangePasswordComponent {
       (data: any) => {
       this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
       this.error_message = data.error.message;});
+  }
+
+  toogleShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    }
+    else {
+      this.showPassword = false;
+    }
   }
 
   // Translations
