@@ -112,7 +112,6 @@ export class BillsComponent implements OnInit {
         this.billsLengthList = data.costs_length_list;
       }
     });
-
   }
 
   getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
@@ -136,16 +135,19 @@ export class BillsComponent implements OnInit {
   onChange(event, type: string) {
     if (type === 'categoryId') {
       this.categoryId = event.value;
-      if (event.value != null) {
+      if (event.value != 'null') {
+        console.log("Ima")
         this.settingsService.getSubCategoriesByCategories(event.value).subscribe((data: any) => {
           this.subCategories$ = data.sub_categories;
           this.error_message = '';
-        }, (data: any) => this.error_message = data.error.message);
+        }, (data: any) => {
+          this.error_message = data.error.message;
+        });
       }
       else {
-        this.subCategories$ = [];
+        this.subCategories$ = undefined;
+        this.subCategoryId = null;
       }
-
     }
     else if (type === 'subCategoryId') {
       this.subCategoryId = event.value;

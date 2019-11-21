@@ -77,10 +77,10 @@ export class RegisterComponent implements OnInit {
       this.registerService.register(reqData.address, finalDate, reqData.city_id, reqData.confirmPassword, reqData.email, reqData.firstName, reqData.gender, reqData.lastName, reqData.password, reqData.country_id).subscribe((data: any) => {
         this.openDialogRegisterConfirmation();
       }, (data: any) => {
-        if (data.error.message === 'Password is not valid!')  {
-          this.snackBar.open(this._translation('Password should be atleast 8 characters long\\n\' +\n' +
-            '            \'            and should contain one number, one character and one special\\n\' +\n' +
-            '            \'            character!', this.langCode), null, {duration: 4000, verticalPosition: 'top'});
+        console.log(data.error.message);
+        if (data.error.message === this._translation('Password is not valid!', this.langCode))  {
+          console.log("Nešto sa šifrom")
+          this.snackBar.open(this._translation('Password should be at least 8 characters long and should contain one number, one character and one special character!', this.langCode), null, {duration: 4000, verticalPosition: 'top'});
         }
         else {
           this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});

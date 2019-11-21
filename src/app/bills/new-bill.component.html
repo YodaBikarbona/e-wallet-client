@@ -19,7 +19,7 @@
       </mat-option>
       <mat-option *ngFor="let category of data.categories$" [value]="category.id"
                   value="category.name">
-        {{category.name}}
+        <p *ngIf="category.translations">{{ category.translations.translation_category_name }}</p>
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -31,7 +31,7 @@
         <p></p>
       </mat-option>
       <mat-option *ngFor="let subCategory of data.subCategories$ | async" [value]="subCategory.id" >
-        {{subCategory.name}}
+        <p *ngIf="subCategory.translations">{{ subCategory.translations.translation_subcategory_name }}</p>
       </mat-option>
     </mat-select>
   </mat-form-field>

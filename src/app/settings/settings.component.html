@@ -52,11 +52,11 @@
                   <div>
 
                   </div>
-                  <mat-card class="currencyCard" (click)="activeCategory(category.id)"  *ngIf="active">
-                    <h5 class="m-auto card">{{ category.name }}</h5>
+                  <mat-card class="currencyCard" (click)="activeCategory(category.id)"  *ngIf="active && category.translations">
+                    <h5 class="m-auto card">{{ category.translations.translation_category_name }}</h5>
                   </mat-card>
-                  <mat-card class="currencyCard" (click)="deactiveCategory(category.id)" *ngIf="!active">
-                    <h5 class="m-auto card">{{ category.name }}</h5>
+                  <mat-card class="currencyCard" (click)="deactiveCategory(category.id)" *ngIf="!active && category.translations">
+                    <h5 class="m-auto card">{{ category.translations.translation_category_name }}</h5>
                   </mat-card>
                   <!--/div-->
                 </div>
@@ -79,11 +79,11 @@
                   <div>
 
                   </div>
-                  <mat-card class="currencyCard" (click)="activeSubCategory(sub_category.id)" *ngIf="active">
-                    <h5 class="m-auto card">{{ sub_category.name }} <br> ({{ sub_category.bill_category.name }})</h5>
+                  <mat-card class="currencyCard" (click)="activeSubCategory(sub_category.id)" *ngIf="active && sub_category.translations">
+                    <h5 class="m-auto card">{{ sub_category.translations.translation_subcategory_name }} <br> <p *ngIf="sub_category.bill_category && sub_category.bill_category.translations"> ({{ sub_category.bill_category.translations.translation_category_name }}) </p></h5>
                   </mat-card>
-                  <mat-card class="currencyCard" (click)="deactiveSubCategory(sub_category.id)" *ngIf="!active">
-                    <h5 class="m-auto card">{{ sub_category.name }} <br> ({{ sub_category.bill_category.name }})</h5>
+                  <mat-card class="currencyCard" (click)="deactiveSubCategory(sub_category.id)" *ngIf="!active && sub_category.translations">
+                    <h5 class="m-auto card">{{ sub_category.translations.translation_subcategory_name }} <br> <p *ngIf="sub_category.bill_category && sub_category.bill_category.translations"> ({{ sub_category.bill_category.translations.translation_category_name }}) </p></h5>
                   </mat-card>
                   <!--/div-->
 

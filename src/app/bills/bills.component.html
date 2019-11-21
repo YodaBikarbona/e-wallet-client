@@ -78,7 +78,7 @@
               <p></p>
             </mat-option>
             <mat-option *ngFor="let category of categories$" [value]="category.id">
-              <p>{{ category.name }}</p>
+              <p *ngIf="category.translations">{{ category.translations.translation_category_name }}</p>
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -91,7 +91,7 @@
               <p></p>
             </mat-option>
             <mat-option *ngFor="let sub_category of subCategories$" [value]="sub_category.id">
-              <p>{{ sub_category.name }}</p>
+              <p *ngIf="sub_category.translations">{{ sub_category.translations.translation_subcategory_name }}</p>
             </mat-option>
           </mat-select>
         </mat-form-field>

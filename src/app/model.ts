@@ -60,6 +60,7 @@ export class User extends AbstractEntity {
 
 export class BillCategory extends AbstractEntity{
   name: string;
+  translations: string;
 }
 
 export class BillSubCategory extends BillCategory {

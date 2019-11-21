@@ -104,5 +104,6 @@
   "Active currencies monthly limit": "Active currencies monthly limit",
   "Your active currencies and their monthly limit": "Your active currencies and their monthly limit",
   "Passwords are not same!": "Passwords are not same!",
-  "Password should be atleast 8 characters long\\n' +\n            '            and should contain one number, one character and one special\\n' +\n            '            character": "Password should be atleast 8 characters long\\n' +\n            '            and should contain one number, one character and one special\\n' +\n            '            character"
+  "Password is not valid!": "Password is not valid!",
+  "Password should be at least 8 characters long and should contain one number, one character and one special character!": "Password should be at least 8 characters long and should contain one number, one character and one special character!"
 }
