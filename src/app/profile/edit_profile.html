@@ -9,7 +9,8 @@
     <input type="text" matInput required [(ngModel)]="dataEdit.lastName">
   </mat-form-field>
   <mat-form-field class="w-100">
-    <input matInput [matDatepicker]="picker" [(ngModel)]="dataEdit.birthDate" placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="dataEdit.birthDate"
+           placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
   </mat-form-field>
@@ -65,9 +66,17 @@
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
+    <button type="button" mat-raised-button class="btn-block w-90"
+            (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data" (click)="editProfile(dataEdit)">{{ _translation('Save', langCode) }}</button>
+    <button type="button" [disabled]="
+    dataEdit.firstName &&
+    dataEdit.lastName &&
+    dataEdit.birthDate &&
+    dataEdit.address &&
+    dataEdit.email &&
+    dataEdit.gender ? false: true" mat-raised-button color="primary" class="btn-block w-90" [mat-dialog-close]="data"
+            (click)="editProfile(dataEdit)">{{ _translation('Save', langCode) }}</button>
   </div>
 </div>

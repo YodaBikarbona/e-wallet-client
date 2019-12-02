@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
+</ngx-spinner>
 <div class="row" xmlns="http://www.w3.org/1999/html">
   <div class="col-md-1 col-sm-12 p-1">
     <mat-form-field class="w-90">
@@ -11,7 +19,7 @@
   </div>
   <div class="col-md-1 col-sm-12">
     <div class="text-center m-1">
-      <button mat-raised-button color="primary" class="btn-block" (click)="toogleShow()">How application works</button>
+      <!--<button mat-raised-button color="primary" class="btn-block" (click)="toogleShow()">How application works</button>-->
     </div>
   </div>
   <div class="col-md-10 col-sm-0"></div>
@@ -77,7 +85,7 @@
       </mat-form-field>
     </div>
     <div class="text-center">
-      <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Activate', langCode) }}</button>
+      <button type="submit" [disabled]="code ? false: true" mat-raised-button color="primary" class="btn-block">{{ _translation('Activate', langCode) }}</button>
     </div>
     <div class="text-center mt-1">
       <button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">{{ _translation('Resend code', langCode) }}</button>
@@ -102,7 +110,7 @@
       <span class="error_message">{{message}}</span>
     </div>
     <div class="text-center">
-      <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign in', langCode) }}</button>
+      <button type="submit" [disabled]="email && password ? false: true" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign in', langCode) }}</button>
       <p class="m-2">{{ _translation('Don\'t have an account?', langCode) }} <a routerLink="/register">{{ _translation('Sign up', langCode) }}</a></p>
       <p class="m-2"><a routerLink="/restartPassword">{{ _translation('Forgot your password', langCode) }}</a></p>
     </div>

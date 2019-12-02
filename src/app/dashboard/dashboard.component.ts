@@ -11,6 +11,7 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '
 import {UserService} from '../services/user.service';
 import {languages, translateFunction} from '../translations/translations';
 
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,10 +31,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   langCode = '';
   languages = languages;
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router, public userService: UserService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private autenticationService: AuthenticationService, public router: Router, public userService: UserService, private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
-
+    this.spinner.show();
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -86,13 +87,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
       );
     }
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   ngOnDestroy(): void {
   }
 
   logout() {
+    this.spinner.show()
     localStorage.removeItem('auth-token');
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
     this.router.navigate(['login']);
   }
 

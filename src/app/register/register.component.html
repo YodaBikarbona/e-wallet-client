@@ -25,7 +25,8 @@
         </div>
         <div>
           <mat-form-field class="w-100">
-            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate" placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
+            <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate"
+                   placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <!--mat-datepicker #picker></--mat-datepicker-->
             <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
@@ -36,7 +37,8 @@
         <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Country', langCode) }}</mat-label>
-            <mat-select name="country_id" [(ngModel)]="regRequest.country_id" (selectionChange)="onCountryChange($event)">
+            <mat-select name="country_id" [(ngModel)]="regRequest.country_id"
+                        (selectionChange)="onCountryChange($event)">
               <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
                 {{country.name}}
               </mat-option>
@@ -47,7 +49,7 @@
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('City', langCode) }}</mat-label>
             <mat-select name="city_id" [(ngModel)]="regRequest.city_id">
-              <mat-option *ngFor="let city of cities$" [value]="city.id" >
+              <mat-option *ngFor="let city of cities$" [value]="city.id">
                 {{city.name}}
               </mat-option>
             </mat-select>
@@ -66,10 +68,12 @@
           <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="regRequest.gender">
             <div class="row">
               <div class="col-md-6">
-                <mat-radio-button value="Male" class="mb-1">{{ _translation('Male', langCode) }}</mat-radio-button>
+                <mat-radio-button color="primary" value="Male"
+                                  class="mb-1">{{ _translation('Male', langCode) }}</mat-radio-button>
               </div>
               <div class="col-md-6">
-                <mat-radio-button value="Female" class="mb-1">{{ _translation('Female', langCode) }}</mat-radio-button>
+                <mat-radio-button color="primary" value="Female"
+                                  class="mb-1">{{ _translation('Female', langCode) }}</mat-radio-button>
               </div>
             </div>
           </mat-radio-group>
@@ -79,17 +83,66 @@
         <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Password', langCode) }}</mat-label>
-            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="password" [(ngModel)]="regRequest.password">
+            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="password"
+                   [(ngModel)]="regRequest.password" (ngModelChange)="checkPasswordStrength($event)">
             <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
             <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
+          <div *ngIf="regRequest.password" class="passwordStrengthInfo">
+            <p *ngIf="!isUpper" class="red"><i class="material-icons">
+              cancel
+            </i> {{ _translation('Contains at least one upper character', langCode) }}
+            </p>
+            <p *ngIf="isUpper" class="green"><i class="material-icons">
+              done
+            </i> {{ _translation('Contains at least one upper character', langCode) }}
+            </p>
+            <p *ngIf="!isLower" class="red"><i class="material-icons">
+              cancel
+            </i> {{ _translation('Contains at least one lower character', langCode) }}
+            </p>
+            <p *ngIf="isLower" class="green"><i class="material-icons">
+              done
+            </i> {{ _translation('Contains at least one lower character', langCode) }}
+            </p>
+            <p *ngIf="!isSpec" class="red"><i class="material-icons">
+              cancel
+            </i> {{ _translation('Contains at least one special character', langCode) }}
+            </p>
+            <p *ngIf="isSpec" class="green"><i class="material-icons">
+              done
+            </i> {{ _translation('Contains at least one special character', langCode) }}
+            </p>
+            <p *ngIf="!isDigit" class="red"><i class="material-icons">
+              cancel
+            </i> {{ _translation('Contains at least one digit character', langCode) }}
+            </p>
+            <p *ngIf="isDigit" class="green"><i class="material-icons">
+              done
+            </i> {{ _translation('Contains at least one digit character', langCode) }}
+            </p>
+            <p class="red" *ngIf="regRequest.password.length < 8 || regRequest.password.length > 25"><i
+              class="material-icons">
+              cancel
+            </i> {{ _translation('Contains between 8 and 25 characters', langCode) }}
+            </p>
+            <p class="green" *ngIf="regRequest.password.length > 7 && regRequest.password.length < 26"><i
+              class="material-icons">
+              done
+            </i> {{ _translation('Contains between 8 and 25 characters', langCode) }}
+            </p>
+          </div>
+          <p *ngIf="regRequest.password">{{ regRequest.password.length}} / 25</p>
+          <p *ngIf="!regRequest.password">0 / 25</p>
+          <mat-progress-bar mode="determinate" [value]="passwordStrength"></mat-progress-bar>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 p-1">
         <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Confirm password', langCode) }}</mat-label>
-            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="confirmPassword" [(ngModel)]="regRequest.confirmPassword">
+            <input [type]="showPassword == true ? 'text': 'password'" matInput required name="confirmPassword"
+                   [(ngModel)]="regRequest.confirmPassword">
             <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
             <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
@@ -100,7 +153,18 @@
           <div class="col-md-8"></div>
           <div class="col-md-4">
             <div class="text-center">
-              <button type="submit" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign up', langCode) }}</button>
+              <button type="submit" [disabled]="passwordStrength === 100 &&
+              regRequest.confirmPassword &&
+              regRequest.password === regRequest.confirmPassword &&
+              regRequest.firstName &&
+              regRequest.lastName &&
+              regRequest.country_id &&
+              regRequest.city_id &&
+              regRequest.email &&
+              regRequest.gender &&
+              regRequest.address &&
+              regRequest.birthDate ? false: true" mat-raised-button color="primary"
+                      class="btn-block">{{ _translation('Sign up', langCode) }}</button>
             </div>
           </div>
         </div>

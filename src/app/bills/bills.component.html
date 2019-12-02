@@ -1,3 +1,11 @@
+<ngx-spinner
+  bdColor="#fff"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
+</ngx-spinner>
 <div class="bills p-2" *ngIf="!newBillState">
   <div class="row">
     <!--h1>Costs</h1-->
@@ -168,14 +176,14 @@
           <!-- Item Column -->
           <ng-container matColumnDef="bill_category">
             <th mat-header-cell *matHeaderCellDef class="text-center">{{ _translation('Category', langCode) }}</th>
-            <td mat-cell *matCellDef="let bill" class="text-center"> {{bill?.bill_category?.name}} </td>
+            <td mat-cell *matCellDef="let bill" class="text-center"> {{bill?.bill_category?.translations?.translation_category_name}} </td>
             <td mat-footer-cell *matFooterCellDef></td>
           </ng-container>
 
           <!-- Item Column -->
           <ng-container matColumnDef="bill_sub_category" class="tableMobile">
             <th mat-header-cell *matHeaderCellDef class="text-center tableMobile">{{ _translation('Sub category', langCode) }}</th>
-            <td mat-cell *matCellDef="let bill" class="text-center tableMobile"> {{bill?.bill_sub_category?.name}} </td>
+            <td mat-cell *matCellDef="let bill" class="text-center tableMobile"> {{bill?.bill_sub_category?.translations?.translation_subcategory_name}} </td>
             <td mat-footer-cell *matFooterCellDef class="text-center tableMobile"></td>
           </ng-container>
 

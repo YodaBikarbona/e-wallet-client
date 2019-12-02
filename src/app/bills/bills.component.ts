@@ -3,7 +3,7 @@ import {Transaction, Bill, Currency, BillCategory, BillSubCategory, User} from '
 import {SettingsService} from '../services/settings.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BillService} from '../services/bill.service';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
+//import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {DialogChangePasswordComponent} from '../profile/change_password';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {DialogNewBillComponent} from './new-bill.component';
@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver';
 import {languages, translateFunction} from '../translations/translations';
 import {UserResolver} from '../services/user.resolver';
 import {UserService} from '../services/user.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-bills',
@@ -46,9 +47,10 @@ export class BillsComponent implements OnInit {
   langCode = '';
   languages = languages;
   user: User;
-  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog, private snackBar: MatSnackBar, private userService: UserService) { }
+  constructor(public billService: BillService, public settingsService: SettingsService, public router: Router, public dialog: MatDialog, private snackBar: MatSnackBar, private userService: UserService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -104,10 +106,12 @@ export class BillsComponent implements OnInit {
       }
     })).subscribe((data: any) => {
       if (this.buttonSwitchMessage === 'Switch to costs!') {
+        this.spinner.hide();
         this.bills$ = data.profits;
         this.billsLengthList = data.profits_length_list;
       }
       else {
+        this.spinner.hide();
         this.bills$ = data.costs;
         this.billsLengthList = data.costs_length_list;
       }
@@ -115,17 +119,27 @@ export class BillsComponent implements OnInit {
   }
 
   getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
+    this.spinner.show();
     this.billService.getCosts(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe((data:any) => {
+      this.spinner.hide();
       this.bills$ = data.costs;
       this.billsLengthList = data.costs_length_list;
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.spinner.hide();
+      this.error_message = data.error.message;
+    });
   }
 
   getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number) {
+    this.spinner.show();
     this.billService.getProfits(categoryId, subCategoryId, currencyId, this.billsLimit, this.billsOffset, this.searchField.value, this.dateFromRequest, this.dateToRequest).subscribe((data:any) => {
+      this.spinner.hide();
       this.bills$ = data.profits;
       this.billsLengthList = data.profits_length_list;
-    }, (data:any) => this.error_message = data.error.message);
+    }, (data:any) => {
+      this.spinner.hide();
+      this.error_message = data.error.message;
+    });
   }
 
   /*onChange(categoryId: number, subCategoryId: number, currencyId: number) {
@@ -136,7 +150,6 @@ export class BillsComponent implements OnInit {
     if (type === 'categoryId') {
       this.categoryId = event.value;
       if (event.value != 'null') {
-        console.log("Ima")
         this.settingsService.getSubCategoriesByCategories(event.value).subscribe((data: any) => {
           this.subCategories$ = data.sub_categories;
           this.error_message = '';
@@ -156,19 +169,13 @@ export class BillsComponent implements OnInit {
       this.currencyId = event.value;
     }
     else if (type === 'dateFrom') {
-      console.log(event, type);
-      console.log(event.value);
       const tempDateFrom = new Date(event.value);
       const dateString = tempDateFrom.getFullYear() + '-' + (tempDateFrom.getMonth() + 1) + '-' + tempDateFrom.getDate() + 'T' + tempDateFrom.getHours() + ':' + tempDateFrom.getMinutes() + ':' + tempDateFrom.getSeconds() + '.' + tempDateFrom.getMilliseconds();
-      console.log(dateString);
       this.dateFromRequest = dateString;
     }
     else if (type === 'dateTo') {
-      console.log(event, type);
-      console.log(event.value);
       const tempDateTo = new Date(event.value);
       const dateString = tempDateTo.getFullYear() + '-' + (tempDateTo.getMonth() + 1) + '-' + tempDateTo.getDate() + 'T' + tempDateTo.getHours() + ':' + tempDateTo.getMinutes() + ':' + tempDateTo.getSeconds() + '.' + tempDateTo.getMilliseconds();
-      console.log(dateString);
       this.dateToRequest = dateString;
     }
     else {
@@ -201,7 +208,6 @@ export class BillsComponent implements OnInit {
     else {
       billType = 'costs';
     }
-    console.log(this.user)
     const dialogRef = this.dialog.open(DialogNewBillComponent, {
       //width: '300px',
       disableClose: true,
@@ -216,6 +222,7 @@ export class BillsComponent implements OnInit {
         categoryId: 'null',
         subCategoryId: 'null',
         currencyId: this.user.currency_id ? this.user.currency_id : 'null',
+        quantity: 1,
       }
     });
 

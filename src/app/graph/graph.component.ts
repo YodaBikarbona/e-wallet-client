@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
+//import { Chart } from 'chart.js';
 import {BillService} from '../services/bill.service';
 import {Bill, Currency, graphResponse} from '../model';
 import * as FusionCharts from 'fusioncharts';
 import {SettingsService} from '../services/settings.service';
 import {languages, translateFunction} from '../translations/translations';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-graph',
@@ -145,7 +146,7 @@ export class GraphComponent implements OnInit {
   data: []
 };
 
-  constructor(public billService: BillService, public settingsService: SettingsService) {
+  constructor(public billService: BillService, public settingsService: SettingsService, private spinner: NgxSpinnerService) {
 
     /*this.type = 'timeseries';
     this.width = '100%';
@@ -194,15 +195,15 @@ export class GraphComponent implements OnInit {
     'format': '%d-%b-%y'
   },
   {
-    "name": 'Type',
-    "type": 'string'
+    'name': 'Type',
+    'type': 'string'
   },
   {
-    "name": this._translation('Bills price', localStorage.getItem('lang')),
-    "type": 'number'
+    'name': this._translation('Bills price', localStorage.getItem('lang')),
+    'type': 'number'
   }
 ]
-    if (data != undefined) {
+    if (data !== undefined) {
       const fusionDataStore = new FusionCharts.DataStore();
       const fusionTable = fusionDataStore.createDataTable(data, schema);
       this.dataSource.data = fusionTable;
@@ -211,6 +212,7 @@ export class GraphComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -225,11 +227,16 @@ export class GraphComponent implements OnInit {
     let currencies = (searchValues: string) => this.settingsService.getCurrencies(true, '');
     currencies('').subscribe((data:any) => {
       this.currencies$ = data.currencies;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
     //this.fetchData(this.bills);
   }
 
   getGraph(currencyId: number, dateFrom: string, dateTo: string) {
+    this.spinner.show();
     this.billService.getGraph(true, true, currencyId, dateFrom, dateTo).subscribe((data: graphResponse) => {
       this.bills = data;
       this.pieDataCategoryCost.data = data.bill_categories_list_cost;
@@ -241,10 +248,12 @@ export class GraphComponent implements OnInit {
       this.pieDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
       this.dataProfitSubCategoryPie = data.bill_sub_categories_list_profit;
       //this.monthly_limit = this.bills.monthly_limit
+      this.spinner.hide();
       this.graph();
       },
       (data: any) => {
         this.error_message = data.error.message;
+        this.spinner.hide();
       });
   }
 

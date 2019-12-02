@@ -7,6 +7,8 @@ import {MatSnackBar} from '@angular/material';
 import {not} from 'rxjs/internal-compatibility';
 import {languages, translateFunction} from '../translations/translations';
 
+import { NgxSpinnerService} from 'ngx-spinner';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit {
   languages = languages;
   showPassword = false;
 
-  constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar) { }
+  constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar, private spinner: NgxSpinnerService) { }
   //constructor() { }
 
   ngOnInit() {
@@ -48,9 +50,14 @@ export class LoginComponent implements OnInit {
       this.userEmail = email;
     }
     let request = new AuthenticationRequest(email, password);
+    this.spinner.show();
     this.authService.authenticate(request)
-      .subscribe(res => this.router.navigate(['dashboard']),
+      .subscribe(res => {
+        this.spinner.hide();
+        this.router.navigate(['dashboard']);
+        },
         err => {
+          this.spinner.hide();
           if (err.message) {
             this.snackBar.open(err.message, null, {duration: 4000, verticalPosition: 'top'});
             // this.message = err.message;
@@ -64,8 +71,14 @@ export class LoginComponent implements OnInit {
   activateUser(code: string) {
     if (this.authentcationRequest) {
       this.authentcationRequest.code = code;
+      //this.spinner.show();
       this.authService.authenticate(this.authentcationRequest)
-        .subscribe(res => this.router.navigate(['dashboard']), console.log);
+        .subscribe(res => {
+          this.spinner.hide();
+          this.router.navigate(['dashboard']);
+          }, (data: any) => {
+          this.spinner.hide();
+        });
     }
   }
 
@@ -74,8 +87,12 @@ export class LoginComponent implements OnInit {
   }*/
 
   restartPassword(email: string) {
+    //this.spinner.show();
     this.passwordService.restartLoginCode(email).subscribe((data:any) => {
-    }, (data:any) => {});
+      this.spinner.hide();
+    }, (data:any) => {
+      this.spinner.hide();
+    });
   }
 
   toogleShow() {

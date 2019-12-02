@@ -1,9 +1,9 @@
 <!--img width="200" height="100" class="billHeader"
             src="http://localhost:5000/dir/header_bill.png"/-->
 <!--<img width="200" height="100" class="billHeader"-->
-            <!--src="http://178.236.87.123:5000/dir/header_bill.png"/>-->
+<!--src="http://178.236.87.123:5000/dir/header_bill.png"/>-->
 <img width="200" height="100" class="billHeader"
-            src="https://i.ibb.co/fqdrtcs/header-bill.png"/>
+     src="https://i.ibb.co/fqdrtcs/header-bill.png"/>
 <div mat-dialog-content class="text-center">
   <div *ngIf="data.newBillType == 'costs'">
     <p>{{ _translation('Add new bill (Cost)', langCode) }}</p>
@@ -14,9 +14,9 @@
   <mat-form-field class="w-100">
     <mat-label>{{ _translation('Category', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId', null)">
-      <mat-option value="null">
-        <p></p>
-      </mat-option>
+      <!--<mat-option value="null">-->
+      <!--<p></p>-->
+      <!--</mat-option>-->
       <mat-option *ngFor="let category of data.categories$" [value]="category.id"
                   value="category.name">
         <p *ngIf="category.translations">{{ category.translations.translation_category_name }}</p>
@@ -30,7 +30,7 @@
       <mat-option value="null">
         <p></p>
       </mat-option>
-      <mat-option *ngFor="let subCategory of data.subCategories$ | async" [value]="subCategory.id" >
+      <mat-option *ngFor="let subCategory of data.subCategories$ | async" [value]="subCategory.id">
         <p *ngIf="subCategory.translations">{{ subCategory.translations.translation_subcategory_name }}</p>
       </mat-option>
     </mat-select>
@@ -39,9 +39,9 @@
   <mat-form-field class="w-100">
     <mat-label>{{ _translation('Currency', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.currencyId" required>
-      <mat-option value="null">
-        <p></p>
-      </mat-option>
+      <!--<mat-option value="null">-->
+      <!--<p></p>-->
+      <!--</mat-option>-->
       <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
         {{currency.code}}
       </mat-option>
@@ -55,7 +55,8 @@
 
   <mat-form-field class="w-100">
     <mat-label>{{ _translation('Comment', langCode) }}</mat-label>
-    <textarea matInput placeholder="{{ _translation('I bought a new car for 10000€...', langCode) }}" class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
+    <textarea matInput placeholder="{{ _translation('I bought a new car for 10000€...', langCode) }}"
+              class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
   </mat-form-field>
 
   <mat-form-field class="w-100">
@@ -69,25 +70,33 @@
   </mat-form-field>
 
   <div class="w-100 text-left">
-    <mat-checkbox [(ngModel)]="data.notMyCity" (change)="toogle($event)">{{ _translation('Not my city', langCode) }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="data.notMyCity"
+                  (change)="toogle($event)">{{ _translation('Not my city', langCode) }}</mat-checkbox>
   </div>
 
 </div>
 <div mat-dialog-actions class="w-100">
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
+    <button type="button" mat-raised-button class="btn-block w-90"
+            (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button color="primary" class="btn-block w-90" (click)="addNewBill(data)">{{ _translation('Add', langCode) }}</button>
+    <button type="button" [disabled]="
+    data.categoryId &&
+    data.currencyId &&
+    data.title &&
+    data.price &&
+    data.quantity ? false: true" mat-raised-button color="primary" class="btn-block w-90"
+            (click)="addNewBill(data)">{{ _translation('Add', langCode) }}</button>
   </div>
 </div>
 <div class="text-right">
   <!--img width="200" height="100" class="billFooter"
             src="http://localhost:5000/dir/footer_bill.png"/-->
   <!--<img width="200" height="100" class="billFooter"-->
-            <!--src="http://178.236.87.123:5000/dir/footer_bill.png"/>-->
+  <!--src="http://178.236.87.123:5000/dir/footer_bill.png"/>-->
   <img width="200" height="100" class="billFooter"
-            src="https://i.ibb.co/jhQf47t/footer-bill.png"/>
+       src="https://i.ibb.co/jhQf47t/footer-bill.png"/>
 </div>
 
 

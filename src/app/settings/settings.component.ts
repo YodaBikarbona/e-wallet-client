@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {debounce, debounceTime, flatMap} from 'rxjs/operators';
 import {languages, translateFunction} from '../translations/translations';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-settings',
@@ -27,9 +28,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   lang = '';
   langCode = '';
   languages = languages;
-  constructor(public settingsService: SettingsService, public router: Router, private snackBar: MatSnackBar) { }
+  constructor(public settingsService: SettingsService, public router: Router, private snackBar: MatSnackBar, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -47,16 +49,35 @@ export class SettingsComponent implements OnInit, OnDestroy {
     let activeCurrencies = (searchValues: string) => this.settingsService.getActiveCurrenciesLimit(true, searchValues);
     currencies('').subscribe((data:any) => {
       this.currencies$ = data.currencies;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
+    this.spinner.show();
     categories('').subscribe((data:any) => {
       this.categories$ = data.categories;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
+    this.spinner.show();
     subCategories('').subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
+    this.spinner.show();
     activeCurrencies('').subscribe((data:any) => {
       this.activeCurrencies$ = data.currencies;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
     let settings = (searchValues: string) => zip(currencies(searchValues), categories(searchValues), subCategories(searchValues));
 
 
@@ -72,9 +93,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.subCategories$ = data.sub_categories;
     }, (data:any) => this.error_message = data.error.message);*/
     this.subSubscription = this.searchField.valueChanges.pipe(debounceTime(500), flatMap(value => settings(value))).subscribe((data:any) => {
+      this.spinner.show();
       this.currencies$ = data[0].currencies;
       this.categories$ = data[1].categories;
       this.subCategories$ = data[2].sub_categories;
+      this.spinner.hide();
     });
   }
 
@@ -87,16 +110,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.error_message = message;
   }
   changeActive() {
+    this.spinner.show();
     this.active = !this.active;
     this.settingsService.getCurrencies(this.active, this.searchField.value).subscribe((data:any) => {
       this.currencies$ = data.currencies;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
+    this.spinner.show();
     this.settingsService.getCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.categories$ = data.categories;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
+    this.spinner.show();
     this.settingsService.getSubCategories(this.active, this.searchField.value).subscribe((data:any) => {
       this.subCategories$ = data.sub_categories;
-    }, (data:any) => this.error_message = data.error.message);
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
   }
   activeCurrency(currencyId: number) {
     this.settingsService.ToogleActiveCurrency(true, this.searchField.value, currencyId).subscribe((data:any) => {

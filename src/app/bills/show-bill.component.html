@@ -27,9 +27,9 @@
   <mat-form-field class="w-100">
     <mat-label>{{ _translation('Category', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.categoryId" required (selectionChange)="onChange($event, 'categoryId')">
-      <mat-option value="null">
-        <p></p>
-      </mat-option>
+      <!--<mat-option value="null">-->
+        <!--<p></p>-->
+      <!--</mat-option>-->
       <mat-option *ngFor="let category of data.categories$" [value]="category.id"
                   value="category.name">
         <p *ngIf="category.translations">{{ category.translations.translation_category_name }}</p>
@@ -52,9 +52,9 @@
   <mat-form-field class="w-100">
     <mat-label>{{ _translation('Currency', langCode) }}</mat-label>
     <mat-select [(ngModel)]="data.currencyId" required>
-      <mat-option value="null">
-        <p></p>
-      </mat-option>
+      <!--<mat-option value="null">-->
+        <!--<p></p>-->
+      <!--</mat-option>-->
       <mat-option *ngFor="let currency of data.currencies$" [value]="currency.id">
         {{currency.code}}
       </mat-option>
@@ -91,7 +91,12 @@
     <button type="button" mat-raised-button class="btn-block w-90" (click)="onNoClick()">{{ _translation('Close', langCode) }}</button>
   </div>
   <div class="w-50 ml-auto mr-auto mb-auto mt-1 text-center">
-    <button type="button" mat-raised-button color="primary" class="btn-block w-90" (click)="editBill(data)">{{ _translation('Edit', langCode) }}</button>
+    <button type="button" [disabled]="
+    data.categoryId &&
+    data.currencyId &&
+    data.billTitle &&
+    data.billPrice &&
+    data.billQuantity ? false: true" mat-raised-button color="primary" class="btn-block w-90" (click)="editBill(data)">{{ _translation('Edit', langCode) }}</button>
   </div>
   <div class="w-100 ml-auto mr-auto mb-auto mt-1 text-center">
     <button type="button" mat-raised-button color="warn" class="btn-block deleteBill" (click)="openDialogDeleteBill(data.billId)">{{ _translation('Delete', langCode) }}</button>

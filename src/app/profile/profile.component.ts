@@ -13,6 +13,8 @@ import {CityResolver} from '../services/country.service';
 import {SettingsService} from '../services/settings.service';
 import {languages, translateFunction} from '../translations/translations';
 
+import {NgxSpinnerService} from 'ngx-spinner';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -33,10 +35,11 @@ export class ProfileComponent implements OnInit {
   langCode = '';
   languages = languages;
 
-  constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver, public settingsService: SettingsService) {
+  constructor(private router: ActivatedRoute, private userService: UserService, private autenticationService: AuthenticationService, public dialog: MatDialog, public cityService: CityResolver, public settingsService: SettingsService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
+    this.spinner.show();
     if (!localStorage.getItem('lang')) {
       localStorage.setItem('lang', 'en');
       this.langCode = localStorage.getItem('lang');
@@ -48,14 +51,23 @@ export class ProfileComponent implements OnInit {
       this.changeLangByCode(this.langCode);
     }
     this.changeLang(undefined, this.langCode);
-    this.router.data.pipe(map(data => data.user.user)).subscribe(user => this.user = user);
+    this.router.data.pipe(map(data => data.user.user)).subscribe(user => {
+      this.user = user;
+      this.spinner.hide();
+    }, (data: any) => {
+      this.spinner.hide();
+    });
     this.countries$ = this.router.data.pipe(map(data => data.countries));
 
     this.cities$ = this.onCountryChange(event = null, this.user.country_id);
+    this.spinner.show();
     this.settingsService.getCurrencies(true, '').subscribe((data:any) => {
       this.currencies$ = data.currencies;
-    }, (data:any) => this.error_message = data.error.message);
-
+      this.spinner.hide();
+    }, (data:any) => {
+      this.error_message = data.error.message;
+      this.spinner.hide();
+    });
   }
 
   image_selected (event) {

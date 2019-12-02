@@ -94,7 +94,6 @@ export class DialogNewBillComponent implements OnInit {
   }
 
   toogle(event: any) {
-    console.log(event)
     this.data.notMyCity = event.checked;
   }
 

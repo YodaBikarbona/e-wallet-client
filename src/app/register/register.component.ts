@@ -13,6 +13,7 @@ import {DialogShowBillComponent} from '../bills/show-bill.component';
 import {DialogRegisterConfirmationComponent} from './register-confirmation.component';
 import {error} from '@angular/compiler/src/util';
 import {languages, translateFunction} from '../translations/translations';
+import {isDigit} from 'codelyzer/angular/styles/chars';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +33,11 @@ export class RegisterComponent implements OnInit {
   langCode = '';
   languages = languages;
   showPassword = false;
+  passwordStrength = 0;
+  isUpper = false;
+  isLower = false;
+  isDigit = false;
+  isSpec = false;
   constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar, public routerRedirect: Router) { }
 
   ngOnInit() {
@@ -74,19 +80,23 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open(this._translation('Passwords are not same!', this.langCode), null, {duration: 4000, verticalPosition: 'top'});
     }
     else {
-      this.registerService.register(reqData.address, finalDate, reqData.city_id, reqData.confirmPassword, reqData.email, reqData.firstName, reqData.gender, reqData.lastName, reqData.password, reqData.country_id).subscribe((data: any) => {
-        this.openDialogRegisterConfirmation();
-      }, (data: any) => {
-        console.log(data.error.message);
-        if (data.error.message === this._translation('Password is not valid!', this.langCode))  {
-          console.log("Nešto sa šifrom")
-          this.snackBar.open(this._translation('Password should be at least 8 characters long and should contain one number, one character and one special character!', this.langCode), null, {duration: 4000, verticalPosition: 'top'});
-        }
-        else {
-          this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
-        }
+      if (this.passwordStrength === 100) {
+        this.registerService.register(reqData.address, finalDate, reqData.city_id, reqData.confirmPassword, reqData.email, reqData.firstName, reqData.gender, reqData.lastName, reqData.password, reqData.country_id).subscribe((data: any) => {
+            this.openDialogRegisterConfirmation();
+          }, (data: any) => {
+            console.log(data.error.message);
+            if (data.error.message === this._translation('Password is not valid!', this.langCode)) {
+              console.log("Nešto sa šifrom")
+              this.snackBar.open(this._translation('Password should be at least 8 characters long and should contain one number, one character and one special character!', this.langCode), null, {
+                duration: 4000,
+                verticalPosition: 'top'
+              });
+            } else {
+              this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+            }
+          }
+        );
       }
-      );
     }
   }
 
@@ -118,6 +128,34 @@ export class RegisterComponent implements OnInit {
     else {
       this.showPassword = false;
     }
+  }
+
+  checkPasswordStrength(event) {
+    this.isUpper = false;
+    this.isLower = false;
+    this.isDigit = false;
+    this.isSpec = false;
+    let strength = 0;
+    if (event.match(/[a-z]+/)) {
+      strength += 1;
+      this.isLower = true;
+    }
+    if (event.match(/[A-Z]+/)) {
+      strength += 1;
+      this.isUpper = true;
+    }
+    if (event.match(/[@#$%^&+=.!/?*-]+/)) {
+      strength += 1;
+      this.isSpec = true;
+    }
+    if (event.match(/[0-9]+/)) {
+      strength += 1;
+      this.isDigit = true;
+    }
+    if ((event.length > 7) && (event.length < 26)) {
+      strength += 1;
+    }
+    this.passwordStrength = strength * 20;
   }
 
   // Translations

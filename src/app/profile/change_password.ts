@@ -13,6 +13,7 @@ export interface DialogData {
 @Component({
   selector: 'app-profile',
   templateUrl: 'change_password.html',
+  styleUrls: ['./change_password.scss']
 })
 export class DialogChangePasswordComponent {
 
@@ -21,6 +22,11 @@ export class DialogChangePasswordComponent {
   langCode = '';
   languages = languages;
   showPassword = false;
+  passwordStrength = 0;
+  isUpper = false;
+  isLower = false;
+  isDigit = false;
+  isSpec = false;
 
   constructor(public userService: UserService, public dialogRef: MatDialogRef<DialogChangePasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public router: Router, private snackBar: MatSnackBar) {
     if (!localStorage.getItem('lang')) {
@@ -60,6 +66,34 @@ export class DialogChangePasswordComponent {
     else {
       this.showPassword = false;
     }
+  }
+
+  checkPasswordStrength(event) {
+    this.isUpper = false;
+    this.isLower = false;
+    this.isDigit = false;
+    this.isSpec = false;
+    let strength = 0;
+    if (event.match(/[a-z]+/)) {
+      strength += 1;
+      this.isLower = true;
+    }
+    if (event.match(/[A-Z]+/)) {
+      strength += 1;
+      this.isUpper = true;
+    }
+    if (event.match(/[@#$%^&+=.!/?*-]+/)) {
+      strength += 1;
+      this.isSpec = true;
+    }
+    if (event.match(/[0-9]+/)) {
+      strength += 1;
+      this.isDigit = true;
+    }
+    if ((event.length > 7) && (event.length < 26)) {
+      strength += 1;
+    }
+    this.passwordStrength = strength * 20;
   }
 
   // Translations

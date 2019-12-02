@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@auth0/angular-jwt": "^3.0.1",
     "angular": "^1.7.8",
     "angular-file-saver": "^1.1.3",
     "angular-fusioncharts": "^3.0.3",
@@ -30,7 +31,10 @@
     "fusioncharts": "^3.14.1",
     "hammerjs": "^2.0.8",
     "ng2-charts": "^2.3.0",
+    "ngx-spinner": "^7.2.0",
+    "node-sass": "^4.13.0",
     "rxjs": "~6.3.3",
+    "true-case-path": "^2.2.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

@@ -22,7 +22,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from "@angular/material";
+import { MatNativeDateModule } from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
@@ -30,19 +30,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
-
-
-
-
-
-
-
-
-
-
-//import { VERSION } from '@angular/material';
+// import { VERSION } from '@angular/material';
 import { MenuListItemComponent } from './menu-list-item/menu-list-item.component';
 import { NavService } from './dashboard/nav.service';
 import { BillsComponent } from './bills/bills.component';
@@ -65,7 +56,7 @@ import { DialogDeleteBillComponent } from './bills/delete-bill.component';
 
 
 // Navigation
-//import { SidenavAutosizeExample } from './dashboard/dashboard.component';
+// import { SidenavAutosizeExample } from './dashboard/dashboard.component';
 
 
 // Graphs import packages
@@ -85,7 +76,9 @@ FusionChartsModule.fcRoot(
   Charts,
   FusionTheme,
   TimeSeries,
-)
+);
+
+import { NgxSpinnerModule} from 'ngx-spinner';
 
 
 @NgModule({
@@ -107,7 +100,7 @@ FusionChartsModule.fcRoot(
     DialogShowBillComponent,
     DialogRegisterConfirmationComponent,
     DialogDeleteBillComponent,
-    //SidenavAutosizeExample,
+    // SidenavAutosizeExample,
   ],
   imports: [
     BrowserModule,
@@ -139,8 +132,10 @@ FusionChartsModule.fcRoot(
     MatCheckboxModule,
     MatDialogModule,
     FusionChartsModule,
-    //ChartsModule,
-    //VERSION,
+    MatProgressBarModule,
+    NgxSpinnerModule
+    // ChartsModule,
+    // VERSION,
   ],
   entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],

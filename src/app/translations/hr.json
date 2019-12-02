@@ -105,5 +105,10 @@
   "Your active currencies and their monthly limit": "Vaše aktivne valute i mjesečni limiti",
   "Passwords are not same!": "Lozinke nisu jednake!",
   "Password is not valid!": "Lozinka nije validna!",
-  "Password should be at least 8 characters long and should contain one number, one character and one special character!": "Lozinka treba sadržavati najmanje 8 simbola i treba sadrđavati jedan broj, jedno slovo i jedan specijalni simbol!"
+  "Password should be at least 8 characters long and should contain one number, one character and one special character!": "Lozinka treba sadržavati najmanje 8 simbola i treba sadrđavati jedan broj, jedno slovo i jedan specijalni simbol!",
+  "Contains at least one upper character": "Sadrži najmanje jedno veliko slovo",
+  "Contains at least one lower character": "Sadrži najmanje jedno malo slovo",
+  "Contains at least one special character": "Sadrži najmanje jedan specijalni simbol",
+  "Contains at least one digit character": "Sadrži najmanje jedan broj",
+  "Contains between 8 and 25 characters": "Sadrži između 8 i 25 simbola"
 }

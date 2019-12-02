@@ -20,6 +20,12 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
   lang = '';
   langCode = '';
   languages = languages;
+  passwordStrength = 0;
+  isUpper = false;
+  isLower = false;
+  isDigit = false;
+  isSpec = false;
+  showPassword = false;
 
   constructor(public passwordService: RestartPasswordService, public router: Router, private snackBar: MatSnackBar) {
   }
@@ -70,6 +76,43 @@ export class RestartPasswordComponent implements OnInit, OnDestroy {
     else {
       this.passwordService.saveNewPassword(newPassword, confirmPassword, email).subscribe((data: any) => this.router.navigate(['login']), (data:any) => this.error_message = data.error.message);
     }
+  }
+
+  toogleShowPassword() {
+    if (this.showPassword === false) {
+      this.showPassword = true;
+    }
+    else {
+      this.showPassword = false;
+    }
+  }
+
+  checkPasswordStrength(event) {
+    this.isUpper = false;
+    this.isLower = false;
+    this.isDigit = false;
+    this.isSpec = false;
+    let strength = 0;
+    if (event.match(/[a-z]+/)) {
+      strength += 1;
+      this.isLower = true;
+    }
+    if (event.match(/[A-Z]+/)) {
+      strength += 1;
+      this.isUpper = true;
+    }
+    if (event.match(/[@#$%^&+=.!/?*-]+/)) {
+      strength += 1;
+      this.isSpec = true;
+    }
+    if (event.match(/[0-9]+/)) {
+      strength += 1;
+      this.isDigit = true;
+    }
+    if ((event.length > 7) && (event.length < 26)) {
+      strength += 1;
+    }
+    this.passwordStrength = strength * 20;
   }
 
   // Translations
