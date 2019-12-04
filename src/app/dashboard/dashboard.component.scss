@@ -48,3 +48,10 @@
 .app {
   cursor: pointer;
 }
+
+.copyright {
+  font-size: 12px;
+  /deep/ .material-icons {
+    font-size: 10px !important;
+  }
+}

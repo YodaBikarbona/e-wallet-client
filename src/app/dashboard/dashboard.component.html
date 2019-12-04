@@ -8,112 +8,32 @@
 </ngx-spinner>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary" routerLink="/dashboard" class="app" (click)="closeMenu(null, drawer)">E-Wallet</mat-toolbar>
-      <!--mat-sidenav #appDrawer mode="over" opened="false"-->
-        <mat-nav-list>
-          <app-menu-list-item *ngFor="let item of navItems" [item]="item" [routerLink]="[item.route]" (click)="closeMenu(item.displayName, drawer)"></app-menu-list-item>
-        </mat-nav-list>
-        <div class="text-center logout p-1">
-          <button type="submit" mat-raised-button color="primary" class="btn-block" (click)="logout()">{{ _translation('Logout', langCode) }}</button>
-        </div>
-      </mat-sidenav>
-      <!--app-top-nav fxHide.xs></app-top-nav-->
-      <mat-sidenav-content>
-          <mat-toolbar color="primary">
-            <button
-              id="menuButton"
-              type="button"
-              aria-label="Toggle sidenav"
-              mat-icon-button
-              (click)="drawer.toggle()"
-              *ngIf="isHandset$ | async">
-              <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-            </button>
-            <span></span>
-          </mat-toolbar>
-          <div class="p-5 dashboard-content">
-            <router-outlet></router-outlet>
-          </div>
-          <!--<div class="pl-2 pr-2">-->
-            <!--<h3 class="w-100 text-center">News and information</h3>-->
-            <!--<div *ngFor="let n of news">-->
-              <!--<div class="p-1 mb-1" style="border: 1px solid black">-->
-                <!--<div class="row">-->
-                  <!--<div class="col-md-6 col-sm-6">-->
-                    <!--<h5>Title: {{ n.title }}</h5>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-6 col-sm-6 text-right">-->
-                    <!--<p>Created by: {{ n.user.role.role_name }}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-12 col-sm-12">-->
-                    <!--<p>Date: {{ n.created }}</p>-->
-                  <!--</div>-->
-                  <!--<div class="col-md-12 col-sm-12">-->
-                    <!--<p>{{ n.content }}</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--&lt;!&ndash;p>Date: {{ n.created }}</p>-->
-                <!--<p>{{ n.content }}</p&ndash;&gt;-->
-                <!--<div class="text-right w-100">-->
-                  <!--<button mat-button class="w-10" (click)="clear(n.id)">Clear</button>-->
-                <!--</div>-->
-              <!--</div>-->
-
-
-            <!--</div>-->
-            <!--&lt;!&ndash;div class="p-1" style="border: 1px solid black">-->
-              <!--<h5>New categories</h5>-->
-              <!--<p>Date: 10.08.2018</p>-->
-              <!--<p>Added new categories food, drinks, auto</p>-->
-            <!--</div&ndash;&gt;-->
-          <!--</div>-->
-
-          <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-          -->
-        </mat-sidenav-content>
-        </mat-sidenav-container>
-    <!--mat-nav-list>
-      <a mat-list-item [routerLink]="['profile']"><mat-icon class="p-1">account_circle</mat-icon>Profile</a-->
-
-      <!--a mat-list-item routerLink="bills" (click)="showSubmenu = !showSubmenu" class="parent">
-        <span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
-        <mat-icon class="p-1">list_alt</mat-icon>Bills
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-        <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-          <a mat-list-item href="...">Submenu Item 1</a>
-          <a mat-list-item href="...">Submenu Item 2</a>
-        </div>
-      </a-->
-
-      <!--a mat-list-item routerLink="bills"><mat-icon class="p-1">list_alt</mat-icon>Bills</a>
-      <a mat-list-item href="#"><mat-icon class="p-1">equalizer</mat-icon>Graphs</a>
-      <a mat-list-item href="#"><mat-icon class="p-1">settings</mat-icon>Options</a>
-      <div class="text-center logout p-1">
-          <button type="submit" mat-raised-button color="primary" class="btn-block">Logout</button>
-      </div>
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary" routerLink="/dashboard" class="app" (click)="closeMenu(null, drawer)">E-Wallet
+    </mat-toolbar>
+    <!--mat-sidenav #appDrawer mode="over" opened="false"-->
+    <mat-nav-list>
+      <app-menu-list-item *ngFor="let item of navItems" [item]="item" [routerLink]="[item.route]"
+                          (click)="closeMenu(item.displayName, drawer)"></app-menu-list-item>
     </mat-nav-list>
+    <div class="text-center logout p-1">
+      <button type="submit" mat-raised-button color="primary" class="btn-block"
+              (click)="logout()">{{ _translation('Logout', langCode) }}</button>
+      <div class="mt-1 copyright">
+        Copyright
+        <i class="material-icons">
+          copyright
+        </i> 2019 Mihael Perić
+      </div>
+    </div>
   </mat-sidenav>
+  <!--app-top-nav fxHide.xs></app-top-nav-->
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
+        id="menuButton"
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
@@ -123,23 +43,112 @@
       </button>
       <span></span>
     </mat-toolbar>
-    <router-outlet></router-outlet>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    <div class="p-5 dashboard-content">
+      <router-outlet></router-outlet>
+    </div>
+    <!--<div class="pl-2 pr-2">-->
+    <!--<h3 class="w-100 text-center">News and information</h3>-->
+    <!--<div *ngFor="let n of news">-->
+    <!--<div class="p-1 mb-1" style="border: 1px solid black">-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-6 col-sm-6">-->
+    <!--<h5>Title: {{ n.title }}</h5>-->
+    <!--</div>-->
+    <!--<div class="col-md-6 col-sm-6 text-right">-->
+    <!--<p>Created by: {{ n.user.role.role_name }}</p>-->
+    <!--</div>-->
+    <!--<div class="col-md-12 col-sm-12">-->
+    <!--<p>Date: {{ n.created }}</p>-->
+    <!--</div>-->
+    <!--<div class="col-md-12 col-sm-12">-->
+    <!--<p>{{ n.content }}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;p>Date: {{ n.created }}</p>-->
+    <!--<p>{{ n.content }}</p&ndash;&gt;-->
+    <!--<div class="text-right w-100">-->
+    <!--<button mat-button class="w-10" (click)="clear(n.id)">Clear</button>-->
+    <!--</div>-->
+    <!--</div>-->
 
+
+    <!--</div>-->
+    <!--&lt;!&ndash;div class="p-1" style="border: 1px solid black">-->
+    <!--<h5>New categories</h5>-->
+    <!--<p>Date: 10.08.2018</p>-->
+    <!--<p>Added new categories food, drinks, auto</p>-->
+    <!--</div&ndash;&gt;-->
+    <!--</div>-->
+
+    <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+    -->
   </mat-sidenav-content>
+</mat-sidenav-container>
+<!--mat-nav-list>
+  <a mat-list-item [routerLink]="['profile']"><mat-icon class="p-1">account_circle</mat-icon>Profile</a-->
+
+<!--a mat-list-item routerLink="bills" (click)="showSubmenu = !showSubmenu" class="parent">
+  <span class="full-width" *ngIf="isExpanded || isShowing">Parent Menu</span>
+  <mat-icon class="p-1">list_alt</mat-icon>Bills
+  <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+  <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+    <a mat-list-item href="...">Submenu Item 1</a>
+    <a mat-list-item href="...">Submenu Item 2</a>
+  </div>
+</a-->
+
+<!--a mat-list-item routerLink="bills"><mat-icon class="p-1">list_alt</mat-icon>Bills</a>
+<a mat-list-item href="#"><mat-icon class="p-1">equalizer</mat-icon>Graphs</a>
+<a mat-list-item href="#"><mat-icon class="p-1">settings</mat-icon>Options</a>
+<div class="text-center logout p-1">
+    <button type="submit" mat-raised-button color="primary" class="btn-block">Logout</button>
+</div>
+</mat-nav-list>
+</mat-sidenav>
+<mat-sidenav-content>
+<mat-toolbar color="primary">
+<button
+  type="button"
+  aria-label="Toggle sidenav"
+  mat-icon-button
+  (click)="drawer.toggle()"
+  *ngIf="isHandset$ | async">
+  <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+</button>
+<span></span>
+</mat-toolbar>
+<router-outlet></router-outlet>
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, itaque cumque at, est eius veniam molestiae praesentium facere delectus porro repudiandae beatae error amet? Commodi, optio impedit! Nihil, atque qui!
+
+</mat-sidenav-content>
 </mat-sidenav-container-->
