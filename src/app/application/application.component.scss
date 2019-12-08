@@ -1,0 +1,12 @@
+.star {
+  &:hover {
+    background-color: blue;
+  }
+}
+
+/deep/ .br-default .br-selected:after {
+    color: blue !important;
+}
+/deep/ .br-default .br-active:after {
+    color: blue !important;
+}

@@ -1,0 +1,24 @@
+<ngx-spinner
+  bdColor="#fff"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
+</ngx-spinner>
+<div class="settings p-2">
+  <div>
+    <!--<h5 class="text-center">{{ _translation('Application rating', langCode) }}</h5>-->
+    <!--<bar-rating [(rate)]="rate" [max]="5"></bar-rating>-->
+    <div class="row">
+      <div class="col-md-5 col-sm-4"></div>
+      <div class="col-md-2 col-sm-4">
+        <h5>{{ _translation('Application rating', langCode) }}</h5>
+        <div class="m-auto">
+          <bar-rating [rate]="rate" [max]="5" class="ratingBar" (rateChange)="changeRating($event)"></bar-rating>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-4"></div>
+    </div>
+  </div>
+</div>

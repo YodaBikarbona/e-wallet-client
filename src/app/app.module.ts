@@ -54,6 +54,9 @@ import { DialogShowBillComponent } from './bills/show-bill.component';
 import { DialogDeleteBillComponent } from './bills/delete-bill.component';
 
 
+import { BarRatingModule } from 'ngx-bar-rating';
+
+
 
 // Navigation
 // import { SidenavAutosizeExample } from './dashboard/dashboard.component';
@@ -79,6 +82,7 @@ FusionChartsModule.fcRoot(
 );
 
 import { NgxSpinnerModule} from 'ngx-spinner';
+import { ApplicationComponent } from './application/application.component';
 
 
 @NgModule({
@@ -100,6 +104,7 @@ import { NgxSpinnerModule} from 'ngx-spinner';
     DialogShowBillComponent,
     DialogRegisterConfirmationComponent,
     DialogDeleteBillComponent,
+    ApplicationComponent,
     // SidenavAutosizeExample,
   ],
   imports: [
@@ -133,7 +138,8 @@ import { NgxSpinnerModule} from 'ngx-spinner';
     MatDialogModule,
     FusionChartsModule,
     MatProgressBarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BarRatingModule
     // ChartsModule,
     // VERSION,
   ],

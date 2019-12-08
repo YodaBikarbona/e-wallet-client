@@ -110,5 +110,6 @@
   "Contains at least one lower character": "Contains at least one lower character",
   "Contains at least one special character": "Contains at least one special character",
   "Contains at least one digit character": "Contains at least one digit character",
-  "Contains between 8 and 25 characters": "Contains between 8 and 25 characters"
+  "Contains between 8 and 25 characters": "Contains between 8 and 25 characters",
+  "Application rating": "Application rating"
 }

@@ -110,5 +110,6 @@
   "Contains at least one lower character": "Sadrži najmanje jedno malo slovo",
   "Contains at least one special character": "Sadrži najmanje jedan specijalni simbol",
   "Contains at least one digit character": "Sadrži najmanje jedan broj",
-  "Contains between 8 and 25 characters": "Sadrži između 8 i 25 simbola"
+  "Contains between 8 and 25 characters": "Sadrži između 8 i 25 simbola",
+  "Application rating": "Ocjena aplikacije"
 }

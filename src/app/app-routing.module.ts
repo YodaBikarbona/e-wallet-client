@@ -11,6 +11,7 @@ import {CityResolver, CountryResolver} from './services/country.service';
 import {SettingsComponent} from './settings/settings.component';
 import {GraphComponent} from './graph/graph.component';
 import {NewsComponent} from './news/news.component';
+import {ApplicationComponent} from './application/application.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
     //{path: "costs", component: BillsComponent},
     {path: "graph", component: GraphComponent},
     {path: "settings", component: SettingsComponent},
+    {path: "application", component: ApplicationComponent},
   ]
 },
 {path: "**", redirectTo: "/login", pathMatch: "full"}

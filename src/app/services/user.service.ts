@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { API_URL } from '../app.constants';
-import {ChangePassword, ClearNewsRequest, EditProfile, User} from '../model';
+import {ApplicationRatingRequest, ChangePassword, ClearNewsRequest, EditProfile, User} from '../model';
 import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 
@@ -31,5 +31,9 @@ export class UserService {
   clearNews(newsId) {
     const request = new ClearNewsRequest(newsId);
     return this.http.put(`${API_URL}/v1/news/clear`, request);
+  }
+  updateApplicationRating(rating) {
+    const request = new ApplicationRatingRequest(rating);
+    return this.http.post(`${API_URL}/v1/application/rating`, request);
   }
 }

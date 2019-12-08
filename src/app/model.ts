@@ -56,6 +56,7 @@ export class User extends AbstractEntity {
   city_id: number;
   country_id: number;
   currency_id: number;
+  application_rating: number;
 }
 
 export class BillCategory extends AbstractEntity{
@@ -386,6 +387,14 @@ export class ClearNewsRequest {
 
   constructor(newsId: number) {
     this.newsId = newsId;
+  }
+}
+
+export class ApplicationRatingRequest {
+  rating: number;
+
+  constructor(rating: number) {
+    this.rating = rating;
   }
 }
 

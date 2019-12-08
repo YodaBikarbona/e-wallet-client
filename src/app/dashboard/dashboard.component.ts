@@ -157,6 +157,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       disabled: true,
       iconName: 'settings',
       route: 'settings',
+    },
+    {
+      displayName: 'Application',
+      iconName: 'apps',
+      route: 'application',
     }
   ];
 
