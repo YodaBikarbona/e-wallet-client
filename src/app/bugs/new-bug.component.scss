@@ -1,0 +1,10 @@
+/deep/ .newBillTextarea {
+  height: 200px;
+  max-height: 200px;
+  min-width: 200px;
+  resize: none !important;
+  @media (max-width: 767px) {
+    height: 200px !important;
+    resize: none;
+  }
+}

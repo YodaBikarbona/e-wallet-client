@@ -159,7 +159,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       route: 'settings',
     },
     {
-      displayName: 'Application',
+      displayName: this._translation('Application', localStorage.getItem('lang')),
       iconName: 'apps',
       route: 'application',
     }

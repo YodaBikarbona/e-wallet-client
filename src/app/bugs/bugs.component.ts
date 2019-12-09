@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {DialogNewBugComponent} from './new-bug.component';
+import {map} from 'rxjs/operators';
 import {languages, translateFunction} from '../translations/translations';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {UserService} from '../services/user.service';
-import {User} from '../model';
-import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-application',
-  templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  selector: 'app-bugs',
+  templateUrl: './bugs.component.html',
+  styleUrls: ['./bugs.component.scss']
 })
-export class ApplicationComponent implements OnInit {
+export class BugsComponent implements OnInit {
 
   lang = '';
   langCode = '';
   languages = languages;
-  rate = 0;
-  user: User;
 
-  constructor(private spinner: NgxSpinnerService, private userService: UserService, public router: Router) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     if (!localStorage.getItem('lang')) {
@@ -32,27 +29,31 @@ export class ApplicationComponent implements OnInit {
       this.changeLangByCode(this.langCode);
     }
     this.changeLang(undefined, this.langCode);
-    this.userService.find_by_id().subscribe((data: any) => {
-      this.user = data.user;
-      this.rate = this.user.application_rating;
-    });
   }
 
-  changeRating(event) {
-    this.userService.updateApplicationRating(event).subscribe((data: any) => {
-      this.userService.find_by_id().subscribe((data: any) => {
-        this.user = data.user;
-        this.rate = this.user.application_rating;
+  openDialogReportBug(): void {
+    const dialogRef = this.dialog.open(DialogNewBugComponent, {
+      width: '300px',
+      disableClose: true,
+      data: {
+        bugComment: '',
+      }
+    });
+    dialogRef.afterClosed().pipe(
+    //   flatMap((result: any) => {
+    //     if (this.buttonSwitchMessage === 'Switch to costs!') {
+    //       this.getProfits(this.categoryId, this.subCategoryId, this.currencyId);
+    //     }
+    //     else {
+    //       this.getCosts(this.categoryId, this.subCategoryId, this.currencyId);
+    // }
+    //   }),
+      map(((data: any) => data)))
+      .subscribe(result => {
+        console.log(result);
+    }, (data: any) => {
+        console.log(data);
       });
-    });
-  }
-
-  redirectToBugs() {
-    this.router.navigate(['dashboard/application/bugs']);
-  }
-
-  redirectToSuggestions() {
-    this.router.navigate(['dashboard/application/suggestions']);
   }
 
   // Translations
@@ -86,4 +87,5 @@ export class ApplicationComponent implements OnInit {
   _translation(key: string, language: string) {
     return translateFunction(key, language);
   }
+
 }

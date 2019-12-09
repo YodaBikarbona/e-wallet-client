@@ -111,5 +111,14 @@
   "Contains at least one special character": "Sadrži najmanje jedan specijalni simbol",
   "Contains at least one digit character": "Sadrži najmanje jedan broj",
   "Contains between 8 and 25 characters": "Sadrži između 8 i 25 simbola",
-  "Application rating": "Ocjena aplikacije"
+  "Application rating": "Ocjena aplikacije",
+  "Report": "Prijavi",
+  "Report a new bug": "Prijavite novi bug",
+  "I can't add a new bill..": "Ne mogu dodati novi račun..",
+  "Application": "Aplikacija",
+  "Report bugs": "Prijavi bugove",
+  "Read all bugs before reporting new bugs (Duplicate).": "Prije dodavanja novog buga pročitajte ostale (Duplikati).",
+  "List of all bugs reported by users.": "Lista svih bugova prijavljenih od strane korisnika.",
+  "Bugs": "Bugovi",
+  "Suggestions": "Prijedlozi"
 }

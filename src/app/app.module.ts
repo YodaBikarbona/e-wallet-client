@@ -83,6 +83,9 @@ FusionChartsModule.fcRoot(
 
 import { NgxSpinnerModule} from 'ngx-spinner';
 import { ApplicationComponent } from './application/application.component';
+import { BugsComponent } from './bugs/bugs.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { DialogNewBugComponent } from './bugs/new-bug.component';
 
 
 @NgModule({
@@ -105,6 +108,9 @@ import { ApplicationComponent } from './application/application.component';
     DialogRegisterConfirmationComponent,
     DialogDeleteBillComponent,
     ApplicationComponent,
+    BugsComponent,
+    SuggestionsComponent,
+    DialogNewBugComponent,
     // SidenavAutosizeExample,
   ],
   imports: [
@@ -143,7 +149,7 @@ import { ApplicationComponent } from './application/application.component';
     // ChartsModule,
     // VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent, DialogNewBugComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

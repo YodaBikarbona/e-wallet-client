@@ -1,0 +1,20 @@
+<div mat-dialog-content class="text-center">
+  <p>{{ _translation('Report a new bug', langCode) }}</p>
+  <mat-form-field class="w-100">
+    <mat-label>{{ _translation('Comment', langCode)}}</mat-label>
+    <textarea matInput placeholder="{{ _translation('I can\'t add a new bill..', langCode) }}"
+              class="newBillTextarea" [(ngModel)]="data.bugComment"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="w-100">
+  <div class="w-50 m-auto text-center">
+    <button type="button" mat-raised-button class="btn-block w-90" cdkFocusInitial
+            (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
+  </div>
+  <div class="w-50 m-auto text-center">
+    <button type="button" [disabled]="
+    data.bugComment &&
+    data.bugComment.length <= 255? false: true" mat-raised-button color="primary" class="btn-block w-90"
+            (click)="reportBug(data)">{{ _translation('Report', langCode) }}</button>
+  </div>
+</div>

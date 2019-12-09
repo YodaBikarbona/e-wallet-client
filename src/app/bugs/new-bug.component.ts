@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {DialogData} from '../bills/new-bill.component';
 import {languages, translateFunction} from '../translations/translations';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {UserService} from '../services/user.service';
-import {User} from '../model';
-import {Router} from '@angular/router';
+
+export interface DialogData4 {
+  bugComment: string;
+}
 
 @Component({
-  selector: 'app-application',
-  templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  selector: 'app-bugs',
+  templateUrl: './new-bug.component.html',
+  styleUrls: ['./new-bug.component.scss']
 })
-export class ApplicationComponent implements OnInit {
+export class DialogNewBugComponent implements OnInit {
 
   lang = '';
   langCode = '';
   languages = languages;
-  rate = 0;
-  user: User;
 
-  constructor(private spinner: NgxSpinnerService, private userService: UserService, public router: Router) { }
+  constructor(public dialogRef: MatDialogRef<DialogNewBugComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData4) { }
 
   ngOnInit() {
     if (!localStorage.getItem('lang')) {
@@ -32,27 +32,14 @@ export class ApplicationComponent implements OnInit {
       this.changeLangByCode(this.langCode);
     }
     this.changeLang(undefined, this.langCode);
-    this.userService.find_by_id().subscribe((data: any) => {
-      this.user = data.user;
-      this.rate = this.user.application_rating;
-    });
   }
 
-  changeRating(event) {
-    this.userService.updateApplicationRating(event).subscribe((data: any) => {
-      this.userService.find_by_id().subscribe((data: any) => {
-        this.user = data.user;
-        this.rate = this.user.application_rating;
-      });
-    });
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
-  redirectToBugs() {
-    this.router.navigate(['dashboard/application/bugs']);
-  }
-
-  redirectToSuggestions() {
-    this.router.navigate(['dashboard/application/suggestions']);
+  reportBug(data) {
+    console.log(data.bugComment);
   }
 
   // Translations
@@ -86,4 +73,5 @@ export class ApplicationComponent implements OnInit {
   _translation(key: string, language: string) {
     return translateFunction(key, language);
   }
+
 }

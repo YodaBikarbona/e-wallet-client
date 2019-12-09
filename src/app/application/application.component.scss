@@ -1,12 +1,26 @@
-.star {
-  &:hover {
-    background-color: blue;
-  }
-}
-
 /deep/ .br-default .br-selected:after {
     color: blue !important;
 }
 /deep/ .br-default .br-active:after {
     color: blue !important;
+}
+
+/deep/ bar-rating{
+  .br-default {
+    @media (min-width: 768px) {
+      width: 50% !important;
+      margin-left: 25% !important;
+    }
+  }
+}
+
+.application {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
+  min-height: 700px;
+
+  @media (max-width: 767px) {
+    //padding: 0;
+  }
 }
