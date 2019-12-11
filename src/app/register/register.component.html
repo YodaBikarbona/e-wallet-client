@@ -132,8 +132,6 @@
             </i> {{ _translation('Contains between 8 and 25 characters', langCode) }}
             </p>
           </div>
-          <p *ngIf="regRequest.password">{{ regRequest.password.length}} / 25</p>
-          <p *ngIf="!regRequest.password">0 / 25</p>
           <mat-progress-bar mode="determinate" [value]="passwordStrength"></mat-progress-bar>
         </div>
       </div>
