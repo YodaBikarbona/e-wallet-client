@@ -3,6 +3,8 @@
   border-radius: 5px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 700px;
+  background-color: #0B0C10;
+  color: #66FCF1;
 
   @media (max-width: 767px) {
     //padding: 0;
@@ -98,4 +100,38 @@ currencyCard {
   @media (max-width: 767px) {
     text-align: center;
   }
+}
+
+button {
+  border-radius: 50px;
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-tab-label-content {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #F44336 !important;
+}
+
+/deep/ .mat-select-value {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #66FCF1 !important;
 }

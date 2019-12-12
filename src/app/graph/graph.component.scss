@@ -96,3 +96,15 @@ button {
 .priceColumn {
   border-bottom: 1px solid #66FCF1;
 }
+
+.pieChart {
+  background-color: #0B0C10;
+}
+
+.breakSection {
+  margin-bottom: 1px;
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #66FCF1 !important;
+}

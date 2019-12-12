@@ -85,37 +85,45 @@
   </fusioncharts>
 </div>
 <div class="pieChart">
-  <fusioncharts *ngIf="bills && dataCostCategoryPie.length > 0"
-                [width]="width"
-                [height]="height"
-                [type]="typePie"
-                [dataFormat]="pieFormat"
-                [dataSource]="pieDataCategoryCost"
-  >
-  </fusioncharts>
-  <fusioncharts *ngIf="bills && dataProfitCategoryPie.length > 0"
-                [width]="width"
-                [height]="height"
-                [type]="typePie"
-                [dataFormat]="pieFormat"
-                [dataSource]="pieDataCategoryProfit"
-  >
-  </fusioncharts>
-  <fusioncharts *ngIf="bills && dataCostSubCategoryPie.length > 0"
-                [width]="width"
-                [height]="height"
-                [type]="typePie"
-                [dataFormat]="pieFormat"
-                [dataSource]="pieDataSubCategoryCost"
-  >
-  </fusioncharts>
-  <fusioncharts *ngIf="bills && dataProfitSubCategoryPie.length > 0"
-                [width]="width"
-                [height]="height"
-                [type]="typePie"
-                [dataFormat]="pieFormat"
-                [dataSource]="pieDataSubCategoryProfit"
-  >
-  </fusioncharts>
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataCostCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataCategoryCost"
+    >
+    </fusioncharts>
+  </div>
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataProfitCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataCategoryProfit"
+    >
+    </fusioncharts>
+  </div>
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataCostSubCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataSubCategoryCost"
+    >
+    </fusioncharts>
+  </div>
+  <div>
+    <fusioncharts *ngIf="bills && dataProfitSubCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataSubCategoryProfit"
+    >
+    </fusioncharts>
+  </div>
 </div>
 

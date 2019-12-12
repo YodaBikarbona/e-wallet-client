@@ -107,3 +107,7 @@ button {
 /deep/ .mat-input-element:disabled {
   color: #66FCF1 !important;
 }
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #66FCF1 !important;
+}
