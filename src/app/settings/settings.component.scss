@@ -8,6 +8,9 @@
 
   @media (max-width: 767px) {
     //padding: 0;
+    border-radius: unset;
+    border: unset;
+    margin-top: -20px;
   }
 }
 
@@ -62,8 +65,10 @@ currencyCard {
   border-radius: 50% !important;
   height: 100px;
   width: 100px;
+  background-color: #0B0C10 !important;
+  color: #66FCF1 !important;
   &:hover {
-    box-shadow: 2px 5px #3f51b5;
+    box-shadow: 2px 5px #888888;
   }
 }
 
@@ -88,6 +93,11 @@ currencyCard {
 
 /deep/ .mat-expansion-panel-header {
   min-height: 70px !important;
+  span {
+    &:after {
+      color: #66FCF1 !important;
+    }
+  }
 }
 
 .settings {
@@ -104,7 +114,7 @@ currencyCard {
 
 button {
   border-radius: 50px;
-  background-color: #1F2833 !important;
+  background-color: #0B0C10 !important;
   color: #66FCF1 !important;
 }
 
@@ -134,4 +144,36 @@ button {
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: #66FCF1 !important;
+}
+
+/deep/ .mat-accordion .mat-expansion-panel:first-of-type {
+  @media (max-width: 767px) {
+    border-top-right-radius: unset !important;
+    border-top-left-radius: unset !important;
+  }
+}
+
+/deep/ .mat-accordion .mat-expansion-panel:last-of-type {
+  @media (max-width: 767px) {
+    border-bottom-right-radius: unset !important;
+    border-bottom-left-radius: unset !important;
+  }
+}
+
+/deep/ mat-expansion-panel {
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ mat-panel-title {
+  color: #66FCF1 !important;
+}
+
+/deep/ mat-panel-description {
+  color: #66FCF1 !important;
 }
