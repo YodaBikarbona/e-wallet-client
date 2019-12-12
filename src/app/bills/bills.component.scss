@@ -3,6 +3,8 @@
   border-radius: 5px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 500px;
+  background-color: #0B0C10;
+  color: #66FCF1;
 
   @media (max-width: 767px) {
     padding: 0;
@@ -53,7 +55,8 @@ tr.mat-footer-row {
 }
 
 .tableHeader {
-  background-color: lightblue;
+  background-color: #1F2833;
+  color: #66FCF1;
 }
 
 /deep/ .mat-table, [mat-footer-row], .mat-footer-row {
@@ -153,4 +156,77 @@ tr.mat-footer-row {
   @media (min-width: 900px) {
     width: 90%;
   }
+}
+
+button {
+  border-radius: 50px;
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #F44336 !important;
+}
+
+/deep/ .cdk-overlay-pane {
+  @media (max-width: 767px) {
+    min-width: unset !important;
+    width: 85% !important;
+  }
+}
+
+/deep/ .mat-select-value {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #66FCF1 !important;
+}
+
+/deep/ .mat-select-arrow-wrapper {
+  background-color: #66FCF1 !important;
+}
+
+/deep/ svg {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-paginator-outer-container {
+  background-color: #0B0C10 !important;
+  color: #66FCF1 !important;
+}
+
+.mat-elevation-z8 {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
+  @media (max-width: 767px) {
+    padding-left: -10px !important;
+    padding-right: -10px !important;
+  }
+}
+
+
+.mat-column-title {
+  color: #66FCF1 !important;
+}
+
+.mat-header-cell {
+  color: #66FCF1 !important;
+}
+
+.mat-cell {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-input-element:disabled {
+  color: #66FCF1 !important;
 }

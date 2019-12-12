@@ -7,6 +7,9 @@
     height: 200px !important;
     resize: none;
   }
+  &::placeholder {
+    color: #66FCF1;
+  }
 }
 
 /deep/ .mat-dialog-container {
@@ -35,4 +38,18 @@
 
 /deep/ .mat-dialog-content {
   max-height: 55vh !important;
+}
+
+button {
+  border-radius: 50px;
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-dialog-container {
+  background-color: #0B0C10 !important;
+  color: #66FCF1 !important;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
 }

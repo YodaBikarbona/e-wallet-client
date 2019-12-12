@@ -14,6 +14,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  border-bottom: 1px solid #66FCF1;
 }
 
 .logout {
@@ -54,4 +55,37 @@
   /deep/ .material-icons {
     font-size: 10px !important;
   }
+}
+
+/deep/ .mat-toolbar {
+  background-color: #0B0C10 !important;
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-sidenav-content {
+  background-color: #0B0C10 !important;
+}
+
+/deep/ .mat-sidenav {
+  background-color: #0B0C10 !important;
+  color: #66FCF1 !important;
+  border-right: 1px solid #66FCF1;
+}
+
+/deep/ app-menu-list-item {
+  a {
+    background-color: #1F2833 !important;
+    color: #66FCF1 !important;
+    border-bottom: 1px solid;
+  }
+}
+
+/deep/ .mat-list-base {
+  padding-top: unset !important;
+}
+
+button {
+  border-radius: 50px;
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
 }

@@ -36,3 +36,63 @@
     }
   }
 }
+
+.graph {
+  background-color: #0B0C10;
+  color: #66FCF1;
+}
+
+/deep/ .mat-select-value {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #66FCF1 !important;
+}
+
+/deep/ .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #F44336 !important;
+}
+
+/deep/ .cdk-overlay-pane {
+  @media (max-width: 767px) {
+    min-width: unset !important;
+    width: 85% !important;
+  }
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #66FCF1 !important;
+}
+
+/deep/ .mat-select-arrow-wrapper {
+  background-color: #66FCF1 !important;
+}
+
+/deep/ .mat-input-element:disabled {
+  color: #66FCF1 !important;
+}
+
+/deep/ svg {
+  color: #66FCF1 !important;
+}
+
+/deep/ .dashboard-content {
+  @media (max-width: 767px) {
+    margin-top: -10px !important;
+  }
+}
+
+button {
+  border-radius: 50px;
+  background-color: #1F2833 !important;
+  color: #66FCF1 !important;
+}
+
+.priceColumn {
+  border-bottom: 1px solid #66FCF1;
+}

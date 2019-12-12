@@ -74,7 +74,6 @@ export class GraphComponent implements OnInit {
 
   //Trial version
 
-
   dataSource: any;
   type: string;
   width: string;
@@ -272,6 +271,7 @@ export class GraphComponent implements OnInit {
         text: this._translation('Profit & Cost', this.langCode)
       },
       series: 'Type',
+      theme: 'candy',
       yAxis: [
         {
           plot: this._translation('Bills price', this.langCode),
