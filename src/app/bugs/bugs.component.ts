@@ -3,6 +3,8 @@ import {MatDialog} from '@angular/material';
 import {DialogNewBugComponent} from './new-bug.component';
 import {map} from 'rxjs/operators';
 import {languages, translateFunction} from '../translations/translations';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {ApplicationService} from '../services/application.service';
 
 @Component({
   selector: 'app-bugs',
@@ -14,8 +16,9 @@ export class BugsComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
+  bugs = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private spinner: NgxSpinnerService, private applicationService: ApplicationService) { }
 
   ngOnInit() {
     if (!localStorage.getItem('lang')) {
@@ -29,6 +32,14 @@ export class BugsComponent implements OnInit {
       this.changeLangByCode(this.langCode);
     }
     this.changeLang(undefined, this.langCode);
+    this.spinner.show();
+    this.applicationService.getBugs().subscribe((data:any) => {
+      this.bugs = data.bugs;
+      this.spinner.hide();
+      console.log(this.bugs);
+    }, (data: any) => {
+      this.spinner.hide();
+    });
   }
 
   openDialogReportBug(): void {
@@ -50,7 +61,13 @@ export class BugsComponent implements OnInit {
     //   }),
       map(((data: any) => data)))
       .subscribe(result => {
-        console.log(result);
+        this.applicationService.getBugs().subscribe((data:any) => {
+          this.bugs = data.bugs;
+          this.spinner.hide();
+          console.log(this.bugs);
+        }, (data: any) => {
+          this.spinner.hide();
+        });
     }, (data: any) => {
         console.log(data);
       });

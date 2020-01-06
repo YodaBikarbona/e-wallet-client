@@ -423,3 +423,11 @@ export class RegisterRequest {
     this.email = email;
   }
 }
+
+export class AddBugRequest {
+  comment: string;
+
+  constructor(comment: string) {
+    this.comment = comment;
+  }
+}

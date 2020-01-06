@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {DialogData} from '../bills/new-bill.component';
 import {languages, translateFunction} from '../translations/translations';
+import {ApplicationService} from '../services/application.service';
 
 export interface DialogData4 {
   bugComment: string;
@@ -18,7 +19,7 @@ export class DialogNewBugComponent implements OnInit {
   langCode = '';
   languages = languages;
 
-  constructor(public dialogRef: MatDialogRef<DialogNewBugComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData4) { }
+  constructor(public dialogRef: MatDialogRef<DialogNewBugComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData4, private applicationService: ApplicationService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if (!localStorage.getItem('lang')) {
@@ -39,7 +40,11 @@ export class DialogNewBugComponent implements OnInit {
   }
 
   reportBug(data) {
-    console.log(data.bugComment);
+    this.applicationService.addBug(data.bugComment).subscribe( (data: any) => {
+      this.onNoClick();
+    }, (data:any) => {
+      this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
+    });
   }
 
   // Translations

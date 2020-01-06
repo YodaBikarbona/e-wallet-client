@@ -3,12 +3,20 @@
   <p> {{ _translation('Read all bugs before reporting new bugs (Duplicate).', langCode)}} </p>
   <p class="text-left"> {{ _translation('List of all bugs reported by users.', langCode)}} </p>
   <div class="messages">
-    <p> This feature is still in progress.</p>
-    <!--<div class="message">-->
-      <!--<p class="text-left pl-1"> Reported: 19.12.2019 18:35</p>-->
-      <!--<p class="text-left pl-1 pr-1"> Hi there, something is wrong with this category-->
-      <!--"cigarete" when I add new bills I can't see this category in my bills</p>-->
-    <!--</div>-->
+    <!--p> This feature is still in progress.</p-->
+    <div *ngFor="let bug of bugs">
+      <div class="message fixed" *ngIf="bug.is_fixed == true">
+        <p class="text-left pl-1"> Reported by: {{ bug.user.first_name }} {{ bug.user.last_name }}</p>
+        <p class="text-left pl-1"> Date: {{ bug.created }}</p>
+        <p class="text-left pl-1 pr-1"> {{ bug.comment }}</p>
+      </div>
+      <div class="message" *ngIf="bug.is_fixed == false">
+        <p class="text-left pl-1"> Reported by: {{ bug.user.first_name }} {{ bug.user.last_name }}</p>
+        <p class="text-left pl-1"> Date: {{ bug.created }}</p>
+        <p class="text-left pl-1 pr-1"> {{ bug.comment }}</p>
+      </div>
+    </div>
+
     <!--<div class="message">-->
       <!--<p class="text-left pl-1"> Reported: 19.12.2019 18:35</p>-->
       <!--<p class="text-left pl-1 pr-1"> Hi there, something is wrong with this category-->

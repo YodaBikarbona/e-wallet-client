@@ -12,13 +12,20 @@
 }
 
 .message {
-  border: 1px solid black;
+  border: 1px solid darkred;
   border-radius: 5px;
   margin-bottom: 10px;
   min-height: 100px;
-  &:hover {
-    box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
-    background-color: lightblue;
+  background-color: #1F2833;
+  //&:hover {
+  //  box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
+  //  background-color: lightblue;
+  //}
+}
+
+.fixed {
+  &.message {
+    border: 1px solid green !important;
   }
 }
 
