@@ -1,0 +1,20 @@
+<div mat-dialog-content class="text-center">
+  <p>{{ _translation('Suggest a new suggestion', langCode) }}</p>
+  <mat-form-field class="w-100">
+    <mat-label>{{ _translation('Comment', langCode)}}</mat-label>
+    <textarea matInput placeholder="{{ _translation('It would be nice to have a Cigarettes category..', langCode) }}"
+              class="newBillTextarea" [(ngModel)]="data.suggestionComment"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="w-100">
+  <div class="w-50 m-auto text-center">
+    <button type="button" mat-raised-button class="btn-block w-90" cdkFocusInitial
+            (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
+  </div>
+  <div class="w-50 m-auto text-center">
+    <button type="button" [disabled]="
+    data.suggestionComment &&
+    data.suggestionComment.length <= 255? false: true" mat-raised-button color="primary" class="btn-block w-90"
+            (click)="suggestSuggestion(data)">{{ _translation('Suggest', langCode) }}</button>
+  </div>
+</div>

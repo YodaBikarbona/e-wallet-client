@@ -1,5 +1,11 @@
-<div class="text-center">
-  <p> This feature is still in progress</p>
-  <!--<h5> Send application suggestions </h5>-->
-  <!--<p> For now you can send suggestions for categories and subcategories</p>-->
+<div class="text-center bugs">
+  <h5> {{ _translation('Suggest suggestions', langCode)}} </h5>
+  <div class="newSuggestion row mt-2">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 col-sm-12 text-right">
+      <button type="button" mat-raised-button color="primary" class="btn-block newBillButton" (click)="openDialogtSuggestSuggestion()">
+        {{ _translation('Suggest', langCode)}}
+      </button>
+    </div>
+  </div>
 </div>

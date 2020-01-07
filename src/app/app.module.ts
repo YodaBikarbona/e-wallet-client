@@ -86,6 +86,7 @@ import { ApplicationComponent } from './application/application.component';
 import { BugsComponent } from './bugs/bugs.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { DialogNewBugComponent } from './bugs/new-bug.component';
+import {DialogNewSuggestionComponent} from './suggestions/new-suggestion.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { DialogNewBugComponent } from './bugs/new-bug.component';
     BugsComponent,
     SuggestionsComponent,
     DialogNewBugComponent,
+    DialogNewSuggestionComponent,
     // SidenavAutosizeExample,
   ],
   imports: [
@@ -149,7 +151,7 @@ import { DialogNewBugComponent } from './bugs/new-bug.component';
     // ChartsModule,
     // VERSION,
   ],
-  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent, DialogNewBugComponent],
+  entryComponents: [DialogChangePasswordComponent, DialogEditProfileComponent, DialogNewBillComponent, DialogShowBillComponent, DialogRegisterConfirmationComponent, DialogDeleteBillComponent, DialogNewBugComponent, DialogNewSuggestionComponent],
   providers: [NavService, {provide: HTTP_INTERCEPTORS, useClass: JWTHeaderInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })

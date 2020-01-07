@@ -431,3 +431,11 @@ export class AddBugRequest {
     this.comment = comment;
   }
 }
+
+export class AddSuggestionRequest {
+  comment: string;
+
+  constructor(comment: string) {
+    this.comment = comment;
+  }
+}

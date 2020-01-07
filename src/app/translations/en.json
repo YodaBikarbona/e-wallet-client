@@ -120,5 +120,12 @@
   "Read all bugs before reporting new bugs (Duplicate).": "Read all bugs before reporting new bugs (Duplicate).",
   "List of all bugs reported by users.": "List of all bugs reported by users.",
   "Bugs": "Bugs",
-  "Suggestions": "Suggestions"
+  "Suggestions": "Suggestions",
+  "Suggest suggestions": "Suggest suggestions",
+  "Suggest": "Suggest",
+  "Suggest a new suggestion": "Suggest a new suggestion",
+  "It would be nice to have a Cigarettes category..": "It would be nice to have a Cigarettes category..",
+  "Suggestion is successfully created!": "Suggestion is successfully created!",
+  "Reported by": "Reported by",
+  "Date": "Date"
 }

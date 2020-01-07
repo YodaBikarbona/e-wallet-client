@@ -120,5 +120,12 @@
   "Read all bugs before reporting new bugs (Duplicate).": "Prije dodavanja novog buga pročitajte ostale (Duplikati).",
   "List of all bugs reported by users.": "Lista svih bugova prijavljenih od strane korisnika.",
   "Bugs": "Bugovi",
-  "Suggestions": "Prijedlozi"
+  "Suggestions": "Prijedlozi",
+  "Suggest suggestions": "Predložite prijedloge",
+  "Suggest": "Predloži",
+  "Suggest a new suggestion": "Predložite novi prijedlog",
+  "It would be nice to have a Cigarettes category..": "Bilo bi lijepo da postoji kategorija Cigarete..",
+  "Suggestion is successfully created!": "Prijedlog je uspješno kreiran!",
+  "Reported by": "Prijavio",
+  "Date": "Datum"
 }

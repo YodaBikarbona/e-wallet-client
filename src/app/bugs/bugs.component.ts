@@ -36,7 +36,6 @@ export class BugsComponent implements OnInit {
     this.applicationService.getBugs().subscribe((data:any) => {
       this.bugs = data.bugs;
       this.spinner.hide();
-      console.log(this.bugs);
     }, (data: any) => {
       this.spinner.hide();
     });
@@ -64,12 +63,10 @@ export class BugsComponent implements OnInit {
         this.applicationService.getBugs().subscribe((data:any) => {
           this.bugs = data.bugs;
           this.spinner.hide();
-          console.log(this.bugs);
         }, (data: any) => {
           this.spinner.hide();
         });
     }, (data: any) => {
-        console.log(data);
       });
   }
 
