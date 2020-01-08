@@ -141,6 +141,22 @@
           <button type="button" mat-raised-button color="primary" class="btn-block" (click)="clearDateTo()">{{ _translation('Clear', langCode) }}</button>
         </div>
       </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field class="desktopVersion">
+          <mat-label>{{ _translation('Location', langCode) }}</mat-label>
+          <mat-select (selectionChange)="onChange($event, 'locationType')">
+            <mat-option value=null>
+              <p></p>
+            </mat-option>
+            <mat-option value='True'>
+              <p>{{ _translation('My city', langCode) }}</p>
+            </mat-option>
+            <mat-option value='False'>
+              <p>{{ _translation('Not my city', langCode) }}</p>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="col-md-12 col-sm-12 search">
           <div>
             <form class="example-form">

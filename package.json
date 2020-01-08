@@ -37,6 +37,7 @@
     "rxjs": "~6.3.3",
     "true-case-path": "^2.2.1",
     "tslib": "^1.9.0",
+    "web-push": "^3.4.3",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

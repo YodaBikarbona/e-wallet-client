@@ -8,12 +8,12 @@ import {API_URL} from '../app.constants';
 })
 export class BillService {
   constructor(public http: HttpClient) { }
-  getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
-    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo);
+  getCosts(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string, location: string) {
+    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo, location);
     return this.http.post(`${API_URL}/v1/bills/costs`, request);
   }
-  getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
-    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo);
+  getProfits(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string, location: string) {
+    const request = new BillCostsGetRequest(categoryId, subCategoryId, currencyId, billsLimit, billsOffset, search, dateFrom, dateTo, location);
     return this.http.post(`${API_URL}/v1/bills/profits`, request);
   }
   newCosts(categoryId: number, subCategoryId: number, currencyId: number, title: string, comment: string, price: string, quantity: number, notMyCity: boolean, created: string) {
@@ -25,8 +25,8 @@ export class BillService {
     return this.http.post(`${API_URL}/v1/bills/profits/new`, request);
   }
 
-  printBills(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string) {
-    const request = new reportPdfRequest(categoryId, subCategoryId, currencyId, billType, search, dateFrom, dateTo);
+  printBills(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string, location: string) {
+    const request = new reportPdfRequest(categoryId, subCategoryId, currencyId, billType, search, dateFrom, dateTo, location);
     return this.http.post(`${API_URL}/v1/report/print`, request, {responseType: 'blob'});
   }
 

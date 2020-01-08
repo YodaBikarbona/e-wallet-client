@@ -121,8 +121,9 @@ export class BillCostsGetRequest {
   search: string;
   dateFrom: string;
   dateTo: string;
+  location: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billsLimit: number, billsOffset: number, search: string, dateFrom: string, dateTo: string, location: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
@@ -131,6 +132,7 @@ export class BillCostsGetRequest {
     this.search = search;
     this.dateFrom = dateFrom;
     this.dateTo = dateTo;
+    this.location = location;
   }
 }
 
@@ -188,8 +190,9 @@ export class reportPdfRequest {
   search: string;
   dateFrom: string;
   dateTo: string;
+  location: string;
 
-  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string) {
+  constructor(categoryId: number, subCategoryId: number, currencyId: number, billType: string, search: string, dateFrom: string, dateTo: string, location: string) {
     this.categoryId = categoryId;
     this.subCategoryId = subCategoryId;
     this.currencyId = currencyId;
@@ -197,6 +200,7 @@ export class reportPdfRequest {
     this.search = search;
     this.dateFrom = dateFrom;
     this.dateTo = dateTo;
+    this.location = location;
   }
 }
 
@@ -437,5 +441,13 @@ export class AddSuggestionRequest {
 
   constructor(comment: string) {
     this.comment = comment;
+  }
+}
+
+export class subTokenRequest {
+  subToken: string;
+
+  constructor(subToken: string) {
+    this.subToken = subToken;
   }
 }
