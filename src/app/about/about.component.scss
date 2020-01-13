@@ -1,0 +1,26 @@
+.applicationInfo {
+  max-height: 650px;
+  overflow-y: scroll;
+}
+
+.infoHeader {
+  font-size: 24px;
+  /deep/ .material-icons {
+    font-size: 17px !important;
+  }
+}
+
+.infoSubHeader {
+  font-size: 18px;
+  /deep/ .material-icons {
+    font-size: 14px !important;
+  }
+}
+
+.infoContent {
+  font-size: 16px;
+  text-align: justify;
+  /deep/ .material-icons {
+    font-size: 14px !important;
+  }
+}

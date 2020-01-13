@@ -10,7 +10,6 @@ import {AuthenticationService} from '../services/authentication.service';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {languages, translateFunction} from '../translations/translations';
-
 import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({

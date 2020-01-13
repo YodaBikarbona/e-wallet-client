@@ -14,6 +14,7 @@ import {NewsComponent} from './news/news.component';
 import {ApplicationComponent} from './application/application.component';
 import {BugsComponent} from './bugs/bugs.component';
 import {SuggestionsComponent} from './suggestions/suggestions.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     {path: 'application', component: ApplicationComponent,
     children: [
       {path: 'bugs', component: BugsComponent},
-      {path: 'suggestions', component: SuggestionsComponent}
+      {path: 'suggestions', component: SuggestionsComponent},
+      {path: 'info', component: AboutComponent}
     ]},
   ]
 },

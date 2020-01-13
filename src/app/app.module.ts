@@ -87,6 +87,7 @@ import { BugsComponent } from './bugs/bugs.component';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { DialogNewBugComponent } from './bugs/new-bug.component';
 import {DialogNewSuggestionComponent} from './suggestions/new-suggestion.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -113,6 +114,7 @@ import {DialogNewSuggestionComponent} from './suggestions/new-suggestion.compone
     SuggestionsComponent,
     DialogNewBugComponent,
     DialogNewSuggestionComponent,
+    AboutComponent,
     // SidenavAutosizeExample,
   ],
   imports: [

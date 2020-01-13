@@ -55,6 +55,10 @@ export class ApplicationComponent implements OnInit {
     this.router.navigate(['dashboard/application/suggestions']);
   }
 
+  redirectToApplicationInfo() {
+    this.router.navigate(['dashboard/application/info']);
+  }
+
   // Translations
   changeLangByCode(langCode: string) {
     if (langCode === 'en') {
