@@ -33,7 +33,7 @@
       </mat-form-field>
     </div>
     <div class="col-md-1 col-sm-3">
-      <div class="text-right p-1">
+      <div class="text-right p-1 clearButton">
         <button type="button" mat-raised-button color="primary" class="btn-block"
                 (click)="clearDateFrom()">{{ _translation('Clear', langCode) }}</button>
       </div>
@@ -48,7 +48,7 @@
       </mat-form-field>
     </div>
     <div class="col-md-1 col-sm-3">
-      <div class="text-right p-1">
+      <div class="text-right p-1 clearButton">
         <button type="button" mat-raised-button color="primary" class="btn-block"
                 (click)="clearDateTo()">{{ _translation('Clear', langCode) }}</button>
       </div>
@@ -70,7 +70,7 @@
     <div class="col-md-3 col-sm-12 priceColumn">
       <p>{{ _translation('Costs', langCode) }}: {{bills?.costs}}</p>
     </div>
-    <div class="col-md-3 col-sm-12">
+    <div class="col-md-3 col-sm-12 priceColumn">
       <p>{{ _translation('Profits', langCode) }}: {{bills?.profits}}</p>
     </div>
   </div>

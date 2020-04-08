@@ -1,8 +1,9 @@
+@import "~src/palette";
 /deep/ .br-default .br-selected:after {
-    color: #66FCF1 !important;
+    color: $textBlack !important;
 }
 /deep/ .br-default .br-active:after {
-    color: #66FCF1 !important;
+    color: $textBlack !important;
 }
 
 /deep/ bar-rating{
@@ -15,11 +16,11 @@
 }
 
 .application {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: 1px solid $borderBlue;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 700px;
-  color: #66FCF1;
+  color: $textBlack;
+  background-color: $backgroundSilver;
   @media (max-width: 767px) {
     //padding: 0;
     border-radius: unset;
@@ -28,7 +29,26 @@
 }
 
 button {
-  border-radius: 50px;
-  background-color: #1F2833 !important;
-  color: #66FCF1 !important;
+  font-weight: 300;
+  border-radius: 0;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
+  border: 1px solid $button;
+  transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
+  &:hover {
+    @media (min-width: 900px) {
+      background-color: $button !important;
+      color: $textWhite !important;
+      transition: background-color 500ms ease, color 500ms ease;
+    }
+  }
+  @media (max-width: 899px) {
+    background-color: $button !important;
+    color: $textWhite !important;
+  }
+}
+
+.activeButton {
+  background-color: $button !important;
+  color: $textWhite !important;
 }

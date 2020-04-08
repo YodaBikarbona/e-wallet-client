@@ -1,8 +1,8 @@
 <div class="text-center bugs">
-  <h5> {{ _translation('Report bugs', langCode)}} </h5>
-  <p> {{ _translation('Read all bugs before reporting new bugs (Duplicate).', langCode)}} </p>
-  <p class="text-left"> {{ _translation('List of all bugs reported by users.', langCode)}} </p>
-  <div class="messages">
+  <h5 class="p-1"> {{ _translation('Report bugs', langCode)}} </h5>
+  <p class="p-1"> {{ _translation('Read all bugs before reporting new bugs (Duplicate).', langCode)}} </p>
+  <p class="text-left p-1"> {{ _translation('List of all bugs reported by users.', langCode)}} </p>
+  <div class="messages p-1">
     <!--p> This feature is still in progress.</p-->
     <div *ngFor="let bug of bugs">
       <div class="message fixed" *ngIf="bug.is_fixed == true">
@@ -19,7 +19,7 @@
   </div>
   <div class="newBug row mt-2">
     <div class="col-md-10"></div>
-    <div class="col-md-2 col-sm-12 text-right">
+    <div class="col-md-2 col-sm-12 text-right p-1">
       <button type="button" mat-raised-button color="primary" class="btn-block newBillButton" (click)="openDialogReportBug()">
         {{ _translation('Report', langCode)}}
       </button>

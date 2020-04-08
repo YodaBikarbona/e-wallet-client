@@ -23,22 +23,34 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-12 p-1">
-      <button type="button" mat-raised-button color="primary" class="btn-block newBillButton" (click)="redirectToBugs()">
+      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="redirectToBugs()">
         <i class="material-icons">bug_report</i>
         {{ _translation('Bugs', langCode)}}
       </button>
+      <!--<button *ngIf="activeButton === 'bugs'" type="button" mat-raised-button color="primary" class="btn-block activeButton" (click)="redirectToBugs()">-->
+        <!--<i class="material-icons">bug_report</i>-->
+        <!--{{ _translation('Bugs', langCode)}}-->
+      <!--</button>-->
     </div>
     <div class="col-md-6 col-sm-12 p-1">
-      <button type="button" mat-raised-button color="primary" class="btn-block newBillButton" (click)="redirectToSuggestions()">
+      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="redirectToSuggestions()">
         <i class="material-icons">question_answer</i>
         {{ _translation('Suggestions', langCode)}}
       </button>
+      <!--<button *ngIf="activeButton === 'suggestions'" type="button" mat-raised-button color="primary" class="btn-block activeButton" (click)="redirectToSuggestions()">-->
+        <!--<i class="material-icons">question_answer</i>-->
+        <!--{{ _translation('Suggestions', langCode)}}-->
+      <!--</button>-->
     </div>
     <div class="col-md-6 col-sm-12 p-1">
-      <button type="button" mat-raised-button color="primary" class="btn-block newBillButton" (click)="redirectToApplicationInfo()">
+      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="redirectToApplicationInfo()">
         <i class="material-icons">info</i>
         {{ _translation('Application info', langCode)}}
       </button>
+      <!--<button *ngIf="activeButton === 'applicationInfo'" type="button" mat-raised-button color="primary" class="btn-block activeButton" (click)="redirectToApplicationInfo()">-->
+        <!--<i class="material-icons">info</i>-->
+        <!--{{ _translation('Application info', langCode)}}-->
+      <!--</button>-->
     </div>
   </div>
   <router-outlet></router-outlet>

@@ -1,3 +1,4 @@
+@import "palette";
 @mixin space ($attribute) {
   @for $i from 1 to 6 {
     &-#{$i} {
@@ -166,11 +167,16 @@ $colums: 12;
 }
 
 body {
-  background-color: #0B0C10;
-  color: #66FCF1;
+  background-color: $backgroundSilver;
+  color: $textBlack;
+  font-weight: 300;
   a {
-    color: #66FCF1;
+    color: $textBlack;
   }
+}
+
+/deep/ .mat-toolbar {
+  font-weight: 400 !important;
 }
 
 input:-webkit-autofill,
@@ -183,8 +189,8 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: unset;
-  -webkit-text-fill-color: #66FCF1;
-  -webkit-box-shadow: 0 0 0px 1000px #0B0C10 inset;
+  -webkit-text-fill-color: $textBlack;
+  -webkit-box-shadow: 0 0 0px 1000px $backgroundSilver inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 

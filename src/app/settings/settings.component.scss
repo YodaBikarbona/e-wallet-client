@@ -1,16 +1,16 @@
+@import "~src/palette";
 .settings {
   border: 1px solid lightgray;
-  border-radius: 5px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 700px;
-  background-color: #0B0C10;
-  color: #66FCF1;
+  background-color: $backgroundSilver;
+  color: $textBlack;
 
   @media (max-width: 767px) {
     //padding: 0;
     border-radius: unset;
     border: unset;
-    margin-top: -20px;
+    //margin-top: -20px;
   }
 }
 
@@ -39,7 +39,7 @@
 }
 
 /deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-    background-color:  rgb(121, 228, 129);;
+    background-color:  rgb(121, 228, 129);
 }
 
 .deactiveCard {
@@ -65,10 +65,15 @@ currencyCard {
   border-radius: 50% !important;
   height: 100px;
   width: 100px;
-  background-color: #0B0C10 !important;
-  color: #66FCF1 !important;
+  background-color: $backgroundBlue !important;
+  color: $textWhite !important;
+  justify-content: center;
+  align-items: center;
+  display: flex !important;
   &:hover {
-    box-shadow: 2px 5px #888888;
+    @media (min-width: 900px) {
+      box-shadow: 2px 5px #888888;
+    }
   }
 }
 
@@ -95,7 +100,7 @@ currencyCard {
   min-height: 70px !important;
   span {
     &:after {
-      color: #66FCF1 !important;
+      color: $textBlack !important;
     }
   }
 }
@@ -113,21 +118,35 @@ currencyCard {
 }
 
 button {
-  border-radius: 50px;
-  background-color: #0B0C10 !important;
-  color: #66FCF1 !important;
+  font-weight: 300;
+  border-radius: 0;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
+  border: 1px solid $button;
+  transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
+  &:hover {
+    @media (min-width: 900px) {
+      background-color: $button !important;
+      color: $textWhite !important;
+      transition: background-color 500ms ease, color 500ms ease;
+    }
+  }
+  @media (max-width: 899px) {
+    background-color: $button !important;
+    color: $textWhite !important;
+  }
 }
 
 /deep/ .mat-tab-label-content {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field.mat-focused .mat-form-field-label {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field.mat-form-field-invalid .mat-form-field-label {
@@ -135,18 +154,19 @@ button {
 }
 
 /deep/ .mat-select-value {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #66FCF1 !important;
+  background-color: black !important;
 }
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: #66FCF1 !important;
+  background-color: black !important;
 }
 
 /deep/ .mat-accordion .mat-expansion-panel:first-of-type {
+  border-radius: 0 !important;
   @media (max-width: 767px) {
     border-top-right-radius: unset !important;
     border-top-left-radius: unset !important;
@@ -154,6 +174,7 @@ button {
 }
 
 /deep/ .mat-accordion .mat-expansion-panel:last-of-type {
+  border-radius: 0 !important;
   @media (max-width: 767px) {
     border-bottom-right-radius: unset !important;
     border-bottom-left-radius: unset !important;
@@ -161,19 +182,37 @@ button {
 }
 
 /deep/ mat-expansion-panel {
-  background-color: #1F2833 !important;
-  color: #66FCF1 !important;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
-  background-color: #1F2833 !important;
-  color: #66FCF1 !important;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
 }
 
 /deep/ mat-panel-title {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ mat-panel-description {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
+}
+
+.activeButton {
+  background-color:  rgb(121, 228, 129) !important;
+  color: $textBlack !important;
+  &:hover {
+    background-color: rgb(121, 228, 129) !important;
+    color: unset !important;
+  }
+}
+
+.inactiveButton {
+  background-color:  $backgroundSilver !important;
+  color: $textBlack !important;
+  &:hover {
+    background-color: unset !important;
+    color: unset !important;
+  }
 }

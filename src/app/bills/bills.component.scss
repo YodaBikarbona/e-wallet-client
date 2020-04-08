@@ -1,10 +1,11 @@
+@import "~src/palette";
 .bills {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: 1px solid $borderBlue;
+  border-radius: 0px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 500px;
-  background-color: #0B0C10;
-  color: #66FCF1;
+  background-color: $backgroundSilver;
+  color: $textBlack;
 
   @media (max-width: 767px) {
     padding: 0;
@@ -48,18 +49,20 @@ tr.mat-footer-row {
 
 .data {
   &:hover {
-    background-color: #C5C6C7;
-    box-shadow: 15px 15px 20px rgba(128, 128, 128, 0.5);
-    color: #1F2833 !important;
-    .mat-cell {
+    @media (min-width: 900px) {
+      background-color: #C5C6C7;
+      box-shadow: 15px 15px 20px rgba(128, 128, 128, 0.5);
       color: #1F2833 !important;
+      .mat-cell {
+        color: #1F2833 !important;
+      }
     }
   }
 }
 
 .tableHeader {
-  background-color: #1F2833;
-  color: #66FCF1;
+  background-color: $backgroundSilver;
+  color: $textBlack;
 }
 
 /deep/ .mat-table, [mat-footer-row], .mat-footer-row {
@@ -162,17 +165,31 @@ tr.mat-footer-row {
 }
 
 button {
-  border-radius: 50px;
-  background-color: #1F2833 !important;
-  color: #66FCF1 !important;
+  font-weight: 300;
+  border-radius: 0;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
+  border: 1px solid $button;
+  transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
+  &:hover {
+    @media (min-width: 900px) {
+      background-color: $button !important;
+      color: $textWhite !important;
+      transition: background-color 500ms ease, color 500ms ease;
+    }
+  }
+  @media (max-width: 899px) {
+    background-color: $button !important;
+    color: $textWhite !important;
+  }
 }
 
 /deep/ .mat-form-field.mat-focused .mat-form-field-label {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-label {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field.mat-form-field-invalid .mat-form-field-label {
@@ -187,29 +204,33 @@ button {
 }
 
 /deep/ .mat-select-value {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #66FCF1 !important;
+  background-color: black !important;
 }
 
 /deep/ .mat-select-arrow-wrapper {
-  background-color: #66FCF1 !important;
+  background-color: $backgroundSilver !important;
+}
+
+/deep/ .mat-select-arrow {
+  color: $selectArrow !important;
 }
 
 /deep/ svg {
-  color: #66FCF1 !important;
+  color: $backgroundBlue !important;
 }
 
 /deep/ .mat-paginator-outer-container {
-  background-color: #0B0C10 !important;
-  color: #66FCF1 !important;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
 }
 
 .mat-elevation-z8 {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  overflow-x: scroll;
+  border: 1px solid $borderBlue;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   @media (max-width: 767px) {
     padding-left: -10px !important;
@@ -219,21 +240,28 @@ button {
 
 
 .mat-column-title {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 .mat-header-cell {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 .mat-cell {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-input-element:disabled {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
-  background-color: #66FCF1 !important;
+  background-color: black !important;
+}
+
+.clearButton {
+  @media (max-width: 360px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

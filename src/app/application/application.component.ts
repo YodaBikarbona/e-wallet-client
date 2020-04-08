@@ -17,6 +17,7 @@ export class ApplicationComponent implements OnInit {
   languages = languages;
   rate = 0;
   user: User;
+  activeButton = '';
 
   constructor(private spinner: NgxSpinnerService, private userService: UserService, public router: Router) { }
 
@@ -48,14 +49,17 @@ export class ApplicationComponent implements OnInit {
   }
 
   redirectToBugs() {
+    this.activeButton = 'bugs';
     this.router.navigate(['dashboard/application/bugs']);
   }
 
   redirectToSuggestions() {
+    this.activeButton = 'suggestions';
     this.router.navigate(['dashboard/application/suggestions']);
   }
 
   redirectToApplicationInfo() {
+    this.activeButton = 'applicationInfo';
     this.router.navigate(['dashboard/application/info']);
   }
 

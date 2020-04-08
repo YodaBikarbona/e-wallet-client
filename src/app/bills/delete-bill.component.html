@@ -7,6 +7,6 @@
     <button type="button" mat-raised-button class="btn-block w-90" [mat-dialog-close]="data" (click)="onNoClick()">{{ _translation('No Thanks', langCode) }}</button>
   </div>
   <div class="w-50 m-auto text-center">
-    <button type="button" mat-raised-button color="warn" class="btn-block w-90" [mat-dialog-close]="data" (click)="confirmDelete()">{{ _translation('Delete', langCode) }}</button>
+    <button type="button" mat-raised-button color="warn" class="btn-block w-90 deleteBill" [mat-dialog-close]="data" (click)="confirmDelete()">{{ _translation('Delete', langCode) }}</button>
   </div>
 </div>

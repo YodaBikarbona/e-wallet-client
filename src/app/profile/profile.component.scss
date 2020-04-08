@@ -1,10 +1,11 @@
+@import "~src/palette";
 .profile {
-  border: 1px solid lightgray;
-  border-radius: 5px;
+  border: 1px solid $borderBlue;
+  //border-radius: 5px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5);
   min-height: 700px;
-  color: #66FCF1;
-  background-color: #0B0C10;
+  color: $textBlack;
+  background-color: $backgroundSilver;
 
   @media (max-width: 767px) {
     //padding: 0;
@@ -32,14 +33,17 @@
 .breakSection {
   width: 100%;
   height: 10px;
-  border-bottom: 1px solid #66FCF1;
+  border-bottom: 1px solid $borderBlue;
 }
 
 .information {
   .row {
     &:hover {
-      background-color: #1F2833;
-      transition: background-color 1s;
+      @media (min-width: 900px) {
+        background-color: $backgroundBlue;
+        color: $textWhite;
+        transition: background-color 500ms ease, color 500ms ease;
+      }
     }
   }
 }
@@ -76,24 +80,41 @@
 }
 
 button {
-  border-radius: 50px;
-  background-color: #1F2833 !important;
-  color: #66FCF1 !important;
+  font-weight: 300;
+  border-radius: 0;
+  background-color: $backgroundSilver !important;
+  color: $textBlack !important;
+  border: 1px solid $button;
+  transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
+  &:hover {
+    @media (min-width: 900px) {
+      background-color: $button !important;
+      color: $textWhite !important;
+      transition: background-color 500ms ease, color 500ms ease;
+    }
+  }
+  @media (max-width: 899px) {
+    background-color: $button !important;
+    color: $textWhite !important;
+  }
 }
 
 /deep/ .mat-tab-label-content {
-  color: #66FCF1 !important;
+  color: $textBlack !important;
 }
 
 /deep/ mat-ink-bar {
-  background-color: #66FCF1 !important;
+  background-color: black !important;
 }
 
 /deep/ .mat-tab-header-pagination-chevron {
-  border-color: #66FCF1 !important;
+  border-color: $borderBlue !important;
 }
 
 /deep/ .mat-tab-label-active {
-  background-color: #1F2833 !important;
+  background-color: $backgroundBlue !important;
+  .mat-tab-label-content {
+    color: $textWhite !important;
+  }
 }
 

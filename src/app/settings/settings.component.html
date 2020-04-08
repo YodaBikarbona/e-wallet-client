@@ -8,17 +8,19 @@
 </ngx-spinner>
 <div class="settings p-2">
   <div>
-    <h5 class="text-center">{{ _translation('Options', langCode) }}</h5>
+    <!--<h5 class="text-center">{{ _translation('Options', langCode) }}</h5>-->
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-6 text-center mb-2">
+            <!--<div class="text-center pl-2">-->
+              <!--<p>{{ _translation('Active', langCode) }}</p>-->
+            <!--</div>-->
             <div class="text-center pl-2">
-              <p>{{ _translation('Active', langCode) }}</p>
-            </div>
-            <div>
-              <mat-slide-toggle (click)="changeActive()"></mat-slide-toggle>
+              <!--<mat-slide-toggle (click)="changeActive()"></mat-slide-toggle>-->
+              <button *ngIf="!active" mat-raised-button color="primary" class="btn-block w-50 inactiveButton" (click)="changeActive()">{{ _translation('Active', langCode) }}</button>
+              <button *ngIf="active" mat-raised-button color="primary" class="btn-block w-50 activeButton" (click)="changeActive()">{{ _translation('Active', langCode) }}</button>
             </div>
           </div>
           <div class="col-md-6 search">
