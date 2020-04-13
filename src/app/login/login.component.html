@@ -76,21 +76,21 @@
 
 
 <div class="login p-3">
-  <form *ngIf="!userActive" (submit)="activateUser(code)">
-    <div>
-      <mat-form-field>
-        <mat-label>{{ _translation('Activation code', langCode) }}</mat-label>
-        <input type="text" matInput required name="code" [(ngModel)]="code">
-        <mat-icon matSuffix>vpn_key</mat-icon>
-      </mat-form-field>
-    </div>
-    <div class="text-center">
-      <button type="submit" [disabled]="code ? false: true" mat-raised-button color="primary" class="btn-block">{{ _translation('Activate', langCode) }}</button>
-    </div>
-    <div class="text-center mt-1">
-      <button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">{{ _translation('Resend code', langCode) }}</button>
-    </div>
-  </form>
+  <!--<form *ngIf="!userActive" (submit)="activateUser(code)">-->
+    <!--<div>-->
+      <!--<mat-form-field>-->
+        <!--<mat-label>{{ _translation('Activation code', langCode) }}</mat-label>-->
+        <!--<input type="text" matInput required name="code" [(ngModel)]="code">-->
+        <!--<mat-icon matSuffix>vpn_key</mat-icon>-->
+      <!--</mat-form-field>-->
+    <!--</div>-->
+    <!--<div class="text-center">-->
+      <!--<button type="submit" [disabled]="code ? false: true" mat-raised-button color="primary" class="btn-block">{{ _translation('Activate', langCode) }}</button>-->
+    <!--</div>-->
+    <!--<div class="text-center mt-1">-->
+      <!--<button type="button" mat-raised-button color="primary" class="btn-block" (click)="restartPassword(userEmail)">{{ _translation('Resend code', langCode) }}</button>-->
+    <!--</div>-->
+  <!--</form>-->
 
   <form (submit)="login(email, password)" *ngIf="userActive">
     <!--img src="https://image.freepik.com/vettori-gratuito/consulenza-finanziaria-orientamento-finanziario-consulente-aziendale-assistenza-agli-investimenti-disegno-di-linea-di-disegno-di-linea-di-disegno-di-linea-di-libro-disegno-per-la-grafica-mobile-e-web_1200-303.jpg" width="100%" height="400" alt="Italian Trulli"-->
@@ -112,7 +112,8 @@
     <div class="text-center">
       <button type="submit" [disabled]="email && password ? false: true" mat-raised-button color="primary" class="btn-block">{{ _translation('Sign in', langCode) }}</button>
       <p class="m-2">{{ _translation('Don\'t have an account?', langCode) }} <a routerLink="/register">{{ _translation('Sign up', langCode) }}</a></p>
-      <p class="m-2"><a routerLink="/restartPassword">{{ _translation('Forgot your password', langCode) }}</a></p>
+      <!--<p class="m-2"><a routerLink="/restartPassword">{{ _translation('Forgot your password', langCode) }}</a></p>-->
     </div>
   </form>
 </div>
+<p class="mt-1 w-100 text-center report-problem">If you have any problem, send mail on privateewallet@gmail.com</p>

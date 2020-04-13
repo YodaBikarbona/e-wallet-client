@@ -26,6 +26,11 @@ mat-form-field {
   }
 }
 
+.report-problem {
+  bottom: 0;
+  position: absolute;
+}
+
 @media (max-width: 767px) {
   .login {
       width: 90%;
