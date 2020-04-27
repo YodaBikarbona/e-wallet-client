@@ -17,7 +17,7 @@
             <!--<div class="text-center pl-2">-->
               <!--<p>{{ _translation('Active', langCode) }}</p>-->
             <!--</div>-->
-            <div class="text-center pl-2">
+            <div class="text-center pl-2 activeActionButton">
               <!--<mat-slide-toggle (click)="changeActive()"></mat-slide-toggle>-->
               <button *ngIf="!active" mat-raised-button color="primary" class="btn-block w-50 inactiveButton" (click)="changeActive()">{{ _translation('Active', langCode) }}</button>
               <button *ngIf="active" mat-raised-button color="primary" class="btn-block w-50 activeButton" (click)="changeActive()">{{ _translation('Active', langCode) }}</button>

@@ -84,44 +84,48 @@
   >
   </fusioncharts>
 </div>
-<div class="pieChart">
+<div class="barChart">
   <div class="breakSection">
-    <fusioncharts *ngIf="bills && dataCostCategoryPie.length > 0"
+    <fusioncharts *ngIf="bills && dataCostCategoryBar.length > 0"
                   [width]="width"
                   [height]="height"
-                  [type]="typePie"
-                  [dataFormat]="pieFormat"
-                  [dataSource]="pieDataCategoryCost"
+                  [type]="typeBar"
+                  [dataFormat]="barFormat"
+                  [dataSource]="barDataCategoryCost"
+                  [containerBackgroundColor]="colorBg"
     >
     </fusioncharts>
   </div>
   <div class="breakSection">
-    <fusioncharts *ngIf="bills && dataProfitCategoryPie.length > 0"
+    <fusioncharts *ngIf="bills && dataProfitCategoryBar.length > 0"
                   [width]="width"
                   [height]="height"
-                  [type]="typePie"
-                  [dataFormat]="pieFormat"
-                  [dataSource]="pieDataCategoryProfit"
+                  [type]="typeBar"
+                  [dataFormat]="barFormat"
+                  [dataSource]="barDataCategoryProfit"
+                  [containerBackgroundColor]="colorBg"
     >
     </fusioncharts>
   </div>
   <div class="breakSection">
-    <fusioncharts *ngIf="bills && dataCostSubCategoryPie.length > 0"
+    <fusioncharts *ngIf="bills && dataCostSubCategoryBar.length > 0"
                   [width]="width"
                   [height]="height"
-                  [type]="typePie"
-                  [dataFormat]="pieFormat"
-                  [dataSource]="pieDataSubCategoryCost"
+                  [type]="typeBar"
+                  [dataFormat]="barFormat"
+                  [dataSource]="barDataSubCategoryCost"
+                  [containerBackgroundColor]="colorBg"
     >
     </fusioncharts>
   </div>
   <div>
-    <fusioncharts *ngIf="bills && dataProfitSubCategoryPie.length > 0"
+    <fusioncharts *ngIf="bills && dataProfitSubCategoryBar.length > 0"
                   [width]="width"
                   [height]="height"
-                  [type]="typePie"
-                  [dataFormat]="pieFormat"
-                  [dataSource]="pieDataSubCategoryProfit"
+                  [type]="typeBar"
+                  [dataFormat]="barFormat"
+                  [dataSource]="barDataSubCategoryProfit"
+                  [containerBackgroundColor]="colorBg"
     >
     </fusioncharts>
   </div>

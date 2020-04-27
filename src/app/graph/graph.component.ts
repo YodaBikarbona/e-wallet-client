@@ -6,6 +6,7 @@ import * as FusionCharts from 'fusioncharts';
 import {SettingsService} from '../services/settings.service';
 import {languages, translateFunction} from '../translations/translations';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-graph',
@@ -86,61 +87,75 @@ export class GraphComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
-  pieFormat = 'json';
-  typePie = 'pie2d';
+  // pieFormat = 'json';
+  barFormat = 'json';
+  typeBar = 'bar2d';
+  // typePie = 'pie2d';
   dateFrom = '';
   dateTo = '';
   dateFromRequest = '';
   dateToRequest = '';
-  dataCostCategoryPie = [];
-  dataProfitCategoryPie = [];
-  dataCostSubCategoryPie = [];
-  dataProfitSubCategoryPie = [];
-  pieDataCategoryCost = {
+  // dataCostCategoryPie = [];
+  // dataProfitCategoryPie = [];
+  // dataCostSubCategoryPie = [];
+  // dataProfitSubCategoryPie = [];
+
+  dataCostCategoryBar = [];
+  dataProfitCategoryBar = [];
+  dataCostSubCategoryBar = [];
+  dataProfitSubCategoryBar = [];
+
+  colorBg = '#fafafa';
+
+  barDataCategoryCost = {
   chart: {
     caption: this._translation('Categories (costs)', localStorage.getItem('lang')),
-    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    // plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    plottooltext: ' $label<br> ($Value)',
     showlegend: '1',
     showpercentvalues: '1',
     legendposition: 'bottom',
     usedataplotcolorforlabels: '1',
-    theme: 'fusion'
+    theme: 'umber',
   },
   data: []
 };
-  pieDataCategoryProfit = {
+  barDataCategoryProfit = {
   chart: {
     caption: this._translation('Categories (profits)', localStorage.getItem('lang')),
-    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    // plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    plottooltext: ' $label<br> ($Value)',
     showlegend: '1',
     showpercentvalues: '1',
     legendposition: 'bottom',
     usedataplotcolorforlabels: '1',
-    theme: 'fusion'
+    theme: 'umber'
   },
   data: []
 };
-  pieDataSubCategoryCost = {
+  barDataSubCategoryCost = {
   chart: {
     caption: this._translation('Sub categories (costs)', localStorage.getItem('lang')),
-    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    // plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    plottooltext: ' $label<br> ($Value)',
     showlegend: '1',
     showpercentvalues: '1',
     legendposition: 'bottom',
     usedataplotcolorforlabels: '1',
-    theme: 'fusion'
+    theme: 'umber'
   },
   data: []
 };
-  pieDataSubCategoryProfit = {
+  barDataSubCategoryProfit = {
   chart: {
     caption: this._translation('Sub categories (profits)', localStorage.getItem('lang')),
-    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    // plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    plottooltext: ' $label<br> ($Value)',
     sshowlegend: '1',
     showpercentvalues: '1',
     legendposition: 'bottom',
     usedataplotcolorforlabels: '1',
-    theme: 'fusion'
+    theme: 'umber'
   },
   data: []
 };
@@ -238,14 +253,14 @@ export class GraphComponent implements OnInit {
     this.spinner.show();
     this.billService.getGraph(true, true, currencyId, dateFrom, dateTo).subscribe((data: graphResponse) => {
       this.bills = data;
-      this.pieDataCategoryCost.data = data.bill_categories_list_cost;
-      this.dataCostCategoryPie = data.bill_categories_list_cost;
-      this.pieDataCategoryProfit.data = data.bill_categories_list_profit;
-      this.dataProfitCategoryPie = data.bill_categories_list_profit;
-      this.pieDataSubCategoryCost.data = data.bill_sub_categories_list_cost;
-      this.dataCostSubCategoryPie = data.bill_sub_categories_list_cost;
-      this.pieDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
-      this.dataProfitSubCategoryPie = data.bill_sub_categories_list_profit;
+      this.barDataCategoryCost.data = data.bill_categories_list_cost;
+      this.dataCostCategoryBar = data.bill_categories_list_cost;
+      this.barDataCategoryProfit.data = data.bill_categories_list_profit;
+      this.dataProfitCategoryBar = data.bill_categories_list_profit;
+      this.barDataSubCategoryCost.data = data.bill_sub_categories_list_cost;
+      this.dataCostSubCategoryBar = data.bill_sub_categories_list_cost;
+      this.barDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
+      this.dataProfitSubCategoryBar = data.bill_sub_categories_list_profit;
       //this.monthly_limit = this.bills.monthly_limit
       this.spinner.hide();
       this.graph();

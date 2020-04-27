@@ -116,12 +116,12 @@ button {
   border-bottom: 1px solid $borderBlue;
 }
 
-.pieChart {
+.pieChart, .barChart {
   background-color: #0B0C10;
 }
 
 .breakSection {
-  margin-bottom: 1px;
+  //margin-bottom: 1px;
 }
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
@@ -129,12 +129,33 @@ button {
 }
 
 /deep/ rect {
-  fill: $backgroundSilver !important;
+  //fill: $backgroundSilver !important;
 }
 
 .clearButton {
   @media (max-width: 360px) {
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+fusioncharts {
+  svg {
+    fill: #ececec !important;
+  }
+}
+
+.lineChart {
+  /deep/ rect {
+    fill: #ececec !important;
+  }
+  /deep/ text {
+    fill: #151E3F !important;
+  }
+}
+
+.barChart {
+  /deep/ text {
+    fill: #151E3F !important;
   }
 }

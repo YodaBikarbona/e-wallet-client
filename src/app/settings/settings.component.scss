@@ -216,3 +216,10 @@ button {
     color: unset !important;
   }
 }
+
+.activeActionButton {
+  @media (max-width: 767px) {
+    padding: 0;
+    margin-top: 50px;
+  }
+}
