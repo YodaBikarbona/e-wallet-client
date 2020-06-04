@@ -24,6 +24,11 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class BillsComponent implements OnInit {
 
+  locationChoices = [
+    {'location': 'My city', 'value': 'True'},
+    {'location': 'Not my city', 'value': 'False'}
+  ]
+
   currencies$: Currency[];
   categories$: BillCategory[];
   subCategories$: BillSubCategory[];
@@ -361,6 +366,23 @@ export class BillsComponent implements OnInit {
   clearDateTo() {
     this.dateTo = '';
     this.dateToRequest = '';
+    if (this.buttonSwitchMessage === 'Switch to costs!') {
+      this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
+    }
+    else {
+      this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
+    }
+  }
+
+  clearAllFilters() {
+    this.dateFrom = '';
+    this.dateFromRequest = '';
+    this.dateTo = '';
+    this.dateToRequest = '';
+    this.categoryId = null;
+    this.subCategoryId = null;
+    this.currencyId = null;
+    this.location = null;
     if (this.buttonSwitchMessage === 'Switch to costs!') {
       this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
     }

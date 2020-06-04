@@ -72,3 +72,20 @@ button {
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: black !important;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 200px;
+}
+
+::-webkit-scrollbar-button {
+  background: #888888;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #cccccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $button;
+}

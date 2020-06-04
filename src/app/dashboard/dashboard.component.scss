@@ -122,3 +122,20 @@ button {
 .subscribePushNotificationButton {
   width: 200px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 200px;
+}
+
+::-webkit-scrollbar-button {
+  background: #888888;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #cccccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $button;
+}
