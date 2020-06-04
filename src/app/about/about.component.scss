@@ -1,6 +1,8 @@
+@import "~src/palette";
 .applicationInfo {
   max-height: 650px;
   overflow-y: scroll;
+  margin-right: 1px;
 }
 
 .infoHeader {
@@ -23,4 +25,21 @@
   /deep/ .material-icons {
     font-size: 14px !important;
   }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 200px;
+}
+
+::-webkit-scrollbar-button {
+  background: #888888;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #cccccc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $button;
 }

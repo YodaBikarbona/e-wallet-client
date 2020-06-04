@@ -75,6 +75,7 @@ export class GraphComponent implements OnInit {
 
   //Trial version
 
+  graphChoice: '';
   dataSource: any;
   type: string;
   width: string;
@@ -87,18 +88,18 @@ export class GraphComponent implements OnInit {
   lang = '';
   langCode = '';
   languages = languages;
-  // pieFormat = 'json';
+  pieFormat = 'json';
   barFormat = 'json';
   typeBar = 'bar2d';
-  // typePie = 'pie2d';
+  typePie = 'pie2d';
   dateFrom = '';
   dateTo = '';
   dateFromRequest = '';
   dateToRequest = '';
-  // dataCostCategoryPie = [];
-  // dataProfitCategoryPie = [];
-  // dataCostSubCategoryPie = [];
-  // dataProfitSubCategoryPie = [];
+  dataCostCategoryPie = [];
+  dataProfitCategoryPie = [];
+  dataCostSubCategoryPie = [];
+  dataProfitSubCategoryPie = [];
 
   dataCostCategoryBar = [];
   dataProfitCategoryBar = [];
@@ -156,6 +157,57 @@ export class GraphComponent implements OnInit {
     legendposition: 'bottom',
     usedataplotcolorforlabels: '1',
     theme: 'umber'
+  },
+  data: []
+};
+
+  // Pie
+
+  pieDataCategoryCost = {
+  chart: {
+    caption: this._translation('Categories (costs)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion',
+  },
+  data: []
+};
+  pieDataCategoryProfit = {
+  chart: {
+    caption: this._translation('Categories (profits)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
+  },
+  data: []
+};
+  pieDataSubCategoryCost = {
+  chart: {
+    caption: this._translation('Sub categories (costs)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    showlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
+  },
+  data: []
+};
+  pieDataSubCategoryProfit = {
+  chart: {
+    caption: this._translation('Sub categories (profits)', localStorage.getItem('lang')),
+    plottooltext: '<b>$percentValue</b> ' + this._translation('of sub category', localStorage.getItem('lang')) + ' $label<br> ($Value)',
+    sshowlegend: '1',
+    showpercentvalues: '1',
+    legendposition: 'bottom',
+    usedataplotcolorforlabels: '1',
+    theme: 'fusion'
   },
   data: []
 };
@@ -255,12 +307,20 @@ export class GraphComponent implements OnInit {
       this.bills = data;
       this.barDataCategoryCost.data = data.bill_categories_list_cost;
       this.dataCostCategoryBar = data.bill_categories_list_cost;
+      this.pieDataCategoryCost.data = data.bill_categories_list_cost;
+      this.dataCostCategoryPie = data.bill_categories_list_cost;
       this.barDataCategoryProfit.data = data.bill_categories_list_profit;
       this.dataProfitCategoryBar = data.bill_categories_list_profit;
+      this.pieDataCategoryProfit.data = data.bill_categories_list_profit;
+      this.dataProfitCategoryPie = data.bill_categories_list_profit;
       this.barDataSubCategoryCost.data = data.bill_sub_categories_list_cost;
       this.dataCostSubCategoryBar = data.bill_sub_categories_list_cost;
+      this.pieDataSubCategoryCost.data = data.bill_sub_categories_list_cost;
+      this.dataCostSubCategoryPie = data.bill_sub_categories_list_cost;
       this.barDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
       this.dataProfitSubCategoryBar = data.bill_sub_categories_list_profit;
+      this.pieDataSubCategoryProfit.data = data.bill_sub_categories_list_profit;
+      this.dataProfitSubCategoryPie = data.bill_sub_categories_list_profit;
       //this.monthly_limit = this.bills.monthly_limit
       this.spinner.hide();
       this.graph();
@@ -332,6 +392,14 @@ export class GraphComponent implements OnInit {
     this.dateTo = '';
     this.dateToRequest = '';
     this.getGraph(this.currencyId, this.dateFromRequest, this.dateToRequest);
+  }
+
+  showGraph(choice) {
+    this.spinner.show();
+    this.graphChoice = choice;
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
   }
 
   // Translations

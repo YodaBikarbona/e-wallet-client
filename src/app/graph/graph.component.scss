@@ -95,8 +95,10 @@
 button {
   font-weight: 300;
   border-radius: 0;
-  background-color: $backgroundSilver !important;
-  color: $textBlack !important;
+  //background-color: $backgroundSilver !important;
+  //color: $textBlack !important;
+  background-color: #2c3c77 !important;
+  color: $textWhite !important;
   border: 1px solid $button;
   transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
   &:hover {
@@ -157,5 +159,20 @@ fusioncharts {
 .barChart {
   /deep/ text {
     fill: #151E3F !important;
+  }
+}
+
+.pieChart {
+  /deep/ rect {
+    fill: #ececec !important;
+  }
+  /deep/ text {
+    fill: #151E3F !important;
+  }
+}
+
+.barButton, .pieButton {
+  @media (max-width: 899px) {
+    width: 90%;
   }
 }

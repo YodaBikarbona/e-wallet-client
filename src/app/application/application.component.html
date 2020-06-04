@@ -1,12 +1,21 @@
-<ngx-spinner
-  bdColor="#fff"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
-</ngx-spinner>
+<!--<ngx-spinner-->
+  <!--bdColor="#fff"-->
+  <!--size="medium"-->
+  <!--color="#fff"-->
+  <!--type="ball-scale-multiple"-->
+<!--&gt;-->
+  <!--&lt;!&ndash;<p style="font-size: 20px; color: white">Loading...</p>&ndash;&gt;-->
+<!--</ngx-spinner>-->
 <div class="application p-2">
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+    [fullScreen]="true"
+  >
+    <!--<p style="font-size: 20px; color: white">Loading...</p>-->
+  </ngx-spinner>
   <div>
     <!--<h5 class="text-center">{{ _translation('Application rating', langCode) }}</h5>-->
     <!--<bar-rating [(rate)]="rate" [max]="5"></bar-rating>-->

@@ -2,16 +2,25 @@
   <canvas id="canvas" width="500px" height="200px">{{ chart }}</canvas>
 </div-->
 
-<ngx-spinner
-  bdColor="#fff"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
-</ngx-spinner>
+<!--<ngx-spinner-->
+  <!--bdColor="#fff"-->
+  <!--size="medium"-->
+  <!--color="#fff"-->
+  <!--type="ball-scale-multiple"-->
+<!--&gt;-->
+  <!--&lt;!&ndash;<p style="font-size: 20px; color: white">Loading...</p>&ndash;&gt;-->
+<!--</ngx-spinner>-->
 
-<div class="graph">
+<div class="graph p-2">
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+    [fullScreen]="true"
+  >
+    <!--<p style="font-size: 20px; color: white">Loading...</p>-->
+  </ngx-spinner>
   <div class="row pr-1 pl-1 mt-1">
     <div class="col-md-12 col-sm-12">
       <mat-form-field class="w-100">
@@ -75,7 +84,7 @@
     </div>
   </div>
 </div>
-<div class="mobileGraph" *ngIf="bills && bills.bills.length > 0">
+<div class="mobileGraph" *ngIf="bills && bills.bills.length > 3">
   <fusioncharts class="lineChart"
     [type]="type"
     [width]="width"
@@ -84,7 +93,17 @@
   >
   </fusioncharts>
 </div>
-<div class="barChart">
+<div class="row w-100 mt-1" *ngIf="bills">
+  <div class="col-md-6 col-sm-12 col-xs-12 text-center mb-1">
+    <button type="button" mat-raised-button color="primary" class="btn-block w-50 barButton"
+                (click)="showGraph('Bar')">{{ _translation('Show bar graph', langCode) }}</button>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12 text-center mb-1">
+    <button type="button" mat-raised-button color="primary" class="btn-block w-50 pieButton"
+                (click)="showGraph('Pie')">{{ _translation('Show pie graph', langCode) }}</button>
+  </div>
+</div>
+<div class="barChart" *ngIf="graphChoice && graphChoice == 'Bar'">
   <div class="breakSection">
     <fusioncharts *ngIf="bills && dataCostCategoryBar.length > 0"
                   [width]="width"
@@ -131,3 +150,45 @@
   </div>
 </div>
 
+<div class="pieChart" *ngIf="graphChoice && graphChoice == 'Pie'">
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataCostCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataCategoryCost"
+    >
+    </fusioncharts>
+  </div>
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataProfitCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataCategoryProfit"
+    >
+    </fusioncharts>
+  </div>
+  <div class="breakSection">
+    <fusioncharts *ngIf="bills && dataCostSubCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataSubCategoryCost"
+    >
+    </fusioncharts>
+  </div>
+  <div>
+    <fusioncharts *ngIf="bills && dataProfitSubCategoryPie.length > 0"
+                  [width]="width"
+                  [height]="height"
+                  [type]="typePie"
+                  [dataFormat]="pieFormat"
+                  [dataSource]="pieDataSubCategoryProfit"
+    >
+    </fusioncharts>
+  </div>
+</div>

@@ -1,11 +1,11 @@
-<ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
->
-  <!--<p style="font-size: 20px; color: white">Loading...</p>-->
-</ngx-spinner>
+<!--<ngx-spinner-->
+  <!--bdColor="rgba(51,51,51,0.8)"-->
+  <!--size="medium"-->
+  <!--color="#fff"-->
+  <!--type="ball-scale-multiple"-->
+<!--&gt;-->
+  <!--&lt;!&ndash;<p style="font-size: 20px; color: white">Loading...</p>&ndash;&gt;-->
+<!--</ngx-spinner>-->
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -49,7 +49,7 @@
         <!--</button>-->
       <!--</div>-->
     </mat-toolbar>
-    <div class="p-5 dashboard-content">
+    <div class="dashboard-content">
       <router-outlet></router-outlet>
     </div>
     <!--<div class="pl-2 pr-2">-->

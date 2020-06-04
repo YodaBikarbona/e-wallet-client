@@ -131,5 +131,7 @@
   "Location": "Lokacija",
   "My city": "Moj grad",
   "Application info": "Informacije aplikacije",
-  "Clear all filters": "Obriši sve filtere"
+  "Clear all filters": "Obriši sve filtere",
+  "Show bar graph": "Prikaži bar graf",
+  "Show pie graph": "Prikaži pie graf"
 }
