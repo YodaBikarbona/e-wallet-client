@@ -55,12 +55,6 @@
   </mat-form-field>
 
   <mat-form-field class="w-100">
-    <mat-label>{{ _translation('Comment', langCode) }}</mat-label>
-    <textarea matInput placeholder="{{ _translation('I bought a new car for 10000€...', langCode) }}"
-              class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
-  </mat-form-field>
-
-  <mat-form-field class="w-100">
     <mat-label>{{ _translation('Price', langCode) }}</mat-label>
     <input type="text" matInput required [(ngModel)]="data.price">
   </mat-form-field>
@@ -74,6 +68,12 @@
     <mat-checkbox [(ngModel)]="data.notMyCity"
                   (change)="toogle($event)">{{ _translation('Not my city', langCode) }}</mat-checkbox>
   </div>
+
+  <mat-form-field class="w-100">
+    <mat-label>{{ _translation('Comment', langCode) }}</mat-label>
+    <textarea matInput placeholder="{{ _translation('I bought a new car for 10000€...', langCode) }}"
+              class="newBillTextarea" [(ngModel)]="data.comment"></textarea>
+  </mat-form-field>
 
 </div>
 <div mat-dialog-actions class="w-100">

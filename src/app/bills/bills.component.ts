@@ -252,11 +252,14 @@ export class BillsComponent implements OnInit {
     //   }),
       map(((data: any) => data)))
       .subscribe(result => {
-        if (this.buttonSwitchMessage === 'Switch to costs!') {
+        if (result.added) {
+          this.snackBar.open('Bill is successfully added!', null, {duration: 4000, verticalPosition: 'top'});
+          if (this.buttonSwitchMessage === 'Switch to costs!') {
           this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
         }
         else {
           this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
+        }
         }
     });
   }
@@ -293,11 +296,19 @@ export class BillsComponent implements OnInit {
     dialogRef.afterClosed().pipe(
       map(((data: any) => data)))
       .subscribe(result => {
-        if (this.buttonSwitchMessage === 'Switch to costs!') {
+        if (result) {
+          if (result.deleted === true) {
+            this.snackBar.open('Bill is successfully deleted!', null, {duration: 4000, verticalPosition: 'top'});
+          }
+          if (result.edited === true) {
+            this.snackBar.open('Bill is successfully edited!', null, {duration: 4000, verticalPosition: 'top'});
+          }
+          if (this.buttonSwitchMessage === 'Switch to costs!') {
           this.getProfits(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
         }
         else {
           this.getCosts(this.categoryId, this.subCategoryId, this.currencyId, this.billsLimit, this.billsOffset, this.location);
+        }
         }
     });
   }

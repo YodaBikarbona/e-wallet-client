@@ -65,15 +65,22 @@ currencyCard {
   border-radius: 50% !important;
   height: 100px;
   width: 100px;
-  background-color: $backgroundBlue !important;
+  //background-color: $backgroundBlue !important;
   color: $textWhite !important;
   justify-content: center;
   align-items: center;
   display: flex !important;
+  background-color: #2c3c77 !important;
   &:hover {
     @media (min-width: 900px) {
       box-shadow: 2px 5px #888888;
+      background-color: $backgroundBlue !important;
+      transform: scale(1.1);
+      transition: all 500ms ease;
     }
+  }
+  @media (max-width: 899px) {
+    background-color: $backgroundBlue !important;
   }
 }
 

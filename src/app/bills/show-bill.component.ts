@@ -80,7 +80,7 @@ export class DialogShowBillComponent implements OnInit {
 
   deleteBill(billId: number) {
     this.billService.deleteBill(billId).subscribe((data: any) => {
-      this.onNoClick();
+      this.dialogRef.close({'deleted': true});
     }, (data:any) => {
       this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
     });
@@ -115,7 +115,7 @@ export class DialogShowBillComponent implements OnInit {
 
   editBill(editData: any) {
     this.billService.editBill(editData).subscribe((data: any) => {
-      this.onNoClick();
+      this.dialogRef.close({'edited': true});
     }, (data:any) => {
       this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
     });

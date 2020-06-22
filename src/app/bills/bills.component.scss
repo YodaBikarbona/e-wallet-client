@@ -53,8 +53,11 @@ tr.mat-footer-row {
   &:hover {
     @media (min-width: 900px) {
       background-color: #C5C6C7;
+      //background-color: rgba(21, 30, 63, 0.5);;
       box-shadow: 15px 15px 20px rgba(128, 128, 128, 0.5);
+      //box-shadow: 15px 15px 20px rgb(21, 30, 63);
       color: #1F2833 !important;
+      //border-bottom: 5px solid $borderBlue !important;
       .mat-cell {
         color: #1F2833 !important;
       }

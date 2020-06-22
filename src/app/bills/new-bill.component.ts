@@ -51,7 +51,7 @@ export class DialogNewBillComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({'added': false});
   }
 
   onChange(event, type: string, subCat: number) {
@@ -77,7 +77,7 @@ export class DialogNewBillComponent implements OnInit {
     const createdString = created.getFullYear() + '-' + (created.getMonth() + 1) + '-' + created.getDate() + 'T' + created.getHours() + ':' + created.getMinutes() + ':' + created.getSeconds() + '.' + created.getMilliseconds();
     if (data.newBillType === 'profits') {
       this.billService.newProfits(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity, createdString).subscribe((data:any) => {
-        this.onNoClick();
+        this.dialogRef.close({'added': true});
       }, (data:any) => {
         this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
         this.error_message = data.error.message;
@@ -85,7 +85,7 @@ export class DialogNewBillComponent implements OnInit {
     }
     else {
       this.billService.newCosts(data.categoryId, data.subCategoryId, data.currencyId, data.title, data.comment, data.price, data.quantity, data.notMyCity, createdString).subscribe((data:any) => {
-        this.onNoClick();
+        this.dialogRef.close({'added': true});
       }, (data:any) => {
         this.snackBar.open(data.error.message, null, {duration: 4000, verticalPosition: 'top'});
         this.error_message = data.error.message;
