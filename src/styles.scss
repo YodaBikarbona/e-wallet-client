@@ -18,3 +18,8 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
+/deep/ .mat-form-field {
+  font-weight: 300 !important;
+  font-size: 15px !important;
+}
