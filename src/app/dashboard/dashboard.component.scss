@@ -9,14 +9,18 @@
 
 .sidenav .mat-toolbar {
   //background: inherit;
-  background-color: #2c3c77 !important;
-  color: $textWhite !important;
-  border-bottom: 1px solid $borderSilver;
+  //background-color: #2c3c77 !important;
+  background-color: $backgroundOrange !important;
+  //color: $textWhite !important;
+  color: $textBlue !important;
+  //border-bottom: 1px solid $borderSilver;
+  border-bottom: 1px solid $borderBlue;
   @media (min-width: 900px) {
-    border-right: 1px solid $borderSilver;
+    //border-right: 1px solid $borderSilver;
   }
   @media (max-width: 899px) {
-    background-color: $backgroundBlue !important;
+    //background-color: $backgroundBlue !important;
+    background-color: $backgroundOrange !important;
   }
 }
 
@@ -25,9 +29,11 @@
   top: 0;
   z-index: 1;
   border-bottom: 1px solid $borderBlue;
-  background-color: #2c3c77 !important;
+  //background-color: #2c3c77 !important;
+  background-color: $backgroundOrange !important;
   @media (max-width: 899px) {
-    background-color: $backgroundBlue !important;
+    //background-color: $backgroundBlue !important;
+    background-color: $backgroundOrange !important;
   }
 }
 
@@ -35,18 +41,35 @@
   position: absolute;
   bottom: 10px;
   width: 90%;
+
   button {
+    font-weight: 300;
+    border-radius: 50px;
+    box-shadow: 0px 10px 20px rgba(128,128,128,0.5) !important;
     @media (min-width: 900px) {
-      background-color: #2c3c77 !important;
-      border: 1px solid $borderSilver;
-      color: $textWhite !important;
+      //background-color: #2c3c77 !important;
+      //border: 1px solid $borderSilver;
+      //color: $textWhite !important;
+      background-color: $backgroundSilver !important;
+      border: 1px solid $buttonBorder;
+      color: $button !important;
+      transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
       &:hover {
       @media (min-width: 900px) {
-          background-color: $button !important;
-          color: $textWhite !important;
-          transition: background-color 500ms ease, color 500ms ease;
+          //background-color: $button !important;
+          //color: $textWhite !important;
+          //transition: background-color 500ms ease, color 500ms ease;
+        background-color: $buttonBackground !important;
+        color: $button !important;
+        border: 1px solid $button;
+        transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
         }
       }
+    }
+    @media (max-width: 899px) {
+      background-color: $buttonBackground !important;
+      color: $button !important;
+      border: 1px solid $button;
     }
   }
 }
@@ -98,11 +121,16 @@
 
 /deep/ .mat-sidenav {
   //background-color: $backgroundSilver !important;
-  color: $textBlack !important;
-  border-right: 1px solid $borderBlue;
-  background-color: #2c3c77 !important;
+  //color: $textBlack !important;
+  //border-right: 1px solid $borderBlue;
+  //background-color: #2c3c77 !important;
+  color: $textBlue !important;
+  background-color: $backgroundSilver !important;
+  //border-right: 1px solid $borderBlue;
+  border-right: 1px solid $borderOrange;
   @media (max-width: 899px) {
-    background-color: $backgroundBlue !important;
+    //background-color: $backgroundBlue !important;
+    background-color: $backgroundSilver !important;
   }
 }
 
@@ -110,22 +138,29 @@
   a {
     //background-color: $backgroundSilver !important;
     //color: $textBlack !important;
-    color: $textWhite !important;
-    background-color: #2c3c77;
-    border-bottom: 1px solid $borderSilver;
+    //color: $textWhite !important;
+    //background-color: #2c3c77;
+    //border-bottom: 1px solid $borderSilver;
+    color: $textBlue !important;
+    background-color: $backgroundOrange;
+    border-bottom: 1px solid $borderBlue;
     //border-bottom: 1px solid $borderBlue;
     transition: background-color 500ms ease, color 500ms ease, border-bottom 500ms ease;
     &:hover {
       @media (min-width: 900px) {
-        background-color: $button !important;
+        //background-color: $button !important;
         color: $textWhite !important;
+        background-color: $hoverOrange !important;
         transition: background-color 500ms ease, color 500ms ease;
       }
     }
     @media (max-width: 899px) {
-      background-color: $button !important;
-      color: $textWhite !important;
-      border-bottom: 1px solid $borderSilver;
+      //background-color: $button !important;
+      //color: $textWhite !important;
+      //border-bottom: 1px solid $borderSilver;
+      color: $textBlue !important;
+      background-color: $backgroundOrange;
+      border-bottom: 1px solid $borderBlue;
     }
   }
 }
@@ -149,9 +184,12 @@ button {
     }
   }
   @media (max-width: 899px) {
-    background-color: $button !important;
-    color: $textWhite !important;
-    border: 1px solid $borderSilver;
+    //background-color: $button !important;
+    //color: $textWhite !important;
+    //border: 1px solid $borderSilver;
+    background-color: $backgroundOrange !important;
+    color: $textBlue !important;
+    border: 1px solid $borderBlue;
   }
 }
 
