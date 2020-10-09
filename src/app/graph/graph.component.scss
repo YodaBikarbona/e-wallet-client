@@ -184,3 +184,7 @@ fusioncharts {
     width: 90%;
   }
 }
+
+/deep/ .raphael-group-121-range-selector-text {
+  display: none !important;
+}
