@@ -77,6 +77,8 @@ button {
   border-radius: 50px;
   box-shadow: 0px 10px 20px rgba(128,128,128,0.5) !important;
   transition: background-color 500ms ease, color 500ms ease, border 500ms ease;
+  margin-bottom: 10px;
+  margin-right: 10px;
   &:hover {
     @media (min-width: 900px) {
       //background-color: $button !important;
@@ -90,9 +92,11 @@ button {
   @media (max-width: 899px) {
     //background-color: $button !important;
     //color: $textWhite !important;
+    width: 100%;
     background-color: $buttonBackground !important;
     color: $button !important;
     border: 1px solid $button;
+    margin-right: 0px;
   }
 }
 
@@ -141,4 +145,27 @@ button {
 
 /deep/ .mat-form-field-appearance-legacy .mat-form-field-underline {
   background-color: black !important;
+}
+
+/deep/ mat-step-header {
+  background-color: $backgroundSilver;
+}
+
+/deep/ .mat-stepper-vertical {
+    background: $backgroundSilver !important;
+}
+
+/deep/ .mat-step-header .mat-step-icon-selected {
+    background-color: $backgroundOrange;
+    color: $textBlue;
+}
+
+/deep/ .mat-step-header .mat-step-icon-state-done {
+    background-color: $backgroundOrange;
+    color: $textBlue;
+}
+
+/deep/ .mat-step-header .mat-step-icon-state-edit {
+    background-color: $backgroundOrange;
+    color: $textBlue;
 }

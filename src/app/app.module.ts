@@ -31,6 +31,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 // import { VERSION } from '@angular/material';
@@ -72,7 +73,7 @@ import * as TimeSeries from 'fusioncharts/fusioncharts.timeseries';
 import { NewsComponent } from './news/news.component';
 import { DialogRegisterConfirmationComponent } from './register/register-confirmation.component';
 
-
+import { NgwWowModule } from 'ngx-wow';
 
 FusionChartsModule.fcRoot(
   FusionCharts,
@@ -149,7 +150,9 @@ import { AboutComponent } from './about/about.component';
     FusionChartsModule,
     MatProgressBarModule,
     NgxSpinnerModule,
-    BarRatingModule
+    BarRatingModule,
+    MatStepperModule,
+    NgwWowModule
     // ChartsModule,
     // VERSION,
   ],

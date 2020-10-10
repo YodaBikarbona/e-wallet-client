@@ -15,12 +15,21 @@ import {error} from '@angular/compiler/src/util';
 import {languages, translateFunction} from '../translations/translations';
 import {isDigit} from 'codelyzer/angular/styles/chars';
 
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {until} from 'selenium-webdriver';
+import elementIsDisabled = until.elementIsDisabled;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   //regRequest: any; // = new RegisterRequest();
 
@@ -38,9 +47,25 @@ export class RegisterComponent implements OnInit {
   isLower = false;
   isDigit = false;
   isSpec = false;
-  constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar, public routerRedirect: Router) { }
+  constructor(public cityService: CityResolver, public router: ActivatedRoute, public registerService: RegisterService, public dialog: MatDialog, public loginRouter: Router, private snackBar: MatSnackBar, public routerRedirect: Router, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstNameCtrl: ['', Validators.required],
+      lastNameCtrl: ['', Validators.required],
+      emailCtrl: ['', Validators.required],
+      birthDateCtrl: ['', Validators.required],
+      genderCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      countryCtrl: ['', Validators.required],
+      cityCtrl: ['', Validators.required],
+      addressCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      passwordCtrl: ['', Validators.required],
+      confirmPasswordCtrl: ['', Validators.required],
+    });
     if (localStorage.getItem('auth-token')) {
       this.routerRedirect.navigate(['dashboard']);
     }
@@ -136,26 +161,28 @@ export class RegisterComponent implements OnInit {
     this.isDigit = false;
     this.isSpec = false;
     let strength = 0;
-    if (event.match(/[a-z]+/)) {
-      strength += 1;
-      this.isLower = true;
+    if (event != null) {
+      if (event.match(/[a-z]+/)) {
+        strength += 1;
+        this.isLower = true;
+      }
+      if (event.match(/[A-Z]+/)) {
+        strength += 1;
+        this.isUpper = true;
+      }
+      if (event.match(/[@#$%^&+=.!/?*-]+/)) {
+        strength += 1;
+        this.isSpec = true;
+      }
+      if (event.match(/[0-9]+/)) {
+        strength += 1;
+        this.isDigit = true;
+      }
+      if ((event.length > 7) && (event.length < 26)) {
+        strength += 1;
+      }
+      this.passwordStrength = strength * 20;
     }
-    if (event.match(/[A-Z]+/)) {
-      strength += 1;
-      this.isUpper = true;
-    }
-    if (event.match(/[@#$%^&+=.!/?*-]+/)) {
-      strength += 1;
-      this.isSpec = true;
-    }
-    if (event.match(/[0-9]+/)) {
-      strength += 1;
-      this.isDigit = true;
-    }
-    if ((event.length > 7) && (event.length < 26)) {
-      strength += 1;
-    }
-    this.passwordStrength = strength * 20;
   }
 
   // Translations

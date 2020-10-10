@@ -1,71 +1,204 @@
+<!--<div class="register p-3">-->
+  <!--<form (submit)="registerSubmit(regRequest)">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-12 col-sm-12 pl-1 pr-1">-->
+        <!--<h3 class="mb-3">{{ _translation('Register', langCode) }}</h3>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-sm-12 p-1">-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('First name', langCode) }}</mat-label>-->
+            <!--<input type="text" matInput required name="firstName" [(ngModel)]="regRequest.firstName">-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Last name', langCode) }}</mat-label>-->
+            <!--<input type="text" matInput required name="lastName" [(ngModel)]="regRequest.lastName">-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Email', langCode) }}</mat-label>-->
+            <!--<input type="email" matInput required name="email" [(ngModel)]="regRequest.email">-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate"-->
+                   <!--placeholder="{{ _translation('Birth date', langCode) }}" required disabled>-->
+            <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+            <!--&lt;!&ndash;mat-datepicker #picker></&#45;&#45;mat-datepicker&ndash;&gt;-->
+            <!--<mat-datepicker touchUi #picker disabled="false"></mat-datepicker>-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-sm-12 p-1">-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Country', langCode) }}</mat-label>-->
+            <!--<mat-select name="country_id" [(ngModel)]="regRequest.country_id"-->
+                        <!--(selectionChange)="onCountryChange($event)">-->
+              <!--<mat-option *ngFor="let country of countries$ | async" [value]="country.id">-->
+                <!--{{country.name}}-->
+              <!--</mat-option>-->
+            <!--</mat-select>-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('City', langCode) }}</mat-label>-->
+            <!--<mat-select name="city_id" [(ngModel)]="regRequest.city_id">-->
+              <!--<mat-option *ngFor="let city of cities$" [value]="city.id">-->
+                <!--{{city.name}}-->
+              <!--</mat-option>-->
+            <!--</mat-select>-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Address', langCode) }}</mat-label>-->
+            <!--<input type="text" matInput required name="address" [(ngModel)]="regRequest.address">-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--&lt;!&ndash;div class="mb-2">-->
+            <!--<label id="example-radio-group-label">Gender</label>-->
+          <!--</div&ndash;&gt;-->
+          <!--<mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="regRequest.gender">-->
+            <!--<div class="row">-->
+              <!--<div class="col-md-6">-->
+                <!--<mat-radio-button color="primary" value="Male"-->
+                                  <!--class="mb-1">{{ _translation('Male', langCode) }}</mat-radio-button>-->
+              <!--</div>-->
+              <!--<div class="col-md-6">-->
+                <!--<mat-radio-button color="primary" value="Female"-->
+                                  <!--class="mb-1">{{ _translation('Female', langCode) }}</mat-radio-button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</mat-radio-group>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-sm-12 p-1">-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Password', langCode) }}</mat-label>-->
+            <!--<input [type]="showPassword == true ? 'text': 'password'" matInput required name="password"-->
+                   <!--[(ngModel)]="regRequest.password" (ngModelChange)="checkPasswordStrength($event)">-->
+            <!--<mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>-->
+            <!--<mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>-->
+          <!--</mat-form-field>-->
+          <!--<div *ngIf="regRequest.password" class="passwordStrengthInfo">-->
+            <!--<p *ngIf="!isUpper" class="red"><i class="material-icons">-->
+              <!--cancel-->
+            <!--</i> {{ _translation('Contains at least one upper character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="isUpper" class="green"><i class="material-icons">-->
+              <!--done-->
+            <!--</i> {{ _translation('Contains at least one upper character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="!isLower" class="red"><i class="material-icons">-->
+              <!--cancel-->
+            <!--</i> {{ _translation('Contains at least one lower character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="isLower" class="green"><i class="material-icons">-->
+              <!--done-->
+            <!--</i> {{ _translation('Contains at least one lower character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="!isSpec" class="red"><i class="material-icons">-->
+              <!--cancel-->
+            <!--</i> {{ _translation('Contains at least one special character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="isSpec" class="green"><i class="material-icons">-->
+              <!--done-->
+            <!--</i> {{ _translation('Contains at least one special character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="!isDigit" class="red"><i class="material-icons">-->
+              <!--cancel-->
+            <!--</i> {{ _translation('Contains at least one digit character', langCode) }}-->
+            <!--</p>-->
+            <!--<p *ngIf="isDigit" class="green"><i class="material-icons">-->
+              <!--done-->
+            <!--</i> {{ _translation('Contains at least one digit character', langCode) }}-->
+            <!--</p>-->
+            <!--<p class="red" *ngIf="regRequest.password.length < 8 || regRequest.password.length > 25"><i-->
+              <!--class="material-icons">-->
+              <!--cancel-->
+            <!--</i> {{ _translation('Contains between 8 and 25 characters', langCode) }}-->
+            <!--</p>-->
+            <!--<p class="green" *ngIf="regRequest.password.length > 7 && regRequest.password.length < 26"><i-->
+              <!--class="material-icons">-->
+              <!--done-->
+            <!--</i> {{ _translation('Contains between 8 and 25 characters', langCode) }}-->
+            <!--</p>-->
+          <!--</div>-->
+          <!--<mat-progress-bar mode="determinate" [value]="passwordStrength"></mat-progress-bar>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6 col-sm-12 p-1">-->
+        <!--<div>-->
+          <!--<mat-form-field class="w-100">-->
+            <!--<mat-label>{{ _translation('Confirm password', langCode) }}</mat-label>-->
+            <!--<input [type]="showPassword == true ? 'text': 'password'" matInput required name="confirmPassword"-->
+                   <!--[(ngModel)]="regRequest.confirmPassword">-->
+            <!--<mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>-->
+            <!--<mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>-->
+          <!--</mat-form-field>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-12 col-sm-12 p-1">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-8"></div>-->
+          <!--<div class="col-md-4">-->
+            <!--<div class="text-center">-->
+              <!--<button type="submit" [disabled]="passwordStrength === 100 &&-->
+              <!--regRequest.confirmPassword &&-->
+              <!--regRequest.password === regRequest.confirmPassword &&-->
+              <!--regRequest.firstName &&-->
+              <!--regRequest.lastName &&-->
+              <!--regRequest.country_id &&-->
+              <!--regRequest.city_id &&-->
+              <!--regRequest.email &&-->
+              <!--regRequest.gender &&-->
+              <!--regRequest.address &&-->
+              <!--regRequest.birthDate ? false: true" mat-raised-button color="primary"-->
+                      <!--class="btn-block">{{ _translation('Sign up', langCode) }}</button>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
+<!--</div>-->
+
+<!-- New registration form -->
+
 <div class="register p-3">
   <form (submit)="registerSubmit(regRequest)">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 pl-1 pr-1">
-        <h3 class="mb-3">{{ _translation('Register', langCode) }}</h3>
-      </div>
-      <div class="col-md-6 col-sm-12 p-1">
-        <div>
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>{{ _translation('Personal information', langCode) }}</ng-template>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('First name', langCode) }}</mat-label>
-            <input type="text" matInput required name="firstName" [(ngModel)]="regRequest.firstName">
+            <input type="text" matInput required name="firstName" [(ngModel)]="regRequest.firstName" formControlName="firstNameCtrl">
           </mat-form-field>
-        </div>
-        <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Last name', langCode) }}</mat-label>
-            <input type="text" matInput required name="lastName" [(ngModel)]="regRequest.lastName">
+            <input type="text" matInput required name="lastName" [(ngModel)]="regRequest.lastName" formControlName="lastNameCtrl">
           </mat-form-field>
-        </div>
-        <div>
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Email', langCode) }}</mat-label>
-            <input type="email" matInput required name="email" [(ngModel)]="regRequest.email">
+            <input type="email" matInput required name="email" [(ngModel)]="regRequest.email" formControlName="emailCtrl">
           </mat-form-field>
-        </div>
-        <div>
           <mat-form-field class="w-100">
             <input matInput [matDatepicker]="picker" name="birthDate" [(ngModel)]="regRequest.birthDate"
-                   placeholder="{{ _translation('Birth date', langCode) }}" required disabled>
+                   placeholder="{{ _translation('Birth date', langCode) }}" required formControlName="birthDateCtrl" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <!--mat-datepicker #picker></--mat-datepicker-->
             <mat-datepicker touchUi #picker disabled="false"></mat-datepicker>
           </mat-form-field>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12 p-1">
-        <div>
-          <mat-form-field class="w-100">
-            <mat-label>{{ _translation('Country', langCode) }}</mat-label>
-            <mat-select name="country_id" [(ngModel)]="regRequest.country_id"
-                        (selectionChange)="onCountryChange($event)">
-              <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
-                {{country.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="w-100">
-            <mat-label>{{ _translation('City', langCode) }}</mat-label>
-            <mat-select name="city_id" [(ngModel)]="regRequest.city_id">
-              <mat-option *ngFor="let city of cities$" [value]="city.id">
-                {{city.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="w-100">
-            <mat-label>{{ _translation('Address', langCode) }}</mat-label>
-            <input type="text" matInput required name="address" [(ngModel)]="regRequest.address">
-          </mat-form-field>
-        </div>
-        <div>
-          <!--div class="mb-2">
-            <label id="example-radio-group-label">Gender</label>
-          </div-->
-          <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="regRequest.gender">
+          <mat-radio-group aria-label="Select an option" required name="gender" [(ngModel)]="regRequest.gender" formControlName="genderCtrl">
             <div class="row">
               <div class="col-md-6">
                 <mat-radio-button color="primary" value="Male"
@@ -77,14 +210,51 @@
               </div>
             </div>
           </mat-radio-group>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12 p-1">
-        <div>
+          <div>
+            <button mat-button matStepperNext>{{ _translation('Next', langCode) }}</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>{{ _translation('Location', langCode) }}</ng-template>
+          <mat-form-field class="w-100">
+            <mat-label>{{ _translation('Country', langCode) }}</mat-label>
+            <mat-select name="country_id" [(ngModel)]="regRequest.country_id"
+                        (selectionChange)="onCountryChange($event)" formControlName="countryCtrl">
+              <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>{{ _translation('City', langCode) }}</mat-label>
+            <mat-select name="city_id" [(ngModel)]="regRequest.city_id" formControlName="cityCtrl">
+              <mat-option *ngFor="let city of cities$" [value]="city.id">
+                {{city.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>{{ _translation('Address', langCode) }}</mat-label>
+            <input type="text" matInput required name="address" [(ngModel)]="regRequest.address" formControlName="addressCtrl">
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperPrevious>{{ _translation('Back', langCode) }}</button>
+            <button mat-button matStepperNext>{{ _translation('Next', langCode) }}</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>{{ _translation('Password', langCode) }}</ng-template>
+
+
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Password', langCode) }}</mat-label>
             <input [type]="showPassword == true ? 'text': 'password'" matInput required name="password"
-                   [(ngModel)]="regRequest.password" (ngModelChange)="checkPasswordStrength($event)">
+                   [(ngModel)]="regRequest.password" (ngModelChange)="checkPasswordStrength($event)" formControlName="passwordCtrl">
             <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
             <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
@@ -133,25 +303,28 @@
             </p>
           </div>
           <mat-progress-bar mode="determinate" [value]="passwordStrength"></mat-progress-bar>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12 p-1">
-        <div>
+
+
           <mat-form-field class="w-100">
             <mat-label>{{ _translation('Confirm password', langCode) }}</mat-label>
             <input [type]="showPassword == true ? 'text': 'password'" matInput required name="confirmPassword"
-                   [(ngModel)]="regRequest.confirmPassword">
+                   [(ngModel)]="regRequest.confirmPassword" formControlName="confirmPasswordCtrl">
             <mat-icon *ngIf="showPassword === false" matSuffix (click)="toogleShowPassword()">visibility_off</mat-icon>
             <mat-icon *ngIf="showPassword === true" matSuffix (click)="toogleShowPassword()">visibility</mat-icon>
           </mat-form-field>
-        </div>
-      </div>
-      <div class="col-md-12 col-sm-12 p-1">
-        <div class="row">
-          <div class="col-md-8"></div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <button type="submit" [disabled]="passwordStrength === 100 &&
+
+          <div>
+            <button mat-button matStepperPrevious>{{ _translation('Back', langCode) }}</button>
+            <button mat-button matStepperNext>{{ _translation('Next', langCode) }}</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>{{ _translation('Done', langCode) }}</ng-template>
+        <p>{{ _translation("Click 'Sign up' to finish registration.", langCode) }}</p>
+        <div>
+          <button mat-button matStepperPrevious>{{ _translation('Back', langCode) }}</button>
+          <button mat-button type="submit" [disabled]="passwordStrength === 100 &&
               regRequest.confirmPassword &&
               regRequest.password === regRequest.confirmPassword &&
               regRequest.firstName &&
@@ -161,12 +334,10 @@
               regRequest.email &&
               regRequest.gender &&
               regRequest.address &&
-              regRequest.birthDate ? false: true" mat-raised-button color="primary"
-                      class="btn-block">{{ _translation('Sign up', langCode) }}</button>
-            </div>
-          </div>
+              regRequest.birthDate ? false: true" color="primary">{{ _translation('Sign up', langCode) }}</button>
+          <button mat-button (click)="stepper.reset()">{{ _translation('Reset', langCode) }}</button>
         </div>
-      </div>
-    </div>
+      </mat-step>
+    </mat-vertical-stepper>
   </form>
 </div>

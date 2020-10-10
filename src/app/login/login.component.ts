@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import { AuthenticationRequest } from '../model';
 import {RestartPasswordService} from '../services/restart-password.service';
 import {MatSnackBar} from '@angular/material';
 import {not} from 'rxjs/internal-compatibility';
 import {languages, translateFunction} from '../translations/translations';
-
+// import { NgwWowService } from 'ngx-wow';
 import { NgxSpinnerService} from 'ngx-spinner';
+// import {Subscription} from 'rxjs';
+// import { filter, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -24,11 +27,17 @@ export class LoginComponent implements OnInit {
   langCode = '';
   languages = languages;
   showPassword = false;
+  // private wowSubscription: Subscription;
 
-  constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar, private spinner: NgxSpinnerService) { }
+  constructor(public authService: AuthenticationService, public router: Router, public passwordService: RestartPasswordService, private snackBar: MatSnackBar, private spinner: NgxSpinnerService) {
+  }
   //constructor() { }
 
   ngOnInit() {
+    // this.wowSubscription = this.wowService.itemRevealed$.subscribe(
+    //   (item:HTMLElement) => {
+    //     // do whatever you want with revealed element
+    //   });
     if (localStorage.getItem('auth-token')) {
       this.router.navigate(['dashboard']);
     }
